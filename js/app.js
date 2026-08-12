@@ -294,9 +294,11 @@
       if (!name) { els.fName.focus(); return; }
       if (!emailOk) { els.fEmail.focus(); return; }
       els.formSubmit.disabled = true;
+      els.formSubmit.classList.add('is-loading');
       els.formSubmit.textContent = t('form.sending');
       setTimeout(() => {
         els.formSubmit.disabled = false;
+        els.formSubmit.classList.remove('is-loading');
         els.formSubmit.textContent = t('form.submit');
         els.formSuccess.hidden = false;
         els.quoteForm.reset();

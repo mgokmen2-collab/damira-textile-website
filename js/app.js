@@ -76,12 +76,11 @@
     const grid = els.collectionGrid;
     grid.innerHTML = COLLECTIONS.map((c) => {
       const count = PRODUCTS.filter((p) => p.coll === c.id).length;
-      const ratio = c.ratio || 1;
       return `
         <article class="collection-card reveal">
           <a href="#catalog" data-coll="${c.id}" aria-label="${esc(c[state.lang])} — ${count} ${t('modal.unit')}">
             <figure>
-              <img src="${c.img}" alt="${esc(c[state.lang])} koleksiyonu, keten üzerine nakış" loading="lazy" style="aspect-ratio: ${ratio}">
+              <img src="${c.img}" alt="${esc(c[state.lang])} koleksiyonu, keten üzerine nakış" loading="lazy">
               <figcaption>${esc(c[state.lang])}<span class="collection-count">${count} ${t('modal.unit')}</span></figcaption>
             </figure>
           </a>
@@ -172,12 +171,11 @@
   }
   function productCard(p) {
     const label = `${p[state.lang].n} — ${collName(p.coll)}`;
-    const ratio = p.ratio || 1;
     return `
       <li class="product-card reveal revealed">
         <button type="button" data-open="${p.id}" aria-label="${esc(label)}: ${esc(p[state.lang].t)}">
           <figure>
-            <img src="${p.img}" alt="${esc(label)}" loading="lazy" style="aspect-ratio: ${ratio}">
+            <img src="${p.img}" alt="${esc(label)}" loading="lazy">
             <figcaption>
               <span>${esc(p[state.lang].t)}</span>
               <p>${esc(p[state.lang].n)}</p>
@@ -199,7 +197,6 @@
     els.modal.hidden = false;
     document.body.style.overflow = 'hidden';
     els.modalImg.src = p.img;
-    els.modalImg.style.aspectRatio = String(p.ratio || 1);
     els.modalImg.alt = `${p[state.lang].n} — ${collName(p.coll)}`;
     els.modalCollection.textContent = collName(p.coll).toUpperCase();
     els.modalTitle.textContent = p[state.lang].n;

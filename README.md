@@ -76,6 +76,27 @@ Filtre, arama, modal, teklif sepeti ve dil değiştirici otomatik olarak yeni ka
 - Dil seçimi `damira-lang` anahtarıyla tarayıcıda saklanır.
 - Logo dosyaları `logos/` klasöründedir.
 
+## Yayın (Hosting)
+
+Site, **GitHub Pages** üzerinden ücretsiz yayınlanır (Türkiye dahil erişilebilir):
+
+```
+https://mgokmen2-collab.github.io/damira-textile-website/
+```
+
+- `main` branch'ine her push'ta `.github/workflows/pages.yml` ile otomatik deploy edilir.
+- Kalıcı bir alan adı alındığında (ör. `damiratextile.com`), Pages ayarlarından custom domain olarak bağlanabilir.
+
+### Cloudflare Pages (yedek)
+
+Site ayrıca Cloudflare Pages üzerinde de yayında: `https://damira-textile.pages.dev/`
+(Not: `*.pages.dev` Türkiye'deki bazı ISS'lerde engellenebilir; kalıcı domain bağlanırsa bu sorun ortadan kalkar.)
+
+```bash
+# Cloudflare Pages'e elle deploy (opsiyonel)
+npx wrangler pages deploy . --project-name=damira-textile --branch=main
+```
+
 ## Lisans
 
 Özel proje — DAMIRA TEXTILE. Tüm hakları saklıdır.

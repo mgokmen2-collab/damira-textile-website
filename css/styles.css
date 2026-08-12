@@ -372,8 +372,11 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
   width: 100%; aspect-ratio: 3 / 4; object-fit: cover;
   transition: transform var(--dur-med) var(--ease), filter var(--dur-short) var(--ease);
 }
-/* Hover: kırpma yerine tam görünüm — contain'e geçer */
-.collection-card:hover img { object-fit: contain; transform: none; filter: saturate(1.05); }
+/* Hover davranışı (koleksiyon):
+   - Kırpılan görseller (data-fit="crop"): contain ile tam görünüm
+   - 3/4'e tam sığan görseller (data-fit="fit"): zoom in */
+.collection-card:hover img[data-fit="crop"] { object-fit: contain; transform: none; filter: saturate(1.05); }
+.collection-card:hover img[data-fit="fit"] { transform: scale(1.06); filter: saturate(1.05); }
 .collection-card figure { background: var(--bg-soft); }
 .collection-card figcaption {
   position: absolute; inset: auto 0 0 0; padding: 28px 16px 14px;
@@ -415,8 +418,11 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
   width: 100%; aspect-ratio: 1 / 1; object-fit: cover;
   transition: transform var(--dur-med) var(--ease);
 }
-/* Hover: kırpma yerine tam görünüm — contain'e geçer (kare görsellerde değişiklik yok) */
-.product-card:hover figure img { object-fit: contain; transform: none; }
+/* Hover davranışı:
+   - Kırpılan görseller (data-fit="crop"): contain ile tam görünüm (zoom out)
+   - Tam sığan kare görseller (data-fit="fit"): zoom in (scale 1.06) */
+.product-card:hover figure img[data-fit="crop"] { object-fit: contain; transform: none; }
+.product-card:hover figure img[data-fit="fit"] { transform: scale(1.06); }
 .product-card figure { background: var(--bg-soft); }
 .product-card figcaption {
   position: absolute; inset: auto 0 0 0; padding: 40px 16px 14px;

@@ -10,9 +10,11 @@
     lang: localStorage.getItem('damira-lang') || 'tr',
     activeColl: null,          // koleksiyon filtresi (null = tümü)
     search: '',
+    sort: 'name',              // name | coll | type
     quote: [],                 // seçili desen id'leri
     visibleCount: 8,           // "daha fazla" sayfalama
-    currentProduct: null       // modalda açık ürün
+    currentProduct: null,      // modalda açık ürün
+    lastTrigger: null          // modalı açan öğe (focus dönüşü için)
   };
 
   const els = {};
@@ -31,6 +33,17 @@
     if (!q) return true;
     return [p[state.lang].n, p[state.lang].t, collName(p.coll)]
       .join(' ').toLowerCase().includes(q);
+  };
+  const filteredProducts = () => {
+    const list = PRODUCTS.filter(matchesFilter);
+    const sortKey = { name: 'n', coll: 'coll', type: 't' }[state.sort] || 'n';
+    const sorted = list.slice().sort((a, b) => {
+      let va = a[state.lang][sortKey] || collName(a.coll) || '';
+      let vb = b[state.lang][sortKey] || collName(b.coll) || '';
+      if (sortKey === 'coll') { va = collName(a.coll); vb = collName(b.coll); }
+      return va.localeCompare(vb, state.lang);
+    });
+    return sorted;
   };
 
   /* ---------- i18n uygula ---------- */
@@ -109,17 +122,35 @@
 
   /* ---------- Ürün grid'i ---------- */
   function renderProducts() {
-    const list = PRODUCTS.filter(matchesFilter);
+    const list = filteredProducts();
     const isEmpty = list.length === 0;
+    const isFiltered = state.activeColl !== null || state.search.trim() !== '';
     els.catalogEmpty.hidden = !isEmpty;
     els.loadMoreBtn.hidden = list.length <= state.visibleCount;
     els.loadMoreBtn.disabled = false;
+    els.resetBtn.hidden = !isFiltered;
+
+    // Sonuç sayacı
+    els.catalogCount.textContent = `${list.length} ${t('catalog.count')}`;
+    els.catalogCount.hidden = false;
 
     const shown = list.slice(0, state.visibleCount);
     els.productGrid.innerHTML = shown.map(productCard).join('');
 
+    // Görsel yüklenince shimmer kapat, opacity ile göster
+    els.productGrid.querySelectorAll('figure img').forEach((img) => {
+      if (img.complete && img.naturalWidth > 0) {
+        img.classList.add('loaded');
+      } else {
+        img.addEventListener('load', () => img.classList.add('loaded'), { once: true });
+      }
+    });
+
     els.productGrid.querySelectorAll('[data-open]').forEach((btn) => {
-      btn.addEventListener('click', () => openModal(btn.dataset.open));
+      btn.addEventListener('click', (e) => {
+        state.lastTrigger = e.currentTarget;
+        openModal(btn.dataset.open);
+      });
     });
 
     const remaining = list.length - state.visibleCount;
@@ -129,6 +160,14 @@
       els.loadMoreBtn.textContent = t('catalog.more');
     }
     observeReveals();
+  }
+  function resetFilters() {
+    state.activeColl = null;
+    state.search = '';
+    state.visibleCount = 8;
+    els.searchInput.value = '';
+    syncChips();
+    renderProducts();
   }
   function productCard(p) {
     const label = `${p[state.lang].n} — ${collName(p.coll)}`;
@@ -168,11 +207,35 @@
     els.modalPdfLink.href = 'catalogs/damira-catalog-2026.pdf';
     els.modalQuoteBtn.textContent = state.quote.includes(id)
       ? '✓ ' + t('modal.inQuote') : t('modal.addQuote');
+    // Focus modal içine al
+    els.modalClose.focus();
   }
   function closeModal() {
     els.modal.hidden = true;
     document.body.style.overflow = '';
     state.currentProduct = null;
+    // Focus tetikleyiciye dön
+    if (state.lastTrigger && document.contains(state.lastTrigger)) {
+      state.lastTrigger.focus();
+    }
+    state.lastTrigger = null;
+  }
+  function trapModalFocus(e) {
+    if (els.modal.hidden) return;
+    if (e.key !== 'Tab') return;
+    const focusables = els.modal.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    if (focusables.length === 0) return;
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
   }
 
   /* ---------- Teklif sepeti ---------- */
@@ -295,6 +358,10 @@
       collectionGrid: $('#collectionGrid'),
       filterChips: $('#filterChips'),
       searchInput: $('#searchInput'),
+      sortSelect: $('#sortSelect'),
+      catalogCount: $('#catalogCount'),
+      resetBtn: $('#resetBtn'),
+      emptyResetBtn: $('#emptyResetBtn'),
       productGrid: $('#productGrid'),
       catalogEmpty: $('#catalogEmpty'),
       loadMoreBtn: $('#loadMoreBtn'),
@@ -306,6 +373,7 @@
       formSubmit: $('#quoteForm .btn[type="submit"]'),
       fName: $('#fName'), fEmail: $('#fEmail'),
       modal: $('#productModal'),
+      modalClose: $('.modal-close'),
       modalImg: $('#modalImg'),
       modalCollection: $('#modalCollection'),
       modalTitle: $('#modalTitle'),
@@ -333,6 +401,16 @@
       renderProducts();
     });
 
+    // Sıralama
+    els.sortSelect.addEventListener('change', () => {
+      state.sort = els.sortSelect.value;
+      renderProducts();
+    });
+
+    // Filtre temizleme
+    els.resetBtn.addEventListener('click', resetFilters);
+    els.emptyResetBtn.addEventListener('click', resetFilters);
+
     // Daha fazla
     els.loadMoreBtn.addEventListener('click', () => {
       state.visibleCount += 8;
@@ -346,6 +424,7 @@
     $$('[data-close-modal]').forEach((el) => el.addEventListener('click', closeModal));
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && !els.modal.hidden) closeModal();
+      trapModalFocus(e);
     });
 
     bindForm();

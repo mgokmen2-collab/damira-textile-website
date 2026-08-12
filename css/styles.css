@@ -262,6 +262,33 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 }
 .catalog-tools { display: flex; flex-direction: column; gap: var(--space-4); align-items: flex-end; }
 
+.catalog-toolbar { display: flex; gap: var(--space-4); align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+.sort-wrap { display: flex; align-items: center; gap: 8px; }
+.sort-label {
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--ink-faint);
+}
+.sort-select {
+  font: inherit; font-size: 0.9rem; font-weight: 500;
+  padding: 10px 32px 10px 14px;
+  border: 1px solid var(--line-strong); border-radius: 2px;
+  background: var(--surface) url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%231A1918' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 12px center;
+  color: var(--ink); appearance: none; cursor: pointer;
+  min-height: 44px;
+}
+.sort-select:focus { outline: none; border-color: var(--gold); }
+.catalog-meta { display: flex; align-items: center; gap: var(--space-4); }
+.catalog-count {
+  font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--ink-faint); font-variant-numeric: tabular-nums;
+}
+.reset-btn {
+  font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em;
+  color: var(--gold-deep); padding: 8px 12px; min-height: 44px;
+  border-bottom: 1px solid transparent; transition: border-color 0.2s;
+}
+.reset-btn:hover { border-color: var(--gold-deep); }
+
 .search-input {
   font: inherit; font-size: 0.95rem;
   padding: 12px 18px; border-radius: 2px;
@@ -277,7 +304,7 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
   font-size: 0.82rem; font-weight: 600; letter-spacing: 0.04em;
   padding: 8px 16px; border-radius: 2px;
   border: 1px solid var(--line-strong); color: var(--ink-soft);
-  transition: all 0.2s; min-height: 36px;
+  transition: all 0.2s; min-height: 44px;
 }
 .chip:hover { border-color: var(--ink); color: var(--ink); }
 .chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
@@ -320,6 +347,19 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 .product-card { position: relative; }
 .product-card button { display: block; width: 100%; text-align: left; }
 .product-card figure { position: relative; overflow: hidden; border-radius: 4px; background: var(--bg-soft); }
+.product-card figure::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(100deg, transparent 30%, rgba(255,255,255,0.35) 50%, transparent 70%);
+  transform: translateX(-100%);
+  animation: shimmer 1.4s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes shimmer {
+  to { transform: translateX(100%); }
+}
+.product-card img.loaded { animation: none; }
+.product-card figure img { opacity: 0; transition: opacity 0.4s; }
+.product-card figure img.loaded { opacity: 1; }
 .product-card img {
   width: 100%; aspect-ratio: 1 / 1; object-fit: cover;
   transition: transform 0.6s var(--ease);
@@ -348,7 +388,9 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
   padding: var(--space-9); text-align: center;
   border: 1px dashed var(--line-strong); border-radius: 4px;
   color: var(--ink-soft);
+  display: flex; flex-direction: column; align-items: center; gap: var(--space-4);
 }
+.btn-sm { padding: 10px 20px; min-height: 44px; font-size: 0.88rem; }
 .catalog-more { max-width: 1440px; margin: var(--space-9) auto 0; text-align: center; }
 
 /* ===== Atelier ===== */
@@ -393,10 +435,15 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
   line-height: 1.4;
 }
 .quote-tag button {
-  width: 20px; height: 20px; border-radius: 1px;
+  width: 28px; height: 28px; border-radius: 1px;
   background: var(--ink); color: var(--bg);
-  font-size: 0.75rem; line-height: 1;
+  font-size: 0.85rem; line-height: 1;
   display: inline-flex; align-items: center; justify-content: center;
+  position: relative;
+}
+/* Görsel olarak küçük ama dokunma alanı 44px */
+.quote-tag button::before {
+  content: ''; position: absolute; inset: -8px;
 }
 .quote-tag button:hover { background: var(--gold-deep); }
 .quote-empty { font-size: 0.92rem; color: var(--ink-faint); margin-bottom: var(--space-4); }

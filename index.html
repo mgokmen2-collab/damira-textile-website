@@ -94,14 +94,31 @@
           <h2 class="section-title" data-i18n="catalog.title">Desenler</h2>
         </div>
         <div class="catalog-tools">
-          <label class="visually-hidden" for="searchInput" data-i18n="catalog.searchLabel">Desen ara</label>
-          <input class="search-input" id="searchInput" type="search" placeholder="Desen ara…" data-i18n-ph="catalog.searchPh">
+          <div class="catalog-toolbar">
+            <label class="visually-hidden" for="searchInput" data-i18n="catalog.searchLabel">Desen ara</label>
+            <input class="search-input" id="searchInput" type="search" placeholder="Desen ara…" data-i18n-ph="catalog.searchPh">
+            <div class="sort-wrap">
+              <label class="sort-label" for="sortSelect" data-i18n="catalog.sortLabel">Sırala</label>
+              <select class="sort-select" id="sortSelect">
+                <option value="name" data-i18n="catalog.sortName">İsim (A–Z)</option>
+                <option value="coll" data-i18n="catalog.sortColl">Koleksiyon</option>
+                <option value="type" data-i18n="catalog.sortType">Tür</option>
+              </select>
+            </div>
+          </div>
+          <div class="catalog-meta">
+            <p class="catalog-count" id="catalogCount" aria-live="polite"></p>
+            <button class="reset-btn" id="resetBtn" hidden data-i18n="catalog.reset">Filtreyi Temizle</button>
+          </div>
           <div class="filter-chips" id="filterChips" role="group" aria-label="Koleksiyon filtresi"></div>
         </div>
       </div>
 
       <div class="catalog-state" id="catalogState" aria-live="polite">
-        <p class="catalog-empty" id="catalogEmpty" hidden data-i18n="catalog.empty">Bu filtreye uyan desen yok. Başka bir koleksiyon deneyin.</p>
+        <div class="catalog-empty" id="catalogEmpty" hidden>
+          <p data-i18n="catalog.empty">Bu filtreye uyan desen yok. Başka bir koleksiyon deneyin.</p>
+          <button class="btn btn-outline btn-sm" id="emptyResetBtn" data-i18n="catalog.reset">Filtreyi Temizle</button>
+        </div>
       </div>
 
       <ul class="product-grid" id="productGrid"><!-- JS ile doldurulur --></ul>

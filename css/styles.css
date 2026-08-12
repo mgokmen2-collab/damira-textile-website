@@ -164,21 +164,32 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 .brand-text { display: flex; flex-direction: column; line-height: 1.05; }
 .brand-text strong {
   font-family: var(--font-serif); font-weight: 600;
-  font-size: 1.5rem; letter-spacing: 0.08em;
+  font-size: 1.4rem; letter-spacing: 0.24em;
 }
-.brand-text span {
-  font-size: 0.75rem; letter-spacing: 0.42em; text-transform: uppercase;
+.brand-textile {
   color: var(--gold-deep); margin-top: 3px;
-  display: flex; align-items: center; gap: 8px;
+  display: flex; align-items: center;
+  /* Column flex'te stretch olmasın — kendi içeriği kadar genişlesin */
+  align-self: flex-start;
 }
-.brand-text span::before,
-.brand-text span::after {
+.brand-textile-letters {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  /* Harfler arası boşluk HTML'de nbsp ile verilir; letter-spacing yok,
+     böylece son harften sonra fazla boşluk oluşmaz ve çizgiler simetrik kalır */
+}
+.brand-textile::before,
+.brand-textile::after {
   content: '';
   height: 1px;
-  width: 14px;
+  flex: 1 1 auto;
+  min-width: 8px;
   background: var(--gold-deep);
-  flex: 0 0 auto;
 }
+.brand-textile::before { margin-right: 6px; }
+.brand-textile::after { margin-left: 6px; }
+/* Satır DAMIRA genişliğine eşitlensin */
+.brand-textile { width: 100%; }
 
 .site-nav { display: flex; gap: var(--space-9); }
 .site-nav a {

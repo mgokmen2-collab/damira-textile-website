@@ -7,13 +7,55 @@
   'use strict';
 
   const COLLECTIONS = [
-    { id: 'monaco',    img: 'items/monaco/ChatGPT%20Image%2029%20Tem%202026%2012_26_41.jpg', ratio: 960/768, tr: 'Monaco',    en: 'Monaco',    fr: 'Monaco' },
-    { id: 'corsica',   img: 'items/corsica/ChatGPT%20Image%206%20Tem%202026%2014_11_22.jpg', ratio: 1, tr: 'Korsika',   en: 'Corsica',   fr: 'Corse' },
-    { id: 'vendee',    img: 'items/vendee/ChatGPT%20Image%2030%20Tem%202026%2012_37_07.jpg', ratio: 1, tr: 'Vendée',    en: 'Vendée',    fr: 'Vendée' },
-    { id: 'oleron',    img: 'items/ile%20doleron/ChatGPT%20Image%2029%20Tem%202026%2015_24_04.jpg', ratio: 896/768, tr: 'Île d’Oléron', en: 'Île d’Oléron', fr: 'Île d’Oléron' },
-    { id: 'baiedesomme', img: 'items/baie%20de%20somme/ChatGPT%20Image%2030%20Tem%202026%2012_41_28.jpg', ratio: 1024/768, tr: 'Baie de Somme', en: 'Baie de Somme', fr: 'Baie de Somme' },
-    { id: 'marseille', img: 'items/marseille/ChatGPT%20Image%208%20Tem%202026%2013_49_26.jpg', ratio: 684/768, tr: 'Marsilya',  en: 'Marseille', fr: 'Marseille' },
-    { id: 'fortboyard', img: 'items/ford%20boyard/ChatGPT%20Image%2030%20Tem%202026%2012_19_07.jpg', ratio: 1, tr: 'Fort Boyard', en: 'Fort Boyard', fr: 'Fort Boyard' }
+    { id: 'monaco',    img: 'items/monaco/ChatGPT%20Image%2029%20Tem%202026%2012_26_41.jpg', ratio: 960/768,
+      tr: 'Monaco',    en: 'Monaco',    fr: 'Monaco',
+      d: {
+        tr: 'Prenslik ihtişamı: kumarhane cephesi, liman yatları, prens sarayı ve lavanta kokulu bahçe terasları. Altın, lacivert ve zümrütün buluştuğu, Akdeniz’in en zarif köşesine saygı duruşu.',
+        en: 'Princely grandeur: the casino façade, harbour yachts, the Prince’s Palace and lavender-scented garden terraces. A tribute to the Riviera’s most elegant corner, where gold, navy and emerald meet.',
+        fr: 'La grandeur princière : façade du casino, yachts du port, palais princier et terrasses de jardin parfumées à la lavande. Hommage au coin le plus élégant de la Riviera, où or, marine et émeraude se rencontrent.'
+      } },
+    { id: 'corsica',   img: 'items/corsica/ChatGPT%20Image%206%20Tem%202026%2014_11_22.jpg', ratio: 1,
+      tr: 'Korsika',   en: 'Corsica',   fr: 'Corse',
+      d: {
+        tr: 'Dağların ve denizin adası: Mağribi başı amblemi, zeytin ve limon sepetleri, Ceneviz kuleleri ve Bonifacio kayalıkları. Korsika’nın yabanıl güzelliği, toprak tonlarında.',
+        en: 'The island of mountains and sea: the Moor’s head emblem, baskets of olives and lemons, Genoese towers and the cliffs of Bonifacio. Corsica’s wild beauty in earthy tones.',
+        fr: 'L’île des montagnes et de la mer : tête de Maure, paniers d’olives et de citrons, tours génoises et falaises de Bonifacio. La beauté sauvage de la Corse en tons terreux.'
+      } },
+    { id: 'vendee',    img: 'items/vendee/ChatGPT%20Image%2030%20Tem%202026%2012_37_07.jpg', ratio: 1,
+      tr: 'Vendée',    en: 'Vendée',    fr: 'Vendée',
+      d: {
+        tr: 'Kırsal Fransa’nın kalbi: mavi panjurlu pencereler, çiçek sepetli bisikletler, balıklar ve martılar. Sade, nostaljik ve denizci bir koleksiyon.',
+        en: 'The heart of rural France: windows with blue shutters, flower-basket bicycles, fishes and seagulls. A simple, nostalgic and nautical collection.',
+        fr: 'Le cœur de la France rurale : fenêtres aux volets bleus, vélos à panier fleuri, poissons et goélands. Une collection simple, nostalgique et marine.'
+      } },
+    { id: 'oleron',    img: 'items/ile%20doleron/ChatGPT%20Image%2029%20Tem%202026%2015_24_04.jpg', ratio: 896/768,
+      tr: 'Île d’Oléron', en: 'Île d’Oléron', fr: 'Île d’Oléron',
+      d: {
+        tr: 'Denizin üstündeki ada: kazıklar üzerindeki balıkçı kulübeleri, Chassiron feneri, bisikletler ve balıklar. Oléron’un mavi-beyaz-kırmızı denizci ruhu.',
+        en: 'The island on the sea: fishing huts on stilts, the Chassiron lighthouse, bicycles and fishes. Oléron’s nautical spirit in blue, white and red.',
+        fr: 'L’île sur la mer : cabanes de pêcheurs sur pilotis, phare de Chassiron, vélos et poissons. L’esprit marin d’Oléron en bleu, blanc et rouge.'
+      } },
+    { id: 'baiedesomme', img: 'items/baie%20de%20somme/ChatGPT%20Image%2030%20Tem%202026%2012_41_28.jpg', ratio: 1024/768,
+      tr: 'Baie de Somme', en: 'Baie de Somme', fr: 'Baie de Somme',
+      d: {
+        tr: 'Yumuşak ışığın körfezi: rengarenk plaj kulübeleri, kumda yatan foklar ve süzülen martılar. Pastel tonlarda huzurlu bir sahil hikâyesi.',
+        en: 'The bay of soft light: colourful beach huts, seals resting on the sand and gulls gliding above. A peaceful seaside story in pastel tones.',
+        fr: 'La baie de lumière douce : cabanes de plage colorées, phoques posés sur le sable et goélands en vol. Une histoire de bord de mer paisible en tons pastel.'
+      } },
+    { id: 'marseille', img: 'items/marseille/ChatGPT%20Image%208%20Tem%202026%2013_49_26.jpg', ratio: 684/768,
+      tr: 'Marsilya',  en: 'Marseille', fr: 'Marseille',
+      d: {
+        tr: 'Eski liman şehri: Notre-Dame de la Garde bazilikası, panoramik liman manzarası ve Provence otları. Altın, okra ve terakotanın Akdeniz sıcaklığı.',
+        en: 'The old port city: the Notre-Dame de la Garde basilica, panoramic harbour views and Provence herbs. Mediterranean warmth in gold, ochre and terracotta.',
+        fr: 'La ville du Vieux-Port : basilique Notre-Dame de la Garde, vues panoramiques sur le port et herbes de Provence. Chaleur méditerranéenne en or, ocre et terracotta.'
+      } },
+    { id: 'fortboyard', img: 'items/ford%20boyard/ChatGPT%20Image%2030%20Tem%202026%2012_19_07.jpg', ratio: 1,
+      tr: 'Fort Boyard', en: 'Fort Boyard', fr: 'Fort Boyard',
+      d: {
+        tr: 'Denizin ortasında efsane: taş kale, çizgili fener kulesi ve üç kuş. Macera ve nostaljinin buluştuğu ikonik bir hatıra.',
+        en: 'A legend in the middle of the sea: the stone fortress, striped lighthouse tower and three birds. An iconic souvenir where adventure meets nostalgia.',
+        fr: 'Une légende au milieu de la mer : forteresse de pierre, tour-phare rayée et trois oiseaux. Un souvenir emblématique où l’aventure rencontre la nostalgie.'
+      } }
   ];
 
   /* Desenler: koleksiyon id'si + görsel yolu + dillerde (ad, açıklama, etiket) + ratio. */
@@ -169,9 +211,17 @@
       'form.submit': 'Teklif Talebi Gönder', 'form.sending': 'Gönderiliyor…',
       'form.success': 'Talebiniz alındı. En geç 2 iş günü içinde size dönüş yapacağız.',
       'footer.note': 'Nice, Fransa · 1976’dan beri turistik tekstil üretimi',
-      'modal.addQuote': 'Teklife Ekle', 'modal.pdf': 'PDF Kataloğu İndir',
+      'modal.addQuote': 'Teklife Ekle', 'modal.pdf': 'E-Katalogu Aç',
       'modal.specs': 'Dokuma', 'modal.specsV': '%100 keten · 210 g/m² · 38.000 dikiş',
-      'modal.unit': 'adet'
+      'modal.unit': 'adet',
+      'ecat.eyebrow': 'E-KATALOG · 2026',
+      'ecat.title': 'Koleksiyonlar ve desenler.',
+      'ecat.lede': 'Yedi bölge, yirmi beş desen. Her biri Fransız kıyılarının bir köşesini keten üzerine işler; otelinize, mağazanıza ve misafirlerinize taşınmak üzere. B2B sipariş ve numune için teklif formunu kullanın.',
+      'ecat.note': '%100 keten · 210 g/m² · 38.000 dikiş / desen',
+      'ecat.designs': 'desen', 'ecat.coll': 'Koleksiyon',
+      'ecat.viewDesigns': 'Desenleri Gör →', 'ecat.quoteDesign': 'Teklif İste',
+      'ecat.cta': 'Bu desenlerden birini sipariş etmek veya numune almak ister misiniz?',
+      'ecat.ctaBtn': 'Teklif Alın'
     },
     en: {
       skip: 'Skip to content',
@@ -208,9 +258,17 @@
       'form.submit': 'Send Quote Request', 'form.sending': 'Sending…',
       'form.success': 'Request received. We will reply within two working days.',
       'footer.note': 'Nice, France · tourist textile production since 1976',
-      'modal.addQuote': 'Add to Quote', 'modal.pdf': 'Download PDF Catalog',
+      'modal.addQuote': 'Add to Quote', 'modal.pdf': 'Open E-Catalog',
       'modal.specs': 'Weave', 'modal.specsV': '100% linen · 210 g/m² · 38,000 stitches',
-      'modal.unit': 'pcs'
+      'modal.unit': 'pcs',
+      'ecat.eyebrow': 'E-CATALOG · 2026',
+      'ecat.title': 'Collections & designs.',
+      'ecat.lede': 'Seven regions, twenty-five designs. Each one embroiders a corner of the French coast onto linen, ready for your hotel, your store and your guests. Use the quote form for B2B orders and samples.',
+      'ecat.note': '100% linen · 210 g/m² · 38,000 stitches / design',
+      'ecat.designs': 'designs', 'ecat.coll': 'Collection',
+      'ecat.viewDesigns': 'View Designs →', 'ecat.quoteDesign': 'Request Quote',
+      'ecat.cta': 'Would you like to order one of these designs or request samples?',
+      'ecat.ctaBtn': 'Get a Quote'
     },
     fr: {
       skip: 'Aller au contenu',
@@ -247,9 +305,17 @@
       'form.submit': 'Envoyer la demande de devis', 'form.sending': 'Envoi en cours…',
       'form.success': 'Demande reçue. Réponse sous deux jours ouvrés.',
       'footer.note': 'Nice, France · production de textiles touristiques depuis 1976',
-      'modal.addQuote': 'Ajouter au devis', 'modal.pdf': 'Télécharger le catalogue PDF',
+      'modal.addQuote': 'Ajouter au devis', 'modal.pdf': 'Ouvrir l’e-catalogue',
       'modal.specs': 'Tissage', 'modal.specsV': '100 % lin · 210 g/m² · 38 000 points',
-      'modal.unit': 'pcs'
+      'modal.unit': 'pcs',
+      'ecat.eyebrow': 'E-CATALOGUE · 2026',
+      'ecat.title': 'Collections et motifs.',
+      'ecat.lede': 'Sept régions, vingt-cinq motifs. Chacun brode un coin de la côte française sur du lin, prêt pour votre hôtel, votre boutique et vos clients. Utilisez le formulaire de devis pour les commandes B2B et les échantillons.',
+      'ecat.note': '100 % lin · 210 g/m² · 38 000 points / motif',
+      'ecat.designs': 'motifs', 'ecat.coll': 'Collection',
+      'ecat.viewDesigns': 'Voir les motifs →', 'ecat.quoteDesign': 'Demander un devis',
+      'ecat.cta': 'Souhaitez-vous commander l’un de ces motifs ou demander des échantillons ?',
+      'ecat.ctaBtn': 'Demander un devis'
     }
   };
 

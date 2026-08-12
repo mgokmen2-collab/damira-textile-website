@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="tr" class="js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>E-Katalog — DAMIRA TEXTILE | Tüm Koleksiyonlar ve Desenler</title>
+  <meta name="description" content="DAMIRA TEXTILE e-kataloğu: 7 koleksiyon, 25 işlemeli desen. Monaco, Corsica, Vendée, Île d'Oléron, Baie de Somme, Marseille, Fort Boyard.">
+  <link rel="icon" type="image/jpeg" href="logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#catalogMain" data-i18n="skip">İçeriğe atla</a>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+      <a class="brand" href="index.html" aria-label="DAMIRA TEXTILE — ana sayfa">
+        <img class="brand-logo" src="logo.jpg" alt="DAMIRA TEXTILE logo — interlocked D ve G monogramı">
+        <span class="brand-text">
+          <strong>DAMIRA</strong>
+          <span>TEXTILE</span>
+        </span>
+      </a>
+
+      <nav class="site-nav" aria-label="Ana gezinme">
+        <a href="index.html#collections" data-i18n="nav.collections">Koleksiyonlar</a>
+        <a href="catalog.html" aria-current="page" data-i18n="nav.catalog">Katalog</a>
+        <a href="index.html#atelier" data-i18n="nav.atelier">Atölye</a>
+        <a href="index.html#contact" data-i18n="nav.contact">İletişim</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="lang-switch" role="group" aria-label="Dil seçimi">
+          <button class="lang-btn" data-lang="tr" aria-pressed="true">TR</button>
+          <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+          <button class="lang-btn" data-lang="fr" aria-pressed="false">FR</button>
+        </div>
+        <a class="header-cta" href="index.html#contact" data-i18n="nav.quote">Teklif Al</a>
+        <button class="nav-toggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Menüyü aç">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-nav" id="mobileNav" hidden>
+      <a href="index.html#collections" data-i18n="nav.collections">Koleksiyonlar</a>
+      <a href="catalog.html" data-i18n="nav.catalog">Katalog</a>
+      <a href="index.html#atelier" data-i18n="nav.atelier">Atölye</a>
+      <a href="index.html#contact" data-i18n="nav.contact">İletişim</a>
+      <a class="mobile-cta" href="index.html#contact" data-i18n="nav.quote">Teklif Al</a>
+    </div>
+  </header>
+
+  <main id="catalogMain">
+    <!-- ===== E-KATALOG KAPAK ===== -->
+    <section class="ecat-hero">
+      <div class="ecat-hero-inner">
+        <p class="eyebrow" data-i18n="ecat.eyebrow">E-KATALOG · 2026</p>
+        <h1 class="ecat-title" data-i18n="ecat.title">Koleksiyonlar ve desenler.</h1>
+        <p class="ecat-lede" data-i18n="ecat.lede">Yedi bölge, yirmi beş desen. Her biri Fransız kıyılarının bir köşesini keten üzerine işler; otelinize, mağazanıza ve misafirlerinize taşınmak üzere. B2B sipariş ve numune için teklif formunu kullanın.</p>
+        <p class="ecat-note" data-i18n="ecat.note">%100 keten · 210 g/m² · 38.000 dikiş / desen</p>
+      </div>
+    </section>
+
+    <!-- ===== KOLEKSİYONLAR (JS ile doldurulur) ===== -->
+    <section class="ecat-section" id="ecatCollections">
+      <div class="ecat-wrap">
+        <div id="ecatCollectionList"><!-- JS --></div>
+      </div>
+    </section>
+
+    <!-- ===== DESENLER (JS ile doldurulur) ===== -->
+    <section class="ecat-section ecat-designs" id="ecatDesigns">
+      <div class="ecat-wrap">
+        <div id="ecatDesignList"><!-- JS --></div>
+      </div>
+    </section>
+
+    <!-- ===== KATALOG ALT BİLGİ ===== -->
+    <section class="ecat-footer-cta">
+      <div class="ecat-wrap">
+        <p class="ecat-cta-text" data-i18n="ecat.cta">Bu desenlerden birini sipariş etmek veya numune almak ister misiniz?</p>
+        <a class="btn btn-primary" href="index.html#contact" data-i18n="ecat.ctaBtn">Teklif Alın</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="footer-brand">DAMIRA TEXTILE</p>
+      <p class="footer-note" data-i18n="footer.note">Nice, Fransa · 1976'dan beri turistik tekstil üretimi</p>
+      <div class="footer-links">
+        <a href="index.html#collections" data-i18n="nav.collections">Koleksiyonlar</a>
+        <a href="index.html#contact" data-i18n="nav.contact">İletişim</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/catalog.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

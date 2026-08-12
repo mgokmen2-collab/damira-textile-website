@@ -212,7 +212,8 @@
     els.modalSpecs.innerHTML = `
       <dt>${t('modal.specs')}</dt><dd>${t('modal.specsV')}</dd>
       <dt>${t('modal.unit')}</dt><dd>${esc(p[state.lang].t)}</dd>`;
-    els.modalPdfLink.href = 'catalogs/damira-catalog-2026.pdf';
+    els.modalPdfLink.href = 'catalog.html';
+    els.modalPdfLink.target = '_blank';
     els.modalQuoteBtn.textContent = state.quote.includes(id)
       ? '✓ ' + t('modal.inQuote') : t('modal.addQuote');
     // Focus modal içine al

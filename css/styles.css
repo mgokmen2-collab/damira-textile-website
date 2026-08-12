@@ -170,6 +170,8 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
   color: var(--gold-deep); margin-top: 3px;
   display: flex; align-items: center;
   justify-content: center;
+  /* Bir tık sola: optik denge için hafif kaydırma */
+  transform: translateX(-3px);
 }
 .brand-textile-letters {
   font-size: 0.72rem;

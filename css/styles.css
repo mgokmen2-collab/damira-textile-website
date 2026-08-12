@@ -85,10 +85,12 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 .skip-link:focus { top: var(--space-4); }
 
 /* ===== Type scale (editorial serif) ===== */
+/* Kısa etiketler: sıkı satır yüksekliği (1.1), geniş harf aralığı */
 .eyebrow {
   font-family: var(--font-sans);
-  font-size: 12px; font-weight: 600;
+  font-size: 0.75rem; font-weight: 600;
   letter-spacing: 0.22em; text-transform: uppercase;
+  line-height: 1.3;
   color: var(--gold-deep);
   margin-bottom: var(--space-4);
 }
@@ -99,14 +101,15 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
   font-size: clamp(2.4rem, 5vw, 3.8rem);
   line-height: 1.1;
   letter-spacing: -0.01em;
+  text-wrap: balance;
   margin-bottom: var(--space-4);
 }
 
 .section-lede {
   font-size: 1.06rem;
   color: var(--ink-soft);
-  max-width: 58ch;
-  line-height: 1.7;
+  max-width: 64ch;
+  line-height: 1.65;
 }
 
 .gold { color: var(--gold-deep); font-style: italic; }
@@ -228,16 +231,17 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
   font-family: var(--font-serif); font-weight: 500;
   font-size: clamp(2.8rem, 6vw, 5rem);
   line-height: 1.06; letter-spacing: -0.015em;
+  text-wrap: balance;
   margin-bottom: var(--space-4);
 }
 .hero-lede {
-  max-width: 56ch; color: var(--ink-soft);
-  font-size: 1.06rem; line-height: 1.7; margin-bottom: var(--space-9);
+  max-width: 62ch; color: var(--ink-soft);
+  font-size: 1.06rem; line-height: 1.65; margin-bottom: var(--space-9);
 }
 .hero-actions { display: flex; gap: var(--space-4); flex-wrap: wrap; margin-bottom: var(--space-4); }
 .hero-note {
-  font-size: 0.82rem; letter-spacing: 0.05em; color: var(--ink-faint);
-  text-transform: uppercase;
+  font-size: 0.78rem; letter-spacing: 0.08em; color: var(--ink-faint);
+  text-transform: uppercase; line-height: 1.4;
 }
 .hero-figure { position: relative; }
 .hero-img {
@@ -246,7 +250,7 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 }
 .hero-caption {
   margin-top: var(--space-4); font-size: 0.85rem; color: var(--ink-faint);
-  font-style: italic;
+  font-style: italic; line-height: 1.5;
 }
 
 /* ===== Sections ===== */
@@ -298,11 +302,13 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
   background: linear-gradient(to top, rgba(26, 25, 24, 0.55), transparent);
   color: var(--bg); font-family: var(--font-serif);
   font-size: 1.5rem; font-weight: 500; letter-spacing: 0.02em;
+  line-height: 1.2; /* açık metin: koyu zeminde daha rahat okunur */
 }
 .collection-count {
   display: block; font-family: var(--font-sans);
-  font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+  font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
   opacity: 0.85; margin-top: 2px;
+  font-variant-numeric: tabular-nums;
 }
 
 /* ===== Product grid ===== */
@@ -328,13 +334,14 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 }
 .product-card:hover figcaption,
 .product-card:focus-within figcaption { opacity: 1; transform: translateY(0); }
-.product-card figcaption p { font-family: var(--font-serif); font-size: 1.15rem; }
+.product-card figcaption p { font-family: var(--font-serif); font-size: 1.15rem; line-height: 1.25; }
 .product-card figcaption span {
-  font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.85;
+  font-size: 0.66rem; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.85;
+  line-height: 1.3;
 }
 .product-info { display: flex; justify-content: space-between; align-items: baseline; margin-top: 12px; gap: 8px; }
-.product-name { font-family: var(--font-serif); font-size: 1.25rem; font-weight: 500; }
-.product-coll { font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint); }
+.product-name { font-family: var(--font-serif); font-size: 1.25rem; font-weight: 500; line-height: 1.25; }
+.product-coll { font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint); line-height: 1.3; }
 
 .catalog-empty {
   max-width: 1440px; margin: var(--space-9) auto;
@@ -359,8 +366,9 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 }
 .atelier-facts dt {
   font-family: var(--font-serif); font-size: 1.15rem; font-weight: 600;
+  line-height: 1.3;
 }
-.atelier-facts dd { font-size: 0.92rem; color: var(--ink-soft); }
+.atelier-facts dd { font-size: 0.92rem; color: var(--ink-soft); line-height: 1.5; font-variant-numeric: tabular-nums; }
 
 /* ===== Contact ===== */
 .contact-inner {
@@ -376,12 +384,13 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
   background: var(--surface); border: 1px solid var(--line);
   border-radius: 4px; padding: clamp(24px, 3vw, 36px);
 }
-.form-label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 8px; }
+.form-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 8px; line-height: 1.3; }
 .quote-items { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: var(--space-4); }
 .quote-tag {
   display: inline-flex; align-items: center; gap: 8px;
   font-size: 0.85rem; padding: 8px 12px;
   background: var(--bg-soft); border: 1px solid var(--line-strong); border-radius: 2px;
+  line-height: 1.4;
 }
 .quote-tag button {
   width: 20px; height: 20px; border-radius: 1px;
@@ -394,7 +403,7 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
 .field { margin-bottom: var(--space-4); }
-.field label { display: block; font-size: 0.85rem; font-weight: 500; margin-bottom: 6px; }
+.field label { display: block; font-size: 0.85rem; font-weight: 500; margin-bottom: 6px; line-height: 1.4; }
 .field input, .field textarea {
   width: 100%; font: inherit; font-size: 1rem;
   padding: 12px 14px; border-radius: 4px;
@@ -419,8 +428,8 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
   max-width: 1440px; margin: 0 auto;
   display: flex; justify-content: space-between; align-items: center; gap: var(--space-4); flex-wrap: wrap;
 }
-.footer-brand { font-family: var(--font-serif); font-weight: 600; font-size: 1.1rem; letter-spacing: 0.1em; }
-.footer-note { font-size: 0.85rem; color: var(--ink-faint); }
+.footer-brand { font-family: var(--font-serif); font-weight: 600; font-size: 1.1rem; letter-spacing: 0.1em; line-height: 1.3; }
+.footer-note { font-size: 0.85rem; color: var(--ink-faint); line-height: 1.5; }
 .footer-links { display: flex; gap: var(--space-9); font-size: 0.9rem; }
 .footer-links a { color: var(--ink-soft); transition: color 0.2s; }
 .footer-links a:hover { color: var(--ink); }
@@ -453,14 +462,14 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 .modal-figure { background: var(--bg-soft); }
 .modal-figure img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 1 / 1; }
 .modal-body { padding: clamp(24px, 3vw, 36px); }
-.modal-title { font-family: var(--font-serif); font-weight: 500; font-size: 2rem; line-height: 1.1; margin-bottom: 8px; }
+.modal-title { font-family: var(--font-serif); font-weight: 500; font-size: 2rem; line-height: 1.15; margin-bottom: 8px; text-wrap: balance; }
 .modal-desc { color: var(--ink-soft); line-height: 1.65; margin-bottom: var(--space-4); }
 .modal-specs {
   display: grid; gap: 4px; margin-bottom: var(--space-9);
   padding: var(--space-4); background: var(--bg-soft); border-radius: 4px;
   font-size: 0.9rem;
 }
-.modal-specs dt { font-weight: 600; font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint); }
+.modal-specs dt { font-weight: 600; font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint); line-height: 1.4; }
 .modal-actions { display: flex; gap: var(--space-4); flex-wrap: wrap; }
 
 /* ===== Motion: reveal on scroll (JS adds .revealed; html.js gate = no-JS fallback) ===== */

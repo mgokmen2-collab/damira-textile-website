@@ -815,16 +815,22 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
   .section, .ecat-section, .ecat-hero { scroll-margin-top: calc(var(--header-h) + 8px); }
 }
 
-/* ===== Touch devices: hover'ı kalıcı göster =====
-   Mobilde :hover tetiklenmez; dokunmatik cihazlarda zoom/parlaklık
-   ve alt yazı efektlerini varsayılan olarak açık tutar. */
+/* ===== Touch devices: dokunma anında zoom =====
+   Mobilde :hover tetiklenmez; dokununca (active) zoom in/out olsun,
+   bırakınca eski haline dönsün — desktop hover'a karşılık. */
 @media (hover: none) {
-  .collection-card figure img.cc-cover[data-fit="fit"] { transform: scale(1.06); filter: saturate(1.05); }
+  .collection-card figure img.cc-cover[data-fit="fit"] { filter: saturate(1.05); }
   .collection-card figure img.cc-contain { opacity: 1; }
-  .product-card figure img.pc-cover[data-fit="fit"] { transform: scale(1.06); }
   .product-card figure img.pc-contain { opacity: 1; }
   .product-card figcaption { opacity: 1; transform: none; }
-  .ecat-design .ecat-design-fig img { transform: scale(1.02); }
+  .ecat-design:active .ecat-design-fig img { transform: scale(1.02); }
+  .collection-card:active figure img.cc-cover[data-fit="fit"],
+  .collection-card:active figure img.cc-contain { transform: scale(1.06); }
+  .product-card:active figure img.pc-cover[data-fit="fit"],
+  .product-card:active figure img.pc-contain { transform: scale(1.06); }
+  /* Dokunma anında hızlı tepki — 400ms çok yavaş kalır */
+  .collection-card figure img,
+  .product-card figure img { transition-duration: 180ms; }
 }
 
 /* ===== Reduced motion ===== */
@@ -835,9 +841,6 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
      iOS "Hareketi Azalt" açıkken de görseller canlı kalsın. */
   .product-card figure::after,
   .collection-card figure::after { animation: shimmer 2.8s ease-in-out infinite !important; }
-  .collection-card figure img.cc-cover[data-fit="fit"],
-  .product-card figure img.pc-cover[data-fit="fit"],
-  .ecat-design .ecat-design-fig img { transform: scale(1.06) !important; }
   .collection-card figure img.cc-contain,
   .product-card figure img.pc-contain { opacity: 1 !important; }
   .product-card figcaption { opacity: 1; transform: none; }

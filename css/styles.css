@@ -154,8 +154,12 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 }
 .brand { display: flex; align-items: center; gap: 14px; margin-right: auto; }
 .brand-logo {
-  width: 64px; height: 64px; border-radius: 50%; object-fit: cover;
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
   border: 1px solid var(--line-strong);
+  background: var(--bg);
+  box-shadow: 0 0 0 4px var(--bg), 0 0 0 5px var(--line);
 }
 .brand-text { display: flex; flex-direction: column; line-height: 1.05; }
 .brand-text strong {
@@ -730,7 +734,7 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
   .nav-toggle { display: block; }
   .mobile-nav { display: flex; }
   .header-cta { display: none; }
-  .brand-logo { width: 52px; height: 52px; }
+  .brand-logo { width: 60px; height: 60px; }
   .brand-text strong { font-size: 1.3rem; }
   .collection-card { grid-column: span 12; }
   .collection-card:nth-child(even) { transform: none; }

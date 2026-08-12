@@ -1,0 +1,18 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Local server / temp
+node_modules/
+dist/
+build/
+
+# Command Code session artifacts (brief/reports ARE versioned intentionally)
+# Keep .commandcode/design and .commandcode/brief.md tracked

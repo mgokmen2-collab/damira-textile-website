@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>DAMIRA TEXTILE - Checkup Report</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<style>
+		body { font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+		.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+		.report-section { border: 1px solid #222226; background: #0a0a0b; position: relative; }
+		.corner-box { position: absolute; width: 20px; height: 20px; border: 1px solid #222226; background: #000; }
+	</style>
+</head>
+<body class="bg-black text-[#fafafa]">
+	<main class="mx-auto w-full max-w-6xl px-5 py-8 md:px-10 md:py-12">
+		<header class="report-section mb-8 p-6 md:p-8">
+			<div class="corner-box left-0 top-0 -translate-x-1/2 -translate-y-1/2"></div>
+			<div class="corner-box right-0 top-0 translate-x-1/2 -translate-y-1/2"></div>
+			<div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+				<div>
+					<div class="mono mb-2 text-xs tracking-widest text-[#666]">// CHECKUP</div>
+					<h1 class="text-4xl font-bold tracking-tight md:text-6xl">DAMIRA TEXTILE</h1>
+				</div>
+				<div class="mono text-left text-xs text-[#666] md:text-right">
+					<div>COMMANDCODE REPORT</div>
+					<div class="text-[#444]">2026-08-12</div>
+				</div>
+			</div>
+		</header>
+
+		<section class="report-section mb-8 p-6 md:p-8">
+			<div class="corner-box left-0 top-0 -translate-x-1/2 -translate-y-1/2"></div>
+			<div class="corner-box right-0 top-0 translate-x-1/2 -translate-y-1/2"></div>
+			<div class="grid gap-8 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
+				<div>
+					<div class="mono mb-2 text-xs tracking-widest text-[#666]">// OVERALL</div>
+					<div class="text-6xl font-bold tracking-tight md:text-7xl">50/60</div>
+					<div class="mt-1 text-lg text-[#666]">WATCH</div>
+					<div class="mt-4 inline-flex border border-[#fbbf24]/30 bg-[#fbbf24]/10 px-3 py-1 text-sm text-[#fbbf24]">FIT TO CONTINUE</div>
+				</div>
+				<div>
+					<div class="mono mb-3 text-xs tracking-widest text-[#666]">// TL;DR</div>
+					<p class="text-sm leading-6 text-[#a0a0a0]">Fundamentally healthy: real OKLCH tokens, editorial typography, texture-led imagery, working filter/search/quote flow, breakpoints verified at 375/768/1440px.</p>
+					<p class="mt-4 text-sm leading-6 text-[#fbbf24]">Two vitals at Watch: interaction states (mobile menu overlay, button feedback) and accessibility (focus ring geometry vs pill controls, thin form errors). Nothing blocks shipping.</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="report-section mb-8 p-6 md:p-8">
+			<div class="mono mb-6 text-xs tracking-widest text-[#666]">// VITAL SIGNS</div>
+			<div class="overflow-x-auto">
+				<table class="w-full min-w-[720px] border-collapse text-sm">
+					<thead>
+						<tr class="border-b border-[#222226] text-left mono text-xs text-[#666]">
+							<th class="py-3 pr-4 font-normal">#</th>
+							<th class="py-3 pr-4 font-normal">VITAL</th>
+							<th class="py-3 pr-4 font-normal">SCORE</th>
+							<th class="py-3 font-normal">KEY FINDING</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="border-b border-[#1a1a1e]"><td class="py-4 pr-4 text-[#555]">1</td><td class="py-4 pr-4 text-[#fafafa]">Intentionality</td><td class="py-4 pr-4 text-[#34d399]">10/10</td><td class="py-4 text-[#a0a0a0]">Palette, type, composition all chosen for this brief</td></tr>
+						<tr class="border-b border-[#1a1a1e]"><td class="py-4 pr-4 text-[#555]">2</td><td class="py-4 pr-4 text-[#fafafa]">Readability</td><td class="py-4 pr-4 text-[#34d399]">10/10</td><td class="py-4 text-[#a0a0a0]">60-76ch body, AA contrast charcoal/linen</td></tr>
+						<tr class="border-b border-[#1a1a1e]"><td class="py-4 pr-4 text-[#555]">3</td><td class="py-4 pr-4 text-[#fafafa]">Usability</td><td class="py-4 pr-4 text-[#34d399]">8/10</td><td class="py-4 text-[#a0a0a0]">Filter/search/modal/quote all work; load-more count helps</td></tr>
+						<tr class="border-b border-[#1a1a1e]"><td class="py-4 pr-4 text-[#555]">4</td><td class="py-4 pr-4 text-[#fafafa]">Responsiveness</td><td class="py-4 pr-4 text-[#34d399]">8/10</td><td class="py-4 text-[#a0a0a0]">375/768/1440 verified; mobile menu pushes content (watch)</td></tr>
+						<tr class="border-b border-[#1a1a1e]"><td class="py-4 pr-4 text-[#555]">5</td><td class="py-4 pr-4 text-[#fafafa]">Speed</td><td class="py-4 pr-4 text-[#34d399]">10/10</td><td class="py-4 text-[#a0a0a0]">Static files, lazy images, no layout shift</td></tr>
+						<tr class="border-b border-[#1a1a1e]"><td class="py-4 pr-4 text-[#555]">6</td><td class="py-4 pr-4 text-[#fafafa]">Accessibility</td><td class="py-4 pr-4 text-[#fbbf24]">4/10</td><td class="py-4 text-[#a0a0a0]">Focus rings exist but pill geometry conflicts; form errors thin</td></tr>
+					</tbody>
+				</table>
+			</div>
+		</section>
+
+		<section class="report-section mb-8 p-6 md:p-8">
+			<div class="mono mb-6 text-xs tracking-widest text-[#666]">// COGNITIVE LOAD / RISK</div>
+			<div class="grid gap-6 md:grid-cols-2">
+				<div>
+					<div class="mb-3 text-xl font-semibold">Low load, contained risk</div>
+					<ul class="space-y-3 text-sm text-[#a0a0a0]">
+						<li><span class="mono mr-2 text-[#34d399]">PASS</span>Asymmetric hero + editorial grid, not the default landing shape</li>
+						<li><span class="mono mr-2 text-[#34d399]">PASS</span>i18n complete: 58 keys x 3 langs, zero gaps</li>
+						<li><span class="mono mr-2 text-[#fbbf24]">WATCH</span>Mobile menu in-flow instead of overlay</li>
+						<li><span class="mono mr-2 text-[#fbbf24]">WATCH</span>Form error recovery is generic</li>
+					</ul>
+				</div>
+				<div>
+					<div class="mono mb-3 text-xs tracking-widest text-[#666]">// NEXT MODES</div>
+					<div class="flex flex-wrap gap-2">
+						<span class="border border-[#333] px-3 py-1 text-sm text-[#a0a0a0]">/interaction</span>
+						<span class="border border-[#333] px-3 py-1 text-sm text-[#a0a0a0]">/responsive</span>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="report-section mb-8 p-6 md:p-8">
+			<div class="mono mb-6 text-xs tracking-widest text-[#666]">// PRIORITY ISSUES</div>
+			<div class="space-y-5">
+				<article class="border border-[#2a1d22] bg-[#110b0d] p-5">
+					<div class="mono mb-2 text-xs text-[#f43f5e]">P1</div>
+					<h2 class="mb-2 text-lg font-semibold">Mobile menu should overlay, not push</h2>
+					<p class="mb-4 text-sm leading-6 text-[#a0a0a0]">At 768px the hamburger menu renders in-flow under the sticky header; opening it shifts page content. Coarse-pointer audience feels it as broken.</p>
+					<div class="border-l border-[#fbbf24] pl-4 text-sm leading-6 text-[#fbbf24]">FIX: /responsive - fixed overlay panel, safe-area padding</div>
+				</article>
+				<article class="border border-[#2a1d22] bg-[#110b0d] p-5">
+					<div class="mono mb-2 text-xs text-[#f43f5e]">P2</div>
+					<h2 class="mb-2 text-lg font-semibold">Focus treatment inconsistent with control language</h2>
+					<p class="mb-4 text-sm leading-6 text-[#a0a0a0]">Dashed focus ring wraps pill-radius controls awkwardly; chips/lang buttons shift border-color on focus but rely on hover-only cues elsewhere.</p>
+					<div class="border-l border-[#fbbf24] pl-4 text-sm leading-6 text-[#fbbf24]">FIX: /interaction - hairline 2-4px radius makes the ring land cleanly; visible focus on every control</div>
+				</article>
+				<article class="border border-[#2a1d22] bg-[#110b0d] p-5">
+					<div class="mono mb-2 text-xs text-[#f43f5e]">P3</div>
+					<h2 class="mb-2 text-lg font-semibold">Form error recovery is thin</h2>
+					<p class="mb-4 text-sm leading-6 text-[#a0a0a0]">Generic error line, no field-level marking; success resets the form and clears quote selection. B2B quote is the conversion moment.</p>
+					<div class="border-l border-[#fbbf24] pl-4 text-sm leading-6 text-[#fbbf24]">FIX: /interaction - per-field errors + aria-describedby, preserve selection</div>
+				</article>
+			</div>
+		</section>
+
+		<footer class="mono py-8 text-center text-xs tracking-widest text-[#444]">
+			Generated with CommandCode - 2026-08-12
+		</footer>
+	</main>
+</body>
+</html>

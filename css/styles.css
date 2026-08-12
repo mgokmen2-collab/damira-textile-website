@@ -831,5 +831,15 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
+  /* Shimmer (parlaklık süpürmesi) ve touch zoom efektleri korunur:
+     iOS "Hareketi Azalt" açıkken de görseller canlı kalsın. */
+  .product-card figure::after,
+  .collection-card figure::after { animation: shimmer 2.8s ease-in-out infinite !important; }
+  .collection-card figure img.cc-cover[data-fit="fit"],
+  .product-card figure img.pc-cover[data-fit="fit"],
+  .ecat-design .ecat-design-fig img { transform: scale(1.06) !important; }
+  .collection-card figure img.cc-contain,
+  .product-card figure img.pc-contain { opacity: 1 !important; }
+  .product-card figcaption { opacity: 1; transform: none; }
   html.js .reveal { opacity: 1; transform: none; }
 }

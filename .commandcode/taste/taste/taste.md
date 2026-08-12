@@ -8,3 +8,5 @@
 - Prefers multi-language support (TR/EN/FR) with a subtle header language toggle for B2B-facing sites. Confidence: 0.7
 - Drives design work through Command Code's `/design` slash-command workflow (`/design setup`, `/design voice`), supplying a concise high-level spec (aesthetic, sections, languages) and expecting the agent to research the repo, verify assets, and implement rather than ask questions. Confidence: 0.6
 - Uses minimal continuation directives (e.g. "kaldığın yerden devam et" — "continue where you left off") and expects the agent to track its own task state across turns (todo list, pending validations) and resume autonomously without re-asking or re-confirming scope. Confidence: 0.6
+- Wants finished projects initialized as git repos and published to GitHub as **private** repos, with a README treated as mandatory ("readme ekle mutlaka"). Confidence: 0.8
+sume autonomously without re-asking or re-confirming scope. Confidence: 0.6

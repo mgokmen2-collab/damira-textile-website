@@ -197,6 +197,7 @@
     els.modal.hidden = false;
     document.body.style.overflow = 'hidden';
     els.modalImg.src = p.img;
+    els.modalImg.style.aspectRatio = String(p.ratio || 1);
     els.modalImg.alt = `${p[state.lang].n} — ${collName(p.coll)}`;
     els.modalCollection.textContent = collName(p.coll).toUpperCase();
     els.modalTitle.textContent = p[state.lang].n;

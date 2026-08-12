@@ -372,7 +372,9 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
   width: 100%; aspect-ratio: 3 / 4; object-fit: cover;
   transition: transform var(--dur-med) var(--ease), filter var(--dur-short) var(--ease);
 }
-.collection-card:hover img { transform: scale(1.04); filter: saturate(1.05); }
+/* Hover: kırpma yerine tam görünüm — contain'e geçer */
+.collection-card:hover img { object-fit: contain; transform: none; filter: saturate(1.05); }
+.collection-card figure { background: var(--bg-soft); }
 .collection-card figcaption {
   position: absolute; inset: auto 0 0 0; padding: 28px 16px 14px;
   background: linear-gradient(to top, rgba(26, 25, 24, 0.55), transparent);
@@ -413,7 +415,9 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
   width: 100%; aspect-ratio: 1 / 1; object-fit: cover;
   transition: transform var(--dur-med) var(--ease);
 }
-.product-card:hover img { transform: scale(1.05); }
+/* Hover: kırpma yerine tam görünüm — contain'e geçer (kare görsellerde değişiklik yok) */
+.product-card:hover figure img { object-fit: contain; transform: none; }
+.product-card figure { background: var(--bg-soft); }
 .product-card figcaption {
   position: absolute; inset: auto 0 0 0; padding: 40px 16px 14px;
   background: linear-gradient(to top, rgba(26, 25, 24, 0.5), transparent);
@@ -542,8 +546,8 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 .modal-panel {
   position: relative; z-index: 1;
   background: var(--bg); border-radius: 6px;
-  max-width: 900px; width: 100%; max-height: 90vh; overflow: auto;
-  display: grid; grid-template-columns: 1.1fr 1fr;
+  max-width: 920px; width: 100%; max-height: 90vh; overflow: auto;
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   animation: modalIn var(--dur-med) var(--ease);
 }
 @keyframes modalIn {
@@ -560,8 +564,13 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
   transition: transform 0.2s;
 }
 .modal-close:hover { transform: rotate(90deg); }
-.modal-figure { background: var(--bg-soft); }
-.modal-figure img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 1 / 1; }
+.modal-figure {
+  background: var(--bg-soft);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+/* Görsel kendi native oranında (JS aspect-ratio set eder), asla kırpılmaz */
+.modal-figure img { width: 100%; height: auto; object-fit: contain; display: block; }
 .modal-body { padding: clamp(24px, 3vw, 36px); }
 .modal-title { font-family: var(--font-serif); font-weight: 500; font-size: 2rem; line-height: 1.15; margin-bottom: 8px; text-wrap: balance; }
 .modal-desc { color: var(--ink-soft); line-height: 1.65; margin-bottom: var(--space-4); }
@@ -601,7 +610,7 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
   .filter-chips { justify-content: flex-start; }
   .form-row { grid-template-columns: 1fr; }
   .modal-panel { grid-template-columns: 1fr; max-height: 92vh; }
-  .modal-figure img { aspect-ratio: 4 / 3; }
+  /* Mobilde de native oran korunur (inline aspect-ratio) */
 }
 
 @media (max-width: 480px) {

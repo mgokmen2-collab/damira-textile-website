@@ -169,8 +169,7 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 .brand-textile {
   color: var(--gold-deep); margin-top: 3px;
   display: flex; align-items: center;
-  /* Column flex'te stretch olmasın — kendi içeriği kadar genişlesin */
-  align-self: flex-start;
+  justify-content: center;
 }
 .brand-textile-letters {
   font-size: 0.72rem;
@@ -182,8 +181,8 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 .brand-textile::after {
   content: '';
   height: 1px;
-  flex: 1 1 auto;
-  min-width: 8px;
+  flex: 0 0 auto;
+  width: 18px;
   background: var(--gold-deep);
 }
 .brand-textile::before { margin-right: 6px; }

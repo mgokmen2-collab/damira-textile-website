@@ -178,7 +178,7 @@
   const I18N = {
     tr: {
       skip: 'İçeriğe atla',
-      'nav.collections': 'Koleksiyonlar', 'nav.catalog': 'Katalog', 'nav.atelier': 'Atölye',
+      'nav.collections': 'Koleksiyonlar', 'nav.catalog': 'E-Katalog', 'nav.designs': 'Desenler', 'nav.atelier': 'Atölye',
       'nav.contact': 'İletişim', 'nav.quote': 'Teklif Al',
       'hero.eyebrow': 'NICE · FRANSA · 1976’DAN BERİ',
       'hero.title1': 'Riviera’nın kumaşları,', 'hero.title2': 'nakışla dokunmuş anıları.',
@@ -188,7 +188,7 @@
       'hero.caption': '“Tour Génoise” — Damira Atölye nakışı, %100 keten',
       'collections.eyebrow': 'KOLEKSİYONLAR', 'collections.title': 'Bir bölge, bir hikâye, bir dizi desen.',
       'collections.lede': 'Her koleksiyon, Fransız kıyılarının bir köşesinden ilham alır. Koleksiyonları seçin, kataloğu filtreleyin.',
-      'catalog.eyebrow': 'KATALOG', 'catalog.title': 'Desenler',
+      'catalog.eyebrow': 'DESENLER', 'catalog.title': 'Desenler',
       'catalog.searchLabel': 'Desen ara', 'catalog.searchPh': 'Desen ara…',
       'catalog.empty': 'Bu filtreye uyan desen yok. Başka bir koleksiyon deneyin.',
       'catalog.more': 'Daha Fazla Desen', 'catalog.all': 'Tümü',
@@ -225,7 +225,7 @@
     },
     en: {
       skip: 'Skip to content',
-      'nav.collections': 'Collections', 'nav.catalog': 'Catalog', 'nav.atelier': 'Atelier',
+      'nav.collections': 'Collections', 'nav.catalog': 'E-Catalog', 'nav.designs': 'Designs', 'nav.atelier': 'Atelier',
       'nav.contact': 'Contact', 'nav.quote': 'Get a Quote',
       'hero.eyebrow': 'NICE · FRANCE · SINCE 1976',
       'hero.title1': 'Fabrics of the Riviera,', 'hero.title2': 'memories stitched in thread.',
@@ -272,7 +272,7 @@
     },
     fr: {
       skip: 'Aller au contenu',
-      'nav.collections': 'Collections', 'nav.catalog': 'Catalogue', 'nav.atelier': 'Atelier',
+      'nav.collections': 'Collections', 'nav.catalog': 'E-Catalogue', 'nav.designs': 'Motifs', 'nav.atelier': 'Atelier',
       'nav.contact': 'Contact', 'nav.quote': 'Demander un devis',
       'hero.eyebrow': 'NICE · FRANCE · DEPUIS 1976',
       'hero.title1': 'Les tissus de la Riviera,', 'hero.title2': 'des souvenirs brodés au fil.',

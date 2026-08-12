@@ -245,7 +245,7 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 }
 .hero-figure { position: relative; }
 .hero-img {
-  width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
+  width: 100%; height: auto; object-fit: contain;
   border-radius: 4px;
 }
 .hero-caption {
@@ -320,7 +320,7 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 .collection-card a { display: block; }
 .collection-card figure { position: relative; overflow: hidden; border-radius: 4px; }
 .collection-card img {
-  width: 100%; aspect-ratio: 3 / 4; object-fit: cover;
+  width: 100%; height: auto; object-fit: cover;
   transition: transform 0.6s var(--ease), filter 0.4s;
 }
 .collection-card:hover img { transform: scale(1.04); filter: saturate(1.05); }
@@ -361,7 +361,7 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 .product-card figure img { opacity: 0; transition: opacity 0.4s; }
 .product-card figure img.loaded { opacity: 1; }
 .product-card img {
-  width: 100%; aspect-ratio: 1 / 1; object-fit: cover;
+  width: 100%; height: auto; object-fit: cover;
   transition: transform 0.6s var(--ease);
 }
 .product-card:hover img { transform: scale(1.05); }
@@ -400,7 +400,7 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
   display: grid; grid-template-columns: 1fr 1fr;
   gap: clamp(24px, 5vw, 72px); align-items: center;
 }
-.atelier-figure img { border-radius: 4px; aspect-ratio: 4 / 5; object-fit: cover; width: 100%; }
+.atelier-figure img { border-radius: 4px; width: 100%; height: auto; object-fit: contain; }
 .atelier-facts {
   display: grid; gap: var(--space-4);
   margin: var(--space-9) 0; padding-top: var(--space-4);
@@ -506,8 +506,8 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
   transition: transform 0.2s;
 }
 .modal-close:hover { transform: rotate(90deg); }
-.modal-figure { background: var(--bg-soft); }
-.modal-figure img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 1 / 1; }
+.modal-figure { background: var(--bg-soft); display: flex; align-items: center; justify-content: center; }
+.modal-figure img { width: 100%; height: auto; object-fit: contain; }
 .modal-body { padding: clamp(24px, 3vw, 36px); }
 .modal-title { font-family: var(--font-serif); font-weight: 500; font-size: 2rem; line-height: 1.15; margin-bottom: 8px; text-wrap: balance; }
 .modal-desc { color: var(--ink-soft); line-height: 1.65; margin-bottom: var(--space-4); }
@@ -527,7 +527,6 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
 @media (max-width: 1024px) {
   .hero { grid-template-columns: 1fr; }
   .hero-figure { order: -1; max-width: 640px; }
-  .hero-img { aspect-ratio: 16 / 10; }
   .atelier-inner, .contact-inner { grid-template-columns: 1fr; }
   .collection-card { grid-column: span 6; }
   .collection-card:nth-child(3n+2) { transform: none; }

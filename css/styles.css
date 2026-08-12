@@ -374,16 +374,22 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 .collection-card { grid-column: span 4; position: relative; }
 .collection-card:nth-child(3n+2) { transform: translateY(24px); }
 .collection-card a { display: block; }
-.collection-card figure { position: relative; overflow: hidden; border-radius: 4px; }
-.collection-card img {
-  width: 100%; aspect-ratio: 3 / 4; object-fit: cover;
-  transition: transform var(--dur-med) var(--ease), filter var(--dur-short) var(--ease);
+.collection-card figure { position: relative; overflow: hidden; border-radius: 4px; aspect-ratio: 3 / 4; }
+.collection-card figure img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform var(--dur-med) var(--ease), opacity var(--dur-med) var(--ease), filter var(--dur-short) var(--ease);
 }
-/* Hover davranışı (koleksiyon):
-   - Kırpılan görseller (data-fit="crop"): contain ile tam görünüm
-   - 3/4'e tam sığan görseller (data-fit="fit"): zoom in */
-.collection-card:hover img[data-fit="crop"] { object-fit: contain; transform: none; filter: saturate(1.05); }
-.collection-card:hover img[data-fit="fit"] { transform: scale(1.06); filter: saturate(1.05); }
+/* Hover davranışı (smooth, çift katman):
+   - Kırpılan görseller: contain katmanı 0→1 fade (tam görünüm)
+   - 3/4'e tam sığan görseller: scale 1→1.06 yumuşak zoom in */
+.collection-card figure img.cc-contain {
+  position: absolute; inset: 0;
+  object-fit: contain;
+  opacity: 0;
+  background: var(--bg-soft);
+}
+.collection-card:hover figure img.cc-contain { opacity: 1; }
+.collection-card:hover figure img.cc-cover[data-fit="fit"] { transform: scale(1.06); filter: saturate(1.05); }
 .collection-card figure { background: var(--bg-soft); }
 .collection-card figcaption {
   position: absolute; inset: auto 0 0 0; padding: 28px 16px 14px;
@@ -407,7 +413,7 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 }
 .product-card { position: relative; }
 .product-card button { display: block; width: 100%; text-align: left; }
-.product-card figure { position: relative; overflow: hidden; border-radius: 4px; background: var(--bg-soft); }
+.product-card figure { position: relative; overflow: hidden; border-radius: 4px; background: var(--bg-soft); aspect-ratio: 1 / 1; }
 .product-card figure::after {
   content: ''; position: absolute; inset: 0;
   background: linear-gradient(100deg, transparent 30%, rgba(255,255,255,0.35) 50%, transparent 70%);
@@ -421,15 +427,22 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 .product-card img.loaded { animation: none; }
 .product-card figure img { opacity: 0; transition: opacity var(--dur-med) var(--ease); }
 .product-card figure img.loaded { opacity: 1; }
-.product-card img {
-  width: 100%; aspect-ratio: 1 / 1; object-fit: cover;
-  transition: transform var(--dur-med) var(--ease);
+/* Katmanlar: cover altta, contain üstte (hover'da yumuşak fade) */
+.product-card figure img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform var(--dur-med) var(--ease), opacity var(--dur-med) var(--ease);
 }
-/* Hover davranışı:
-   - Kırpılan görseller (data-fit="crop"): contain ile tam görünüm (zoom out)
-   - Tam sığan kare görseller (data-fit="fit"): zoom in (scale 1.06) */
-.product-card:hover figure img[data-fit="crop"] { object-fit: contain; transform: none; }
-.product-card:hover figure img[data-fit="fit"] { transform: scale(1.06); }
+.product-card figure img.pc-contain {
+  position: absolute; inset: 0;
+  object-fit: contain;
+  opacity: 0;
+  background: var(--bg-soft);
+}
+/* Hover davranışı (smooth):
+   - Kırpılan görseller: contain katmanı 0→1 fade (zoom out hissi)
+   - Tam sığan kare görseller: scale 1→1.06 yumuşak zoom in */
+.product-card:hover figure img.pc-contain { opacity: 1; }
+.product-card:hover figure img.pc-cover[data-fit="fit"] { transform: scale(1.06); }
 .product-card figure { background: var(--bg-soft); }
 .product-card figcaption {
   position: absolute; inset: auto 0 0 0; padding: 40px 16px 14px;

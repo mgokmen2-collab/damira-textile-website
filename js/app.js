@@ -76,14 +76,15 @@
     const grid = els.collectionGrid;
     grid.innerHTML = COLLECTIONS.map((c) => {
       const count = PRODUCTS.filter((p) => p.coll === c.id).length;
-      // 3/4 kutuya tam sığan görseller (ratio ≈ 0.75) zoom in alır, diğerleri contain'e geçer
+      // 3/4 kutuya tam sığan görseller (ratio ≈ 0.75) zoom in alır, diğerleri contain katmanıyla tam görünür
       const ratio = c.ratio || 1;
       const fit = ratio >= 0.70 && ratio <= 0.80 ? 'fit' : 'crop';
       return `
         <article class="collection-card reveal">
           <a href="#catalog" data-coll="${c.id}" aria-label="${esc(c[state.lang])} — ${count} ${t('modal.unit')}">
             <figure>
-              <img src="${c.img}" alt="${esc(c[state.lang])} koleksiyonu, keten üzerine nakış" loading="lazy" data-fit="${fit}">
+              <img class="cc-cover" src="${c.img}" alt="${esc(c[state.lang])} koleksiyonu, keten üzerine nakış" loading="lazy" data-fit="${fit}">
+              ${fit === 'crop' ? `<img class="cc-contain" src="${c.img}" alt="" aria-hidden="true" loading="lazy">` : ''}
               <figcaption>${esc(c[state.lang])}<span class="collection-count">${count} ${t('modal.unit')}</span></figcaption>
             </figure>
           </a>
@@ -140,7 +141,7 @@
     const shown = list.slice(0, state.visibleCount);
     els.productGrid.innerHTML = shown.map(productCard).join('');
 
-    // Görsel yüklenince shimmer kapat, opacity ile göster
+    // Görsel yüklenince shimmer kapat, opacity ile göster (tüm katmanlar)
     els.productGrid.querySelectorAll('figure img').forEach((img) => {
       if (img.complete && img.naturalWidth > 0) {
         img.classList.add('loaded');
@@ -175,14 +176,15 @@
   function productCard(p) {
     const label = `${p[state.lang].n} — ${collName(p.coll)}`;
     // Kare kutuda tam sığan görseller (ratio ≈ 1) hover'da zoom in alır;
-    // kırpılanlar (ratio ≠ 1) hover'da contain ile tam görünür.
+    // kırpılanlar (ratio ≠ 1) hover'da contain katmanıyla yumuşak tam görünür.
     const ratio = p.ratio || 1;
     const fit = ratio >= 0.96 && ratio <= 1.04 ? 'fit' : 'crop';
     return `
       <li class="product-card reveal revealed">
         <button type="button" data-open="${p.id}" aria-label="${esc(label)}: ${esc(p[state.lang].t)}">
           <figure>
-            <img src="${p.img}" alt="${esc(label)}" loading="lazy" data-fit="${fit}">
+            <img class="pc-cover" src="${p.img}" alt="${esc(label)}" loading="lazy" data-fit="${fit}">
+            ${fit === 'crop' ? `<img class="pc-contain" src="${p.img}" alt="" aria-hidden="true" loading="lazy">` : ''}
             <figcaption>
               <span>${esc(p[state.lang].t)}</span>
               <p>${esc(p[state.lang].n)}</p>

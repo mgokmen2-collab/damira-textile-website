@@ -799,6 +799,18 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
   .section, .ecat-section, .ecat-hero { scroll-margin-top: calc(var(--header-h) + 8px); }
 }
 
+/* ===== Touch devices: hover'ı kalıcı göster =====
+   Mobilde :hover tetiklenmez; dokunmatik cihazlarda zoom/parlaklık
+   ve alt yazı efektlerini varsayılan olarak açık tutar. */
+@media (hover: none) {
+  .collection-card figure img.cc-cover[data-fit="fit"] { transform: scale(1.06); filter: saturate(1.05); }
+  .collection-card figure img.cc-contain { opacity: 1; }
+  .product-card figure img.pc-cover[data-fit="fit"] { transform: scale(1.06); }
+  .product-card figure img.pc-contain { opacity: 1; }
+  .product-card figcaption { opacity: 1; transform: none; }
+  .ecat-design .ecat-design-fig img { transform: scale(1.02); }
+}
+
 /* ===== Reduced motion ===== */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

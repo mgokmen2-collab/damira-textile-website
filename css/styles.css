@@ -697,7 +697,6 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 }
 .footer-brand { font-family: var(--font-serif); font-weight: 600; font-size: 1.1rem; letter-spacing: 0.1em; line-height: var(--lh-snug); }
 .footer-brand span { color: var(--gold-deep); }
-.footer-logo { width: 140px; height: auto; object-fit: contain; }
 .footer-note { font-size: 0.85rem; color: var(--ink-faint); line-height: 1.5; }
 .footer-links { display: flex; gap: var(--space-9); font-size: 0.9rem; }
 .footer-links a { color: var(--ink-soft); transition: color 0.2s; }

@@ -7,9 +7,9 @@ Nice (Fransa) merkezli **DAMIRA TEXTILE** firmasının toptan (B2B) turistik tek
 
 ## Özellikler
 
-- **Katalog:** 7 koleksiyon, 25 işlemeli desen (Monaco, Corsica, Vendée, Île d'Oléron, Baie de Somme, Marseille, Fort Boyard)
-- **Koleksiyon filtreleri + arama:** canlı filtreleme, "daha fazla" sayfalama
-- **Ürün modalı:** desen detayı, teknik özellikler, PDF katalog bağlantısı
+- **E-Katalog:** 7 koleksiyon, 25 işlemeli desen (Monaco, Corsica, Vendée, Île d'Oléron, Baie de Somme, Marseille, Fort Boyard) — `catalog.html` sayfasında zengin açıklama ve görsellerle
+- **Koleksiyon filtreleri + arama:** canlı filtreleme, "daha fazla" sayfalama, sıralama
+- **Ürün modalı:** desen detayı, teknik özellikler, e-katalog bağlantısı
 - **Teklif sepeti:** desenleri seçip hızlı teklif formuyla gönderme (TR/EN/FR)
 - **Çok dilli:** TR / EN / FR dil değiştirici, seçim `localStorage`'ta kalıcı
 - **Tamamen responsive:** 375px → 2560px, touch-first katalog
@@ -19,12 +19,15 @@ Nice (Fransa) merkezli **DAMIRA TEXTILE** firmasının toptan (B2B) turistik tek
 
 Saf HTML/CSS/JS — framework yok, build adımı yok, bağımlılık yok. Bir web sunucusuyla doğrudan çalışır.
 
-- `index.html` — semantik yapı
+- `index.html` — ana sayfa (hero, koleksiyonlar, desenler, atölye, teklif formu)
+- `catalog.html` — e-katalog sayfası
 - `css/styles.css` — OKLCH token sistemi, editoryal tipografi, responsive
 - `js/data.js` — **modüler veri katmanı** (koleksiyonlar, desenler, çeviriler)
-- `js/app.js` — i18n, katalog render/filtre/arama, modal, teklif sepeti
-- `items/` — ürün görselleri (işlemeli keten desenleri)
-- `catalogs/` — PDF kataloglar (indirilebilir)
+- `js/app.js` — ana sayfa: i18n, katalog render/filtre/arama, modal, teklif sepeti
+- `js/catalog.js` — e-katalog render
+- `items/` — ürün görselleri, koleksiyon klasörlerinde (işlemeli keten desenleri)
+- `logos/` — marka logoları (DG monogramı)
+- `catalogs/` — PDF kataloglar
 
 ## Çalıştırma
 
@@ -62,15 +65,16 @@ Katalog tamamen `js/data.js` içindeki veriden üretilir. Yeni içerik eklemek i
 
 Filtre, arama, modal, teklif sepeti ve dil değiştirici otomatik olarak yeni kaydı algılar.
 
-### 3. PDF katalog ekleme
+### 3. PDF katalog ekleme (isteğe bağlı)
 
-`catalogs/` klasörüne `damira-catalog-2026.pdf` adıyla koyun; modal'daki "PDF Kataloğu İndir" bağlantısı otomatik işaret eder.
+`catalogs/` klasörüne `damira-catalog-2026.pdf` adıyla koyabilirsiniz; gerektiğinde `js/data.js` içindeki `modal.pdf` bağlantısı güncellenebilir.
 
 ## Yapı Notları
 
-- Görsel yolları `items/` içindeki dosyalarla birebir eşleşir (boşluklar `%20` ile encode edilir).
+- Ürün görsel yolları `items/<koleksiyon>/` içindeki dosyalarla birebir eşleşir (boşluklar `%20` ile encode edilir).
 - Çeviri anahtarları `I18N` objesinde üç dilde tutulur; eksik anahtar olursa TR'ye düşer.
 - Dil seçimi `damira-lang` anahtarıyla tarayıcıda saklanır.
+- Logo dosyaları `logos/` klasöründedir.
 
 ## Lisans
 

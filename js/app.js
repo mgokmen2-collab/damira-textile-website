@@ -4,13 +4,13 @@
 (function () {
   'use strict';
 
+  document.documentElement.classList.add('js'); // reveal gate: only when JS runs
+
   const { COLLECTIONS, PRODUCTS, I18N } = window.DAMIRA;
 
   const state = {
     lang: localStorage.getItem('damira-lang') || 'tr',
     activeColl: null,          // koleksiyon filtresi (null = tümü)
-    search: '',
-    sort: 'name',              // name | coll | type
     quote: [],                 // seçili desen id'leri
     visibleCount: 8,           // "daha fazla" sayfalama
     currentProduct: null,      // modalda açık ürün
@@ -26,25 +26,8 @@
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const collName = (id) => COLLECTIONS.find((c) => c.id === id)[state.lang];
   const productById = (id) => PRODUCTS.find((p) => p.id === id);
-  const matchesFilter = (p) => {
-    const inColl = !state.activeColl || p.coll === state.activeColl;
-    if (!inColl) return false;
-    const q = state.search.trim().toLowerCase();
-    if (!q) return true;
-    return [p[state.lang].n, p[state.lang].t, collName(p.coll)]
-      .join(' ').toLowerCase().includes(q);
-  };
-  const filteredProducts = () => {
-    const list = PRODUCTS.filter(matchesFilter);
-    const sortKey = { name: 'n', coll: 'coll', type: 't' }[state.sort] || 'n';
-    const sorted = list.slice().sort((a, b) => {
-      let va = a[state.lang][sortKey] || collName(a.coll) || '';
-      let vb = b[state.lang][sortKey] || collName(b.coll) || '';
-      if (sortKey === 'coll') { va = collName(a.coll); vb = collName(b.coll); }
-      return va.localeCompare(vb, state.lang);
-    });
-    return sorted;
-  };
+  const matchesFilter = (p) => !state.activeColl || p.coll === state.activeColl;
+  const filteredProducts = () => PRODUCTS.filter(matchesFilter);
 
   /* ---------- i18n uygula ---------- */
   function applyI18n() {
@@ -96,7 +79,8 @@
         state.activeColl = a.dataset.coll;
         syncChips();
         renderProducts();
-        document.getElementById('catalog').scrollIntoView({ behavior: 'smooth' });
+        const catalog = document.getElementById('catalog');
+        if (catalog) catalog.scrollIntoView({ behavior: 'smooth' });
       });
     });
     observeReveals();
@@ -128,7 +112,7 @@
   function renderProducts() {
     const list = filteredProducts();
     const isEmpty = list.length === 0;
-    const isFiltered = state.activeColl !== null || state.search.trim() !== '';
+    const isFiltered = state.activeColl !== null;
     els.catalogEmpty.hidden = !isEmpty;
     els.loadMoreBtn.hidden = list.length <= state.visibleCount;
     els.loadMoreBtn.disabled = false;
@@ -167,9 +151,7 @@
   }
   function resetFilters() {
     state.activeColl = null;
-    state.search = '';
     state.visibleCount = 8;
-    els.searchInput.value = '';
     syncChips();
     renderProducts();
   }
@@ -287,10 +269,16 @@
         err.setAttribute('role', 'alert');
         input.parentElement.appendChild(err);
       }
-      document.getElementById(errId).textContent = t('form.error');
+      document.getElementById(errId).textContent = t(
+        input.id === 'fEmail' ? 'form.errEmail' : 'form.errName'
+      );
+      input.setAttribute('aria-describedby', errId);
     } else {
       const err = document.getElementById(errId);
       if (err) err.remove();
+      if (input.getAttribute('aria-describedby') === errId) {
+        input.removeAttribute('aria-describedby');
+      }
     }
   }
   function bindForm() {
@@ -342,25 +330,28 @@
   }
 
   /* ---------- Mobile nav ---------- */
+  function setNav(open) {
+    els.navToggle.setAttribute('aria-expanded', String(open));
+    els.mobileNav.hidden = !open;
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (open) {
+      // Odağı menünün ilk bağlantısına taşı
+      const first = els.mobileNav.querySelector('a');
+      if (first) first.focus();
+    } else if (document.activeElement && els.mobileNav.contains(document.activeElement)) {
+      els.navToggle.focus();
+    }
+  }
   function bindNav() {
     els.navToggle.addEventListener('click', () => {
-      const open = els.navToggle.getAttribute('aria-expanded') === 'true';
-      els.navToggle.setAttribute('aria-expanded', String(!open));
-      els.mobileNav.hidden = open;
-      document.body.style.overflow = open ? '' : 'hidden';
+      setNav(els.navToggle.getAttribute('aria-expanded') !== 'true');
     });
     els.mobileNav.querySelectorAll('a').forEach((a) => {
-      a.addEventListener('click', () => {
-        els.navToggle.setAttribute('aria-expanded', 'false');
-        els.mobileNav.hidden = true;
-        document.body.style.overflow = '';
-      });
+      a.addEventListener('click', () => setNav(false));
     });
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && els.navToggle.getAttribute('aria-expanded') === 'true') {
-        els.navToggle.setAttribute('aria-expanded', 'false');
-        els.mobileNav.hidden = true;
-        document.body.style.overflow = '';
+        setNav(false);
       }
     });
   }
@@ -370,8 +361,6 @@
     Object.assign(els, {
       collectionGrid: $('#collectionGrid'),
       filterChips: $('#filterChips'),
-      searchInput: $('#searchInput'),
-      sortSelect: $('#sortSelect'),
       catalogCount: $('#catalogCount'),
       resetBtn: $('#resetBtn'),
       emptyResetBtn: $('#emptyResetBtn'),
@@ -407,19 +396,6 @@
       });
     });
 
-    // Arama
-    els.searchInput.addEventListener('input', () => {
-      state.search = els.searchInput.value;
-      state.visibleCount = 8;
-      renderProducts();
-    });
-
-    // Sıralama
-    els.sortSelect.addEventListener('change', () => {
-      state.sort = els.sortSelect.value;
-      renderProducts();
-    });
-
     // Filtre temizleme
     els.resetBtn.addEventListener('click', resetFilters);
     els.emptyResetBtn.addEventListener('click', resetFilters);
@@ -442,6 +418,7 @@
 
     bindForm();
     bindNav();
+    window.DAMIRA.bindNav = bindNav;
     applyI18n();
     observeReveals();
   });

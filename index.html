@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tr" class="js">
+<html lang="tr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -46,15 +46,16 @@
         </button>
       </div>
     </div>
-    <div class="mobile-nav" id="mobileNav" hidden>
-      <a href="#collections" data-i18n="nav.collections">Koleksiyonlar</a>
-      <a href="catalog.html" data-i18n="nav.catalog">E-Katalog</a>
-      <a href="#catalog" data-i18n="nav.designs">Desenler</a>
-      <a href="#atelier" data-i18n="nav.atelier">Atölye</a>
-      <a href="#contact" data-i18n="nav.contact">İletişim</a>
-      <a class="mobile-cta" href="#contact" data-i18n="nav.quote">Teklif Al</a>
-    </div>
   </header>
+
+  <div class="mobile-nav" id="mobileNav" hidden>
+    <a href="#collections" data-i18n="nav.collections">Koleksiyonlar</a>
+    <a href="catalog.html" data-i18n="nav.catalog">E-Katalog</a>
+    <a href="#catalog" data-i18n="nav.designs">Desenler</a>
+    <a href="#atelier" data-i18n="nav.atelier">Atölye</a>
+    <a href="#contact" data-i18n="nav.contact">İletişim</a>
+    <a class="mobile-cta" href="#contact" data-i18n="nav.quote">Teklif Al</a>
+  </div>
 
   <main id="main">
     <!-- ===== HERO ===== -->
@@ -94,21 +95,9 @@
         <div>
           <p class="eyebrow" data-i18n="catalog.eyebrow">DESENLER</p>
           <h2 class="section-title" data-i18n="catalog.title">Riviera'nın nakışları, ketene işlenmiş hikâyeler.</h2>
-          <p class="section-lede catalog-lede" data-i18n="catalog.lede">Her desen, Fransız kıyılarının bir köşesini %100 keten üzerine işler. Koleksiyon seçin, arayın ve teklifinize ekleyin.</p>
+          <p class="section-lede catalog-lede" data-i18n="catalog.lede">Her desen, Fransız kıyılarının bir köşesini %100 keten üzerine işler. Koleksiyon seçin ve teklifinize ekleyin.</p>
         </div>
         <div class="catalog-tools">
-          <div class="catalog-toolbar">
-            <label class="visually-hidden" for="searchInput" data-i18n="catalog.searchLabel">Desen ara</label>
-            <input class="search-input" id="searchInput" type="search" placeholder="Desen ara…" data-i18n-ph="catalog.searchPh">
-            <div class="sort-wrap">
-              <label class="sort-label" for="sortSelect" data-i18n="catalog.sortLabel">Sırala</label>
-              <select class="sort-select" id="sortSelect">
-                <option value="name" data-i18n="catalog.sortName">İsim (A–Z)</option>
-                <option value="coll" data-i18n="catalog.sortColl">Koleksiyon</option>
-                <option value="type" data-i18n="catalog.sortType">Tür</option>
-              </select>
-            </div>
-          </div>
           <div class="catalog-meta">
             <p class="catalog-count" id="catalogCount" aria-live="polite"></p>
             <button class="reset-btn" id="resetBtn" hidden data-i18n="catalog.reset">Filtreyi Temizle</button>

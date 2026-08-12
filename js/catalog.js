@@ -4,6 +4,8 @@
 (function () {
   'use strict';
 
+  document.documentElement.classList.add('js'); // reveal gate: only when JS runs
+
   const { COLLECTIONS, PRODUCTS, I18N } = window.DAMIRA;
 
   const state = {
@@ -42,6 +44,7 @@
 
   function renderDesigns() {
     const list = $('#ecatDesignList');
+    if (!list) return;
     list.innerHTML = COLLECTIONS.map((c) => {
       const items = productsOf(c.id);
       return `
@@ -110,24 +113,8 @@
       });
     });
 
-    // Mobil menü (app.js'teki bindNav'ı burada da çalıştır)
-    const navToggle = $('.nav-toggle');
-    const mobileNav = $('#mobileNav');
-    if (navToggle && mobileNav) {
-      navToggle.addEventListener('click', () => {
-        const open = navToggle.getAttribute('aria-expanded') === 'true';
-        navToggle.setAttribute('aria-expanded', String(!open));
-        mobileNav.hidden = open;
-        document.body.style.overflow = open ? '' : 'hidden';
-      });
-      mobileNav.querySelectorAll('a').forEach((a) => {
-        a.addEventListener('click', () => {
-          navToggle.setAttribute('aria-expanded', 'false');
-          mobileNav.hidden = true;
-          document.body.style.overflow = '';
-        });
-      });
-    }
+    // Mobil menü: app.js'teki bindNav'ı kullan (odak yönetimi + Escape dahil)
+    if (window.DAMIRA.bindNav) window.DAMIRA.bindNav();
 
     applyI18n();
   });

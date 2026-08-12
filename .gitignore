@@ -14,5 +14,8 @@ node_modules/
 dist/
 build/
 
+# Wrangler (Cloudflare Pages/Workers) local cache
+.wrangler/
+
 # Command Code session artifacts (brief/reports ARE versioned intentionally)
 # Keep .commandcode/design and .commandcode/brief.md tracked

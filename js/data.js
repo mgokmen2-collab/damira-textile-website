@@ -15,14 +15,14 @@
       en: 'Bathrobe Collection',
       fr: 'Collection Peignoirs',
       d: {
-        tr: '%100 saf Ege pamuğu lüks şal yaka havlu, waffle kimono ve nefes alan 4 katlı müslin bornoz modelleri. 5 yıldızlı otel ve spa kalitesi.',
-        en: '100% pure Aegean cotton luxury shawl collar terry, waffle kimono, and breathable 4-layer muslin bathrobes. 5-star hotel and spa grade.',
-        fr: 'Peignoirs haut de gamme en 100% coton égéen : éponge col châle, kimono nid d’abeille et mousseline 4 épaisseurs. Qualité hôtellerie 5 étoiles et spa.'
+        tr: '%100 saf Ege pamuğu lüks şal yaka havlu, waffle kimono ve kapüşonlu spa bornoz modelleri. 5 yıldızlı otel ve spa kalitesi.',
+        en: '100% pure Aegean cotton luxury shawl collar terry, waffle kimono, and hooded spa bathrobes. 5-star hotel and spa grade.',
+        fr: 'Peignoirs haut de gamme en 100% coton égéen : éponge col châle, kimono nid d’abeille et peignoirs spa à capuche. Qualité hôtellerie 5 étoiles et spa.'
       },
       models: [
         { id: 'b1', n: { tr: 'Klasik Şal Yaka Havlu Bornoz', en: 'Classic Shawl Collar Terry Robe', fr: 'Peignoir Éponge Col Châle' }, img: 'koleksiyonlar/bornoz/M26_3246.jpg' },
         { id: 'b2', n: { tr: 'Balpeteği Waffle Kimono Bornoz', en: 'Waffle Honeycomb Kimono Robe', fr: 'Peignoir Kimono Nid d’Abeille' }, img: 'koleksiyonlar/bornoz/M26_3279.jpg' },
-        { id: 'b3', n: { tr: '4 Katlı Nefes Alan Müslin Bornoz', en: '4-Layer Breathable Muslin Robe', fr: 'Peignoir Mousseline 4 Épaisseurs' }, img: 'koleksiyonlar/bornoz/M26_3419.jpg' },
+        { id: 'b3', n: { tr: 'Krem Waffle Kimono Bornoz', en: 'Cream Waffle Kimono Robe', fr: 'Peignoir Kimono Nid d’Abeille Écru' }, img: 'koleksiyonlar/bornoz/M26_3419.jpg' },
         { id: 'b4', n: { tr: 'Kapüşonlu Antrasit Spa Bornozu', en: 'Hooded Charcoal Spa Robe', fr: 'Peignoir Spa à Capuche Anthracite' }, img: 'koleksiyonlar/bornoz/M26_3382.jpg' }
       ]
     },
@@ -113,9 +113,9 @@
         fr: 'Serviettes d’invités et trousses brodées de races canines et félines de prestige pour boutiques de luxe et hôtels de charme.'
       },
       models: [
-        { id: 'g1', n: { tr: 'Safkan Kedi Nakışlı Misafir Havlusu (4 Irk)', en: 'Pedigree Cat Embroidered Guest Towel', fr: 'Serviette d’Invité Chats de Race (4 Motifs)' }, img: 'items/designs/chats.jpg' },
+        { id: 'g1', n: { tr: 'Safkan Kedi Nakışlı Misafir Havlusu (4 Irk)', en: 'Pedigree Cat Embroidered Guest Towel', fr: 'Serviette d’Invité Chats de Race (4 Motifs)' }, img: 'items/designs/chats.jpg', gallery: ['items/designs/kedi-irk/3-irk-set.jpg'] },
         { id: 'g2', n: { tr: 'Safkan Köpek Nakışlı Misafir Havlusu (5 Irk)', en: 'Pedigree Dog Embroidered Guest Towel', fr: 'Serviette d’Invité Chiens de Race (5 Motifs)' }, img: 'items/designs/chiens.jpg' },
-        { id: 'g3', n: { tr: 'COQ D’OR Fermuarlı Kanvas Seyahat Kesesi', en: 'COQ D’OR Canvas Zipper Travel Pouch', fr: 'Trousse de Voyage Zippée COQ D’OR' }, img: 'items-new/giris-foto.jpeg' }
+        { id: 'g3', n: { tr: 'COQ D’OR Fermuarlı Kanvas Seyahat Kesesi', en: 'COQ D’OR Canvas Zipper Travel Pouch', fr: 'Trousse de Voyage Zippée COQ D’OR' }, img: 'items/giris-foto.jpeg' }
       ]
     }
   ];
@@ -125,6 +125,7 @@
     {
       id: 'monaco',
       img: 'items/designs/monaco.jpg',
+      gallery: ["items/designs/monaco/v1.jpg", "items/designs/monaco/v2.jpg"],
       ratio: 1,
       cat: 'riviera',
       tr: { n: 'Monaco', d: 'Casino de Monte-Carlo’nun Beaux-Arts cephesi, kubbeli kuleleri, fıskiyesi ve palmiyeleri. Altın sarısı saten nakış işlemesi.', t: 'Mimari Nakış' },
@@ -134,6 +135,7 @@
     {
       id: 'nice',
       img: 'items/designs/nice.jpg',
+      gallery: ["items/designs/nice/v1.jpg", "items/designs/nice/v2.jpg"],
       ratio: 1,
       cat: 'riviera',
       tr: { n: 'Nice', d: 'Hasır sepette zeytinler, zeytinyağı şişesi, lavanta buketleri ve Promenade des Anglais sahil şeridi.', t: 'Akdeniz & Doğa' },
@@ -143,6 +145,7 @@
     {
       id: 'saint-tropez',
       img: 'items/designs/saint-tropez.jpg',
+      gallery: ["items/designs/saint-tropez/v1.jpg"],
       ratio: 1,
       cat: 'riviera',
       tr: { n: 'Saint-Tropez', d: 'Saint-Tropez’nin dünyaca ünlü sarı-hardal ve kiremit kırmızısı çan kulesi nakışı.', t: 'Tarihi Sembol' },
@@ -152,6 +155,7 @@
     {
       id: 'antibes',
       img: 'items/designs/antibes.jpg',
+      gallery: ["items/designs/antibes/v1.jpg", "items/designs/antibes/v2.jpg", "items/designs/antibes/v3.jpg"],
       ratio: 1,
       cat: 'riviera',
       tr: { n: 'Antibes', d: 'Château Grimaldi (Picasso Müzesi), surlar, deniz dalgaları ve stilize Picasso yüz çizgisi motifi.', t: 'Sanat & Miras' },
@@ -161,6 +165,7 @@
     {
       id: 'cassis',
       img: 'items/designs/cassis.jpg',
+      gallery: ["items/designs/cassis/v1.jpg", "items/designs/cassis/v2.jpg"],
       ratio: 1,
       cat: 'provence',
       tr: { n: 'Cassis', d: 'Hasır örgü sepette fiyonklu lavanta demeti, zeytinyağı şişesi ve zeytin dalı işlemesi.', t: 'Botanik Natürmort' },
@@ -170,6 +175,7 @@
     {
       id: 'eze-village',
       img: 'items/designs/eze-village.jpg',
+      gallery: ["items/designs/eze-village/v1.jpg"],
       ratio: 1,
       cat: 'riviera',
       tr: { n: 'Èze Village', d: 'Sarp kayalık üzerine kurulu ortaçağ taş köyü, çan kulesi ve Akdeniz seyir terası.', t: 'Tarihi Köy' },
@@ -179,6 +185,7 @@
     {
       id: 'provence',
       img: 'items/designs/provence.jpg',
+      gallery: ["items/designs/provence/v1.jpg", "items/designs/provence/v2.jpg", "items/designs/provence/v3.jpg"],
       ratio: 1,
       cat: 'provence',
       tr: { n: 'Provence', d: 'Glanum antik Roma sütunları, zeytin ağaçları ve sonsuz lavanta tarlaları.', t: 'Bölgesel Miras' },
@@ -188,6 +195,7 @@
     {
       id: 'normandie',
       img: 'items/designs/normandie.jpg',
+      gallery: ["items/designs/normandie/v1.jpg", "items/designs/normandie/v2.jpg"],
       ratio: 1,
       cat: 'atlantik',
       tr: { n: 'Normandie', d: 'Mont Saint-Michel manastır kalesi, dalgalar ve ada surlarının görkemli nakışı.', t: 'Tarihi Anıt' },
@@ -197,6 +205,7 @@
     {
       id: 'bretagne',
       img: 'items/designs/bretagne.jpg',
+      gallery: ["items/designs/bretagne/v1.jpg", "items/designs/bretagne/v2.jpg", "items/designs/bretagne/v3.jpg"],
       ratio: 1,
       cat: 'atlantik',
       tr: { n: 'Bretagne', d: 'Balık formuna işlenmiş Breton bayrağı kakım motifi (Ermine) ve denizci deseni.', t: 'Denizci Amblem' },
@@ -206,6 +215,7 @@
     {
       id: 'baie-de-somme',
       img: 'items/designs/baie-de-somme.jpg',
+      gallery: ["items/designs/baie-de-somme/v1.jpg", "items/designs/baie-de-somme/v2.jpg", "items/designs/baie-de-somme/v3.jpg"],
       ratio: 1,
       cat: 'kuzey',
       tr: { n: 'Baie de Somme', d: 'Kazıklar üzerindeki renkli ahşap sahil kulübeleri ve kumsalda duran sevimli martı.', t: 'Sahil Yaşamı' },
@@ -215,6 +225,7 @@
     {
       id: 'ile-d-oleron',
       img: 'items/designs/ile-d-oleron.jpg',
+      gallery: ["items/designs/ile-d-oleron/v1.jpg", "items/designs/ile-d-oleron/v2.jpg", "items/designs/ile-d-oleron/v3.jpg"],
       ratio: 1,
       cat: 'atlantik',
       tr: { n: 'Île d’Oléron', d: 'Kırmızı kubbeli beyaz Chassiron deniz feneri, taş kaide ve okyanus suları.', t: 'Deniz Feneri' },
@@ -224,6 +235,7 @@
     {
       id: 'vendee',
       img: 'items/designs/vendee.jpg',
+      gallery: ["items/designs/vendee/v1.jpg", "items/designs/vendee/v2.jpg", "items/designs/vendee/v3.jpg"],
       ratio: 1,
       cat: 'atlantik',
       tr: { n: 'Vendée', d: 'Mavi panjurlu pencere, sardunyalar ve önünde çiçek sepetli nostaljik Fransız bisikleti.', t: 'Kırsal Romantizm' },
@@ -233,6 +245,7 @@
     {
       id: 'corsica',
       img: 'items/designs/corsica.jpg',
+      gallery: ["items/designs/corsica/v1.jpg", "items/designs/corsica/v2.jpg"],
       ratio: 1,
       cat: 'adalar',
       tr: { n: 'Corsica', d: 'Korsika’nın resmi arması Mağribi Başı (Testa Mora); siyah ve beyaz saten kabartmalı nakış.', t: 'Geleneksel Amblem' },
@@ -242,6 +255,7 @@
     {
       id: 'marseille',
       img: 'items/designs/marseille.jpg',
+      gallery: ["items/designs/marseille/v1.jpg", "items/designs/marseille/v2.jpg"],
       ratio: 1,
       cat: 'provence',
       tr: { n: 'Marseille', d: 'Provence biberiyesi (romarin) ve mor lavanta dalları botanik nakış kompozisyonu.', t: 'Botanik Nakış' },
@@ -260,6 +274,7 @@
     {
       id: 'cote-d-opale',
       img: 'items/designs/cote-d-opale.jpg',
+      gallery: ["items/designs/cote-d-opale/v1.jpg", "items/designs/cote-d-opale/v2.jpg", "items/designs/cote-d-opale/v3.jpg"],
       ratio: 1,
       cat: 'kuzey',
       tr: { n: 'Côte d’Opale', d: 'Beyaz tebeşir falezleri (Cap Blanc-Nez), rüzgar sörfçüsü ve köpüklü okyanus dalgaları.', t: 'Spor & Sahil' },
@@ -278,6 +293,7 @@
     {
       id: 'la-rochelle',
       img: 'items/designs/la-rochelle.jpg',
+      gallery: ["items/designs/la-rochelle/v1.jpg"],
       ratio: 1,
       cat: 'atlantik',
       tr: { n: 'La Rochelle', d: 'Eski limanın koruyucusu tarihi ikiz taş kuleler (Tour Saint-Nicolas ve Tour de la Chaîne).', t: 'Tarihi Liman' },
@@ -287,6 +303,7 @@
     {
       id: 'les-landes',
       img: 'items/designs/les-landes.jpg',
+      gallery: ["items/designs/les-landes/v1.jpg"],
       ratio: 1,
       cat: 'atlantik',
       tr: { n: 'Les Landes', d: 'Dev çam ormanları kozalağı, çam iğneleri ve sevimli sincap nakışı.', t: 'Orman & Doğa' },
@@ -296,6 +313,7 @@
     {
       id: 'mimizan',
       img: 'items/designs/mimizan.jpg',
+      gallery: ["items/designs/mimizan/v1.jpg"],
       ratio: 1,
       cat: 'atlantik',
       tr: { n: 'Mimizan', d: 'Okyanus sahili, çizgili şezlong, plaj şemsiyesi, sörf tahtası ve kum tepeleri.', t: 'Sörf & Plaj' },
@@ -305,6 +323,7 @@
     {
       id: 'montpellier',
       img: 'items/designs/montpellier.jpg',
+      gallery: ["items/designs/montpellier/v1.jpg", "items/designs/montpellier/v2.jpg", "items/designs/montpellier/v3.jpg"],
       ratio: 1,
       cat: 'guney',
       tr: { n: 'Montpellier', d: 'Porte du Peyrou Zafer Takı; 14. Louis dönemi altın armaları ve taş kabartmaları.', t: 'Zafer Takı' },
@@ -314,6 +333,7 @@
     {
       id: 'pays-basque',
       img: 'items/designs/pays-basque.jpg',
+      gallery: ["items/designs/pays-basque/v1.jpg", "items/designs/pays-basque/v2.jpg"],
       ratio: 1,
       cat: 'guney',
       tr: { n: 'Pays Basque', d: 'Kırmızı ve yeşil renklerde geleneksel Bask Haçı (Lauburu) arması.', t: 'Kültürel Amblem' },
@@ -323,6 +343,7 @@
     {
       id: 'toulon',
       img: 'items/designs/toulon.jpg',
+      gallery: ["items/designs/toulon/v1.jpg", "items/designs/toulon/v2.jpg"],
       ratio: 1,
       cat: 'riviera',
       tr: { n: 'Toulon', d: 'Toulon Fransız donanma üssü simgesi uçak gemisi ve Akdeniz suları nakışı.', t: 'Denizcilik' },
@@ -332,6 +353,7 @@
     {
       id: 'aups',
       img: 'items/designs/aups.jpg',
+      gallery: ["items/designs/aups/v1.jpg"],
       ratio: 1,
       cat: 'provence',
       tr: { n: 'Aups', d: 'Yarım çelenk şeklinde zeytin dalları ve ortasında taze lavanta buketi arması.', t: 'Zeytin Çelengi' },
@@ -341,6 +363,7 @@
     {
       id: 'charente-maritime',
       img: 'items/designs/charente-maritime.jpg',
+      gallery: ["items/designs/charente-maritime/v1.jpg", "items/designs/charente-maritime/v2.jpg"],
       ratio: 1,
       cat: 'atlantik',
       tr: { n: 'Charente-Maritime', d: 'Geleneksel beyaz taş ev, mavi ahşap kapılar, sarmaşık asma ve nostaljik bisiklet.', t: 'Sahil Köyü' },
@@ -390,6 +413,57 @@
       'modal.unit': 'model / seçenek',
       'modal.chooseProduct': 'Bu Deseni Hangi Üründe İstersiniz?',
 
+      /* Ürün grubu inceleme paneli (Pilot C akışı) */
+      'panel.eyebrow': 'KOLEKSİYON',
+      'panel.title': 'Model Gezgini',
+      'panel.prev': 'Önceki model',
+      'panel.next': 'Sonraki model',
+      'panel.plain': 'Desen İstemiyorum',
+      'panel.attach': 'Desen Seç & Ekle',
+      'panel.openCatalog': 'E-Kataloğu Aç',
+      'panel.back': 'Geri',
+      'panel.hint': 'Fotoğrafları ok tuşlarıyla veya kaydırarak değiştirebilirsiniz.',
+      'panel.noDesign': 'Şu an görüntülenen model. "Desen İstemiyorum" ile desensiz, "Desen Seç & Ekle" ile modele desen bağlayarak teklife ekleyin.',
+      'panel.designsPicked': 'Seçili desenler:',
+      'panel.clear': '(temizle)',
+      'panel.pickHint': 'Modele bağlamak için desenlere tıklayın, sonra "Teklif Oluştur" ile forma gidin.',
+      'panel.view': 'İncele & Teklife Ekle',
+
+      /* Modele desen bağlama (pending bar) */
+      'pending.title': 'Modele Desen Ekle',
+      'pending.sub': 'Aşağıdan bir bölgesel desen seçin; model + desen tek kalem olarak teklife eklenir.',
+      'pending.noDesign': 'henüz desen seçilmedi',
+      'pending.commit': 'Teklif Oluştur →',
+      'pending.cancel': 'Vazgeç',
+      'pending.added': 'Modele eklendi:',
+      'pending.removed': 'Desen çıkarıldı:',
+      'pending.designs': 'desen',
+      'pending.plainFirst': 'Önce bir üründen "Desen Seç & Ekle"ye tıklayın',
+      'pending.atForm': 'kalem sepette — forma git',
+
+      /* Teklif rozeti / sepet */
+      'quote.badge': 'Teklif Al',
+      'quote.badgeCount': 'Teklif Al',
+      'quote.added': 'Teklife eklendi:',
+      'quote.exists': 'Zaten sepette:',
+      'quote.plain': 'Sade',
+      'quote.toForm': 'Forma Git',
+      'quote.items': 'kalem sepette',
+      'quote.sticky': 'Teklif Oluştur →',
+      'quote.clearQuote': 'Sepeti Temizle',
+
+      /* Desen bölgesi / kategori filtreleri */
+      'cat.riviera': 'Riviera',
+      'cat.provence': 'Provence',
+      'cat.atlantik': 'Atlantik',
+      'cat.kuzey': 'Kuzey Sahili',
+      'cat.adalar': 'Adalar',
+      'cat.guney': 'Güney',
+      'cat.all': 'Tüm Desenler',
+      'designs.detail': 'İncele',
+      'designs.openCatalog': 'E-Kataloğu Aç',
+      'designs.filterLabel': 'Desen kategorisi filtresi',
+
       'atelier.eyebrow': 'ATÖLYE & ÜRETİM',
       'atelier.title': 'Dokunuşu hissettiren kalite.',
       'atelier.lede': '%100 saf Ege pamuğu bukle havlular, nefes alan müslinler ve balpeteği pikeler. Hassas endüstriyel nakış ve yüksek çözünürlüklü su bazlı eko-baskı teknolojisi.',
@@ -429,10 +503,16 @@
       'ecat.note': '%100 Ege Pamuğu · Nakış ve Baskı Üretimi · Minimum 100 Adet Toptan Sipariş',
       'ecat.designs': 'desen / model',
       'ecat.coll': 'Kategori',
+      'ecat.viewModels': 'Modelleri Gör →',
       'ecat.viewDesigns': 'Modelleri Gör →',
+      'ecat.quoteModel': 'Fiyat Teklifi İste',
       'ecat.quoteDesign': 'Fiyat Teklifi İste',
+      'ecat.modelUnit': 'model',
       'ecat.cta': 'Bu koleksiyonlardan numune veya toptan fiyat teklifi almak ister misiniz?',
-      'ecat.ctaBtn': 'Hemen Teklif Alın'
+      'ecat.ctaBtn': 'Hemen Teklif Alın',
+      'ecat.groupOf': 'ürün grubu',
+      'ecat.designOf': 'desen arşivi',
+      'ecat.filtered': 'desen listeleniyor'
     },
 
     en: {
@@ -474,6 +554,57 @@
       'modal.unit': 'models / styles',
       'modal.chooseProduct': 'Apply This Design On Which Product?',
 
+      /* Product group inspection panel */
+      'panel.eyebrow': 'COLLECTION',
+      'panel.title': 'Model Explorer',
+      'panel.prev': 'Previous model',
+      'panel.next': 'Next model',
+      'panel.plain': 'No Design — Plain Only',
+      'panel.attach': 'Choose & Attach Design',
+      'panel.openCatalog': 'Open E-Catalog',
+      'panel.back': 'Back',
+      'panel.hint': 'Use arrow keys or swipe to browse the photos.',
+      'panel.noDesign': 'This is the model you are viewing. Add it plain, or attach a regional design.',
+      'panel.designsPicked': 'Selected designs:',
+      'panel.clear': '(clear)',
+      'panel.pickHint': 'Click designs to attach them to the model, then continue to the quote form.',
+      'panel.view': 'Explore & Add to Quote',
+
+      /* Pending design attachment */
+      'pending.title': 'Attach a Design to This Model',
+      'pending.sub': 'Pick a regional design below; model + design are added to your quote as one line.',
+      'pending.noDesign': 'no design picked yet',
+      'pending.commit': 'Create Quote →',
+      'pending.cancel': 'Cancel',
+      'pending.added': 'Attached to model:',
+      'pending.removed': 'Design removed:',
+      'pending.designs': 'design(s)',
+      'pending.plainFirst': 'First open a product and choose "Attach Design"',
+      'pending.atForm': 'items in quote — go to form',
+
+      /* Quote badge / basket */
+      'quote.badge': 'Get a Quote',
+      'quote.badgeCount': 'Get a Quote',
+      'quote.added': 'Added to quote:',
+      'quote.exists': 'Already in quote:',
+      'quote.plain': 'Plain',
+      'quote.toForm': 'Go to Form',
+      'quote.items': 'items in quote',
+      'quote.sticky': 'Create Quote →',
+      'quote.clearQuote': 'Clear Basket',
+
+      /* Design region / category filters */
+      'cat.riviera': 'Riviera',
+      'cat.provence': 'Provence',
+      'cat.atlantik': 'Atlantic',
+      'cat.kuzey': 'Northern Coast',
+      'cat.adalar': 'Islands',
+      'cat.guney': 'South',
+      'cat.all': 'All Designs',
+      'designs.detail': 'Inspect',
+      'designs.openCatalog': 'Open E-Catalog',
+      'designs.filterLabel': 'Design category filter',
+
       'atelier.eyebrow': 'ATELIER & PRODUCTION',
       'atelier.title': 'Quality you can truly feel.',
       'atelier.lede': '100% pure Aegean cotton terry towels, airy muslins and honeycomb piqués. Industrial embroidery and high-definition water-based printing.',
@@ -513,10 +644,16 @@
       'ecat.note': '100% Aegean Cotton · Fine Embroidery & Eco-Printing · Minimum Order 100 Units',
       'ecat.designs': 'designs / models',
       'ecat.coll': 'Category',
+      'ecat.viewModels': 'View Models →',
       'ecat.viewDesigns': 'View Models →',
+      'ecat.quoteModel': 'Request Pricing',
       'ecat.quoteDesign': 'Request Pricing',
+      'ecat.modelUnit': 'models',
       'ecat.cta': 'Would you like to order samples or receive our wholesale price list?',
-      'ecat.ctaBtn': 'Request a Quote'
+      'ecat.ctaBtn': 'Request a Quote',
+      'ecat.groupOf': 'product group',
+      'ecat.designOf': 'design archive',
+      'ecat.filtered': 'designs shown'
     },
 
     fr: {
@@ -558,6 +695,57 @@
       'modal.unit': 'modèles / options',
       'modal.chooseProduct': 'Sur Quel Produit Souhaitez-vous ce Motif ?',
 
+      /* Panneau d'inspection de la gamme produit */
+      'panel.eyebrow': 'COLLECTION',
+      'panel.title': 'Explorateur de Modèles',
+      'panel.prev': 'Modèle précédent',
+      'panel.next': 'Modèle suivant',
+      'panel.plain': 'Sans Motif — Uni',
+      'panel.attach': 'Choisir & Associer un Motif',
+      'panel.openCatalog': 'Ouvrir l’E-Catalogue',
+      'panel.back': 'Retour',
+      'panel.hint': 'Utilisez les flèches ou balayez pour parcourir les photos.',
+      'panel.noDesign': 'Voici le modèle affiché. Ajoutez-le uni, ou associez-lui un motif régional.',
+      'panel.designsPicked': 'Motifs sélectionnés :',
+      'panel.clear': '(effacer)',
+      'panel.pickHint': 'Cliquez sur des motifs pour les associer au modèle, puis continuez vers le formulaire.',
+      'panel.view': 'Découvrir & Ajouter au Devis',
+
+      /* Association de motif (barre en attente) */
+      'pending.title': 'Associer un Motif à ce Modèle',
+      'pending.sub': 'Choisissez un motif régional ci-dessous ; modèle + motif seront ajoutés au devis en une ligne.',
+      'pending.noDesign': 'aucun motif choisi',
+      'pending.commit': 'Créer le Devis →',
+      'pending.cancel': 'Annuler',
+      'pending.added': 'Associé au modèle :',
+      'pending.removed': 'Motif retiré :',
+      'pending.designs': 'motif(s)',
+      'pending.plainFirst': 'Ouvrez d’abord un produit puis choisissez « Choisir & Associer un Motif »',
+      'pending.atForm': 'articles au devis — aller au formulaire',
+
+      /* Badge devis / panier */
+      'quote.badge': 'Demander un Devis',
+      'quote.badgeCount': 'Demander un Devis',
+      'quote.added': 'Ajouté au devis :',
+      'quote.exists': 'Déjà au devis :',
+      'quote.plain': 'Uni',
+      'quote.toForm': 'Aller au Formulaire',
+      'quote.items': 'articles au devis',
+      'quote.sticky': 'Créer le Devis →',
+      'quote.clearQuote': 'Vider le Panier',
+
+      /* Filtres région / catégorie de motifs */
+      'cat.riviera': 'Riviera',
+      'cat.provence': 'Provence',
+      'cat.atlantik': 'Atlantique',
+      'cat.kuzey': 'Côte Nord',
+      'cat.adalar': 'Îles',
+      'cat.guney': 'Sud',
+      'cat.all': 'Tous les Motifs',
+      'designs.detail': 'Inspecter',
+      'designs.openCatalog': 'Ouvrir l’E-Catalogue',
+      'designs.filterLabel': 'Filtre par catégorie de motif',
+
       'atelier.eyebrow': 'ATELIER & SAVOIR-FAIRE',
       'atelier.title': 'Une matière qui se ressent.',
       'atelier.lede': 'Éponge 100% pur coton égéen, mousselines aérées et piqués nid d’abeille. Broderie industrielle haute précision et impression écologique à l’eau.',
@@ -597,10 +785,16 @@
       'ecat.note': '100% Coton Égéen · Broderie Satin & Impression Éco · Commande Minimale : 100 Pièces',
       'ecat.designs': 'motifs / modèles',
       'ecat.coll': 'Catégorie',
+      'ecat.viewModels': 'Découvrir les Modèles →',
       'ecat.viewDesigns': 'Découvrir les Modèles →',
+      'ecat.quoteModel': 'Demander un Devis',
       'ecat.quoteDesign': 'Demander un Devis',
+      'ecat.modelUnit': 'modèles',
       'ecat.cta': 'Souhaitez-vous recevoir un échantillon ou notre grille tarifaire grossiste ?',
-      'ecat.ctaBtn': 'Demander un Devis'
+      'ecat.ctaBtn': 'Demander un Devis',
+      'ecat.groupOf': 'gamme produit',
+      'ecat.designOf': 'archive des motifs',
+      'ecat.filtered': 'motifs affichés'
     }
   };
 

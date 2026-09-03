@@ -188,8 +188,11 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
   letter-spacing: 0.02em; padding: 6px 2px;
   border-bottom: 1px solid transparent;
   transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+  white-space: nowrap;   /* FR uzun etiketlerde satır kırılmasın */
 }
 .site-nav a:hover { color: var(--ink); border-color: var(--gold); }
+
+.header-cta { white-space: nowrap; }
 
 .header-actions { display: flex; align-items: center; gap: var(--space-4); }
 @media (max-width: 480px) {
@@ -375,15 +378,22 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 .chip:hover { border-color: var(--ink); color: var(--ink); }
 .chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 
-/* ===== Collection grid (editorial, asymmetric) ===== */
+/* ===== Collection grid (editorial) ===== */
 .collection-grid {
   max-width: 1440px; margin: 0 auto;
   display: grid; grid-template-columns: repeat(12, 1fr);
   gap: var(--space-4);
 }
 .collection-card { grid-column: span 4; position: relative; }
-.collection-card:nth-child(3n+2) { transform: translateY(24px); }
 .collection-card a { display: block; }
+/* Kartın tamamı tıklanabilir buton (JS render eder) */
+.cc-open {
+  display: block; width: 100%; text-align: left;
+  background: none; border: none; padding: 0; cursor: pointer; color: inherit;
+  font: inherit;
+}
+.cc-open .cc-view { margin-top: 10px; width: 100%; }
+.cc-open:hover .cc-view { border-color: var(--gold-deep); color: var(--gold-deep); }
 .collection-card figure { position: relative; overflow: hidden; border-radius: 4px; aspect-ratio: 3 / 4; }
 /* Soldan sağa parlaklık süpürmesi — koleksiyonlarda sıralı (biri bitince diğeri) */
 .collection-card figure::after {
@@ -621,15 +631,19 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
   line-height: var(--lh-relaxed); max-width: 56ch;
   margin-bottom: var(--space-4);
 }
-/* Model minyatürleri — hairline kutu, editorial tipografi */
+/* Model minyatürleri — hairline kutu, editorial tipografi (thumb'a tıklayınca ana görsel değişir) */
 .ecat-models-grid {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
   gap: var(--space-4); margin-bottom: var(--space-4);
 }
 .ecat-model {
   background: var(--bg-soft); border: 1px solid var(--line);
-  border-radius: 2px; overflow: hidden;
+  border-radius: 2px; overflow: hidden; cursor: pointer;
+  padding: 0; text-align: left; width: 100%;
+  transition: border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
 }
+.ecat-model:hover { border-color: var(--gold-deep); }
+.ecat-model.active { border-color: var(--gold-deep); box-shadow: 0 0 0 1px var(--gold-deep); }
 .ecat-model img {
   width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block;
   background: var(--bg-soft);
@@ -639,6 +653,8 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
   font-weight: 500; color: var(--ink);
   letter-spacing: 0.01em; line-height: var(--lh-snug);
 }
+.ecat-collection-actions { display: flex; gap: var(--space-4); flex-wrap: wrap; }
+.ecat-collection-actions .btn { min-width: 200px; }
 
 /* Desen grupları */
 .ecat-designs { background: var(--bg-soft); }
@@ -683,6 +699,15 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 .ecat-design-body {
   padding: var(--space-4);
   display: flex; flex-direction: column; gap: var(--space-4); flex: 1;
+}
+/* Desen varyant thumb'ları (gallery) — figürün altında ince şerit */
+.ecat-design-thumbs {
+  display: flex; gap: 4px; padding: 6px var(--space-4) 0;
+  background: var(--surface);
+}
+.ecat-design-thumbs img {
+  width: 52px; height: 52px; object-fit: cover; border-radius: 2px;
+  border: 1px solid var(--line);
 }
 .ecat-design-title {
   font-family: var(--font-serif); font-weight: 500;
@@ -766,9 +791,17 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
   background: var(--bg-soft);
   display: flex; align-items: center; justify-content: center;
   overflow: hidden;
+  position: relative;
 }
 /* Görsel kendi native oranında (JS aspect-ratio set eder), asla kırpılmaz */
 .modal-figure img { width: 100%; height: auto; object-fit: contain; display: block; }
+/* Desen modalı varyant slider'ı */
+.modal-figure .ms-viewport { width: 100%; overflow: hidden; }
+.modal-figure .ms-track { display: flex; transition: transform var(--dur-med) var(--ease); }
+.modal-figure .ms-slide { flex: 0 0 100%; min-width: 0; }
+.modal-figure .ms-slide img { width: 100%; height: auto; display: block; }
+.modal-figure .slider-arrow { top: 44%; }
+.modal-figure .ms-dots { position: absolute; bottom: 10px; left: 0; right: 0; z-index: 2; }
 .modal-body { padding: clamp(24px, 3vw, 36px); }
 .modal-title { font-family: var(--font-serif); font-weight: 500; font-size: 2rem; line-height: 1.15; margin-bottom: 8px; text-wrap: balance; }
 .modal-desc { color: var(--ink-soft); line-height: 1.65; margin-bottom: var(--space-4); }
@@ -806,8 +839,6 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
   .hero { grid-template-columns: 1fr; }
   .atelier-inner, .contact-inner { grid-template-columns: 1fr; }
   .collection-card { grid-column: span 6; }
-  .collection-card:nth-child(3n+2) { transform: none; }
-  .collection-card:nth-child(even) { transform: translateY(16px); }
 }
 
 @media (max-width: 768px) {
@@ -816,7 +847,6 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
   .mobile-nav { display: flex; }
   .header-cta { display: none; }
   .collection-card { grid-column: span 12; }
-  .collection-card:nth-child(even) { transform: none; }
   .catalog-head { flex-direction: column; align-items: flex-start; }
   .catalog-tools { align-items: flex-start; }
   .filter-chips { justify-content: flex-start; }
@@ -863,4 +893,184 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
   .product-card figure img.pc-contain { opacity: 1 !important; }
   .product-card figcaption { opacity: 1; transform: none; }
   html.js .reveal { opacity: 1; transform: none; }
+}
+
+/* ==========================================================================
+   ÜRÜN GRUBU İNCELEME PANELİ (grup kartı → slider + sade/desenli ekleme)
+   ========================================================================== */
+.group-modal {
+  position: fixed; inset: 0; z-index: 100;
+  display: none; align-items: center; justify-content: center;
+  padding: clamp(12px, 3vw, 40px);
+}
+.group-modal.open { display: flex; }
+.gm-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(26, 25, 24, 0.45);
+  backdrop-filter: blur(14px) saturate(0.85);
+  -webkit-backdrop-filter: blur(14px) saturate(0.85);
+  animation: gmFade var(--dur-fast) var(--ease);
+}
+@keyframes gmFade { from { opacity: 0; } to { opacity: 1; } }
+.gm-panel {
+  position: relative; z-index: 1;
+  background: var(--bg); border-radius: 6px;
+  width: min(1080px, 100%);
+  max-height: 92vh; overflow: auto;
+  box-shadow: 0 24px 80px rgba(26, 25, 24, 0.35);
+  animation: gmIn var(--dur-med) var(--ease);
+}
+@keyframes gmIn { from { opacity: 0; transform: translateY(20px) scale(0.985); } to { opacity: 1; transform: none; } }
+.gm-close {
+  position: absolute; top: 12px; right: 12px; z-index: 3;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--bg); color: var(--ink); font-size: 1.4rem; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 8px rgba(26, 25, 24, 0.18);
+  transition: transform var(--dur-short) var(--ease);
+}
+.gm-close:hover { transform: rotate(90deg); }
+.gm-body { padding: clamp(20px, 4vw, 44px); }
+
+/* Slider (tek model, çoklu poz) */
+.slider-wrap { margin-bottom: var(--space-4); }
+.slider-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: var(--space-4); flex-wrap: wrap; margin-bottom: var(--space-4);
+}
+.slider-title {
+  font-family: var(--font-serif); font-weight: 500;
+  font-size: clamp(1.5rem, 3vw, 2.2rem); line-height: var(--lh-tight);
+}
+.slider-count { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+.slider { position: relative; overflow: hidden; border-radius: 6px; }
+.slider-track { display: flex; transition: transform var(--dur-med) var(--ease); }
+.slide { flex: 0 0 100%; min-width: 0; }
+.slide-fig { position: relative; aspect-ratio: 16 / 10; background: var(--bg-soft); overflow: hidden; }
+.slide-fig img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.slide-cap { display: flex; justify-content: space-between; gap: var(--space-4); align-items: baseline; margin-top: 10px; flex-wrap: wrap; }
+.slide-name { font-family: var(--font-serif); font-size: var(--text-xl); font-weight: 500; line-height: 1.25; }
+.slide-meta { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); }
+.slider-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 48px; height: 48px; border-radius: 50%;
+  background: color-mix(in oklch, var(--bg) 88%, transparent);
+  backdrop-filter: blur(6px); border: 1px solid var(--line-strong);
+  color: var(--ink); font-size: 1.6rem; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 2; transition: background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+}
+.slider-arrow:hover { background: var(--bg); border-color: var(--gold-deep); }
+.slider-arrow.prev { left: 12px; }
+.slider-arrow.next { right: 12px; }
+.slider-dots { display: flex; justify-content: center; gap: 8px; margin-top: var(--space-4); }
+.dot {
+  width: 26px; height: 6px; border-radius: 3px; border: none; padding: 0;
+  background: var(--line-strong); cursor: pointer;
+  transition: background var(--dur-fast) var(--ease), transform var(--dur-instant) var(--ease);
+}
+.dot.active { background: var(--gold-deep); }
+.dot:active { transform: scale(0.9); }
+.dot:hover { background: var(--ink-faint); }
+
+/* Slider alt bilgi + aksiyonlar */
+.slider-actions {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--space-4); flex-wrap: wrap;
+  margin-top: var(--space-4); padding: var(--space-4);
+  background: var(--bg-soft); border: 1px solid var(--line); border-radius: 4px;
+}
+.sel-summary { font-size: 0.92rem; color: var(--ink-soft); line-height: 1.5; }
+.sel-summary strong { color: var(--ink); font-family: var(--font-serif); font-size: 1.05rem; font-weight: 600; }
+.gm-actions { display: flex; gap: var(--space-4); flex-wrap: wrap; }
+.gm-actions .btn { flex: 1 1 auto; min-width: 180px; }
+.btn-gold-line { border: 1px solid var(--gold-deep); color: var(--gold-deep); }
+.btn-gold-line:hover { background: var(--gold-deep); color: var(--bg); }
+.gm-hint { font-size: 0.85rem; color: var(--ink-faint); text-align: center; margin-top: var(--space-4); font-style: italic; }
+.sel-designs { display: inline-flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.sel-designs .chip { padding: 4px 10px; min-height: 0; font-size: 0.72rem; }
+.clear-attached { font-size: 0.78rem; font-weight: 600; color: var(--gold-deep); padding: 4px 6px; min-height: 0; border-bottom: 1px solid transparent; }
+.clear-attached:hover { border-color: var(--gold-deep); }
+
+/* Modele desen bağlama (pending bar) — desen arşivi bölümünün altında sabit */
+.pending-bar {
+  text-align: center; margin-top: var(--space-9);
+}
+.pending-box {
+  display: inline-flex; flex-wrap: wrap; gap: var(--space-4);
+  align-items: center; justify-content: center;
+  background: var(--surface); border: 1px solid var(--line-strong);
+  border-radius: 4px; padding: var(--space-4) var(--space-9);
+  max-width: 100%;
+}
+.pending-model {
+  font-family: var(--font-serif); font-size: 1.15rem; font-weight: 500;
+  line-height: var(--lh-snug);
+}
+.pending-plus { color: var(--ink-faint); }
+.pending-designs { display: inline-flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.pending-none { color: var(--ink-faint); font-style: italic; font-size: 0.9rem; }
+
+/* Toast bildirimi */
+.toast {
+  position: fixed; bottom: 24px; right: 24px; z-index: 120;
+  background: var(--ink); color: var(--bg);
+  padding: 12px 18px; border-radius: 4px; font-size: 0.9rem;
+  max-width: min(420px, 90vw); opacity: 0; transform: translateY(8px);
+  pointer-events: none;
+  transition: opacity var(--dur-short) var(--ease), transform var(--dur-short) var(--ease);
+}
+.toast.show { opacity: 1; transform: none; }
+
+/* Sticky sepet çubuğu */
+.quote-sticky {
+  position: sticky; bottom: 0; z-index: 90;
+  background: color-mix(in oklch, var(--bg) 92%, transparent);
+  backdrop-filter: blur(10px); border-top: 1px solid var(--line);
+  padding: 10px clamp(16px, 4vw, 48px);
+}
+.quote-sticky-inner {
+  max-width: 1440px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--space-4); flex-wrap: wrap;
+}
+.quote-sticky .sticky-count { font-size: 0.9rem; color: var(--ink-soft); }
+.quote-sticky .sticky-count strong { color: var(--ink); }
+.quote-sticky a.go-form { border-bottom: 1px solid var(--gold); font-weight: 600; }
+.quote-sticky a.go-form:hover { color: var(--gold-deep); }
+
+/* Header rozet: metin + sayaç */
+.header-cta .quote-n {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 20px; height: 20px; padding: 0 6px; margin-left: 6px;
+  border-radius: 10px; background: var(--gold-deep); color: var(--bg);
+  font-size: 0.72rem; font-weight: 700; line-height: 1;
+  vertical-align: middle;
+}
+
+/* Desen kartı: tek "İncele" butonu (ortalanmış, tam genişlik) */
+.product-card .pc-actions { display: flex; gap: 8px; margin-top: 8px; }
+.product-card .pc-actions .btn,
+.product-card .pc-actions .design-detail-btn { flex: 1 1 auto; }
+.product-card .pc-actions .design-detail-btn,
+.product-card button.design-detail-btn {
+  display: flex; width: 100%; text-align: center;
+  align-items: center; justify-content: center;
+  font-size: 0.85rem; font-weight: 600; padding: 10px 16px;
+  border: 1px solid var(--ink); color: var(--ink); border-radius: 2px;
+  transition: background var(--dur-short) var(--ease), border-color var(--dur-short) var(--ease),
+              color var(--dur-short) var(--ease), transform var(--dur-instant) var(--ease);
+  min-height: 44px;
+}
+.product-card .pc-actions .design-detail-btn:hover,
+.product-card button.design-detail-btn:hover {
+  border-color: var(--gold-deep); color: var(--gold-deep);
+}
+.design-detail-btn:active { transform: scale(0.97); }
+.design-cat-label { font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-deep); }
+
+@media (max-width: 768px) {
+  .slider-arrow { width: 40px; height: 40px; }
+  .gm-actions .btn { min-width: 100%; }
+  .pending-box { padding: var(--space-4); }
 }

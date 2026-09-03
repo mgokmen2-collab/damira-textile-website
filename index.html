@@ -32,11 +32,11 @@
 
       <div class="header-actions">
         <div class="lang-switch" role="group" aria-label="Dil seçimi">
-          <button class="lang-btn" data-lang="tr" aria-pressed="true">TR</button>
-          <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
           <button class="lang-btn" data-lang="fr" aria-pressed="false">FR</button>
+          <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+          <button class="lang-btn" data-lang="tr" aria-pressed="true">TR</button>
         </div>
-        <a class="header-cta" href="#contact" data-i18n="nav.quote">Teklif Al</a>
+        <a class="header-cta" href="#contact" data-i18n="nav.quote" id="quoteLink">Teklif Al</a>
         <button class="nav-toggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Menüyü aç">
           <span></span><span></span>
         </button>
@@ -50,7 +50,7 @@
     <a href="#catalog" data-i18n="nav.designs">Desenler</a>
     <a href="#atelier" data-i18n="nav.atelier">Atölye</a>
     <a href="#contact" data-i18n="nav.contact">İletişim</a>
-    <a class="mobile-cta" href="#contact" data-i18n="nav.quote">Teklif Al</a>
+    <a class="mobile-cta" href="#contact" data-i18n="nav.quote" id="mobileQuoteLink">Teklif Al</a>
   </div>
 
   <main id="main">
@@ -71,9 +71,9 @@
       </div>
       <figure class="hero-figure">
         <div class="hero-media-wrap">
-          <video class="hero-video" autoplay muted loop playsinline poster="items-new/giris-foto.jpeg">
+          <video class="hero-video" autoplay muted loop playsinline poster="items/giris-foto.jpeg">
             <source src="videos/hero-coqdor.mp4" type="video/mp4">
-            <img src="items-new/giris-foto.jpeg" alt="COQ D'OR lüks bornoz, havlu, pike, çanta ve hediyelik koleksiyonu">
+            <img src="items/giris-foto.jpeg" alt="COQ D'OR lüks bornoz, havlu, pike, çanta ve hediyelik koleksiyonu">
           </video>
         </div>
         <figcaption class="hero-caption" data-i18n="hero.caption">COQ D'OR MAISON DE LINGE, Koleksiyon Vitrini - %100 Ege pamuğu</figcaption>
@@ -103,7 +103,7 @@
             <p class="catalog-count" id="catalogCount" aria-live="polite"></p>
             <button class="reset-btn" id="resetBtn" hidden data-i18n="catalog.reset">Filtreyi Temizle</button>
           </div>
-          <div class="filter-chips" id="filterChips" role="group" aria-label="Koleksiyon filtresi"></div>
+          <div class="filter-chips" id="filterChips" role="group" aria-label="Desen kategorisi filtresi" data-i18n-aria="designs.filterLabel"></div>
         </div>
       </div>
 
@@ -215,13 +215,32 @@
     </div>
   </footer>
 
+  <!-- ===== STICKY QUOTE BAR (sepet doluysa görünür) ===== -->
+  <div class="quote-sticky" id="quoteSticky" hidden>
+    <div class="quote-sticky-inner">
+      <span class="sticky-count" id="stickyCount"></span>
+      <div style="display:flex;gap:var(--space-4);align-items:center;flex-wrap:wrap">
+        <button class="btn btn-outline btn-sm" id="clearQuoteBtn" hidden data-i18n="quote.clearQuote">Sepeti Temizle</button>
+        <a class="btn btn-primary btn-sm" href="#contact" id="stickyGoForm">Teklif Oluştur →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MODELE DESEN BAĞLAMA (pending bar) ===== -->
+  <div class="pending-bar" id="pendingBar" hidden></div>
+
   <!-- ===== MODAL ===== -->
   <div class="modal" id="productModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
     <div class="modal-backdrop" data-close-modal></div>
     <div class="modal-panel">
       <button class="modal-close" data-close-modal aria-label="Kapat">×</button>
-      <figure class="modal-figure">
-        <img id="modalImg" src="" alt="">
+      <figure class="modal-figure" id="modalFigure">
+        <div class="ms-viewport">
+          <div class="ms-track" id="msTrack"></div>
+        </div>
+        <button class="slider-arrow prev ms-prev" aria-label="Önceki">‹</button>
+        <button class="slider-arrow next ms-next" aria-label="Sonraki">›</button>
+        <div class="slider-dots ms-dots" id="msDots"></div>
       </figure>
       <div class="modal-body">
         <p class="eyebrow" id="modalCollection"></p>
@@ -230,11 +249,42 @@
         <dl class="modal-specs" id="modalSpecs"></dl>
         <div class="modal-actions">
           <button class="btn btn-primary" id="modalQuoteBtn" data-i18n="modal.addQuote">Teklife Ekle</button>
-          <a class="btn btn-outline" id="modalPdfLink" href="#" data-i18n="modal.pdf">PDF Kataloğu İndir</a>
+          <a class="btn btn-outline" id="modalPdfLink" href="catalog.html" data-i18n="modal.pdf">E-Kataloğu Aç</a>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- ===== ÜRÜN GRUBU İNCELEME PANELİ (slider) ===== -->
+  <div class="group-modal" id="groupModal" role="dialog" aria-modal="true" aria-labelledby="gmTitle">
+    <div class="gm-backdrop" data-gm-close></div>
+    <div class="gm-panel">
+      <button class="gm-close" data-gm-close aria-label="Kapat">×</button>
+      <div class="gm-body">
+        <p class="eyebrow" id="gmGroup"></p>
+        <div class="slider-wrap" id="sliderWrap">
+          <div class="slider-head">
+            <h3 class="slider-title" id="gmTitle"></h3>
+            <span class="slider-count" id="gmCount"></span>
+          </div>
+          <div class="slider" id="gmSlider">
+            <button class="slider-arrow prev" id="gmPrev" aria-label="Önceki model">‹</button>
+            <div class="slider-track" id="gmTrack"></div>
+            <button class="slider-arrow next" id="gmNext" aria-label="Sonraki model">›</button>
+          </div>
+          <div class="slider-dots" id="gmDots"></div>
+          <div class="slider-actions">
+            <div class="sel-summary" id="gmSummary"></div>
+            <div class="gm-actions" id="gmActions"></div>
+          </div>
+          <p class="gm-hint" id="gmHint"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TOAST ===== -->
+  <div class="toast" id="toast" role="status"></div>
 
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>

@@ -17,5 +17,8 @@ build/
 # Wrangler (Cloudflare Pages/Workers) local cache
 .wrangler/
 
+# Raw unoptimized video assets
+Initial_Scene_*.mp4
+
 # Command Code session artifacts (brief/reports ARE versioned intentionally)
 # Keep .commandcode/design and .commandcode/brief.md tracked

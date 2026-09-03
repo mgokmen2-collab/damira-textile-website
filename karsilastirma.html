@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COQ D'OR — Ürün Görseli Karşılaştırma ve Ön İzleme</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fbf9f5;
+      --card-bg: #ffffff;
+      --text: #1f2421;
+      --muted: #6b7280;
+      --gold: #b38b4d;
+      --border: #e8e2d8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 50px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 30px;
+    }
+    .brand-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      letter-spacing: 2px;
+      color: #1a1a1a;
+      margin-bottom: 8px;
+    }
+    .brand-sub {
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .page-desc {
+      color: var(--muted);
+      margin-top: 12px;
+      max-width: 650px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 1rem;
+    }
+    .section-block {
+      margin-bottom: 60px;
+    }
+    .section-header {
+      margin-bottom: 24px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      color: #1a1a1a;
+    }
+    .section-note {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 800px) {
+      .comparison-grid { grid-template-columns: 1fr; }
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+      display: flex;
+      flex-direction: column;
+    }
+    .card-img-wrap {
+      position: relative;
+      background: #eee;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+    }
+    .card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .card:hover .card-img-wrap img {
+      transform: scale(1.02);
+    }
+    .badge {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    .badge-old {
+      background: #374151;
+      color: #ffffff;
+    }
+    .badge-new {
+      background: #059669;
+      color: #ffffff;
+    }
+    .card-body {
+      padding: 24px;
+      flex: 1;
+    }
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .card-desc {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 16px;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tag {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      color: #4b5563;
+    }
+    .color-swatches {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-top: 12px;
+    }
+    .swatch {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid #ffffff;
+      box-shadow: 0 0 0 1px #d1d5db;
+    }
+    .swatch-mint { background: #b8ded3; }
+    .swatch-pink { background: #dfb2b7; }
+    .swatch-navy { background: #222b40; }
+    .swatch-sand { background: #d0c1b0; }
+    .footer-actions {
+      text-align: center;
+      padding: 40px 20px;
+      background: var(--card-bg);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1 class="brand-title">COQ D'OR</h1>
+      <p class="brand-sub">Maison de Linge — Görsel İnceleme & Karşılaştırma</p>
+      <p class="page-desc">Google Imagen 3 motoru ile üretilen yeni lüks ürün görsellerini ve eski ofis fotoğraflarını yan yana inceleyebilirsiniz.</p>
+    </header>
+
+    <!-- HAVLU BÖLÜMÜ -->
+    <section class="section-block">
+      <div class="section-header">
+        <h2 class="section-title">1. Havlu Grubu (Önce / Sonra)</h2>
+        <p class="section-note">Elinizdeki mint yeşili, pudra pembe, koyu lacivert ve kum beji renk paleti ile bordür dikişleri referans alınarak yeniden çekilmiştir.</p>
+      </div>
+      <div class="comparison-grid">
+        <!-- Eski Fotoğraf -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <span class="badge badge-old">Eski Fotoğraf (Ofis Çekimi)</span>
+            <img src="preview/eski_havlu.jpg" alt="Eski Havlu Çekimi">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Mevcut Çekim (Amatör)</h3>
+            <p class="card-desc">Ofis rafında, eğik açıyla ve yetersiz ışık altında çekilmiş fotoğraf. Ürünün kalitesini ve dokusunu müşteriye yansıtamıyor.</p>
+            <div class="tags">
+              <span class="tag">Ofis Ortamı</span>
+              <span class="tag">Eğik Açı</span>
+              <span class="tag">Düşük Işık</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Yeni Fotoğraf -->
+        <div class="card">
+          <div class="card-img-wrap">
+            <span class="badge badge-new">Yeni Fotoğraf (AI Stüdyo Çekimi)</span>
+            <img src="preview/yeni_havlu.jpg" alt="Yeni Lüks Havlu Çekimi">
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Yeni Lüks Butik Otel Çekimi</h3>
+            <p class="card-desc">Traverten mermer tezgahta katlanmış büyük banyo ve yüz havluları. Orijinal renkleriniz korundu; yanına Provence zeytinyağlı sabunu eklendi.</p>
+            <div class="tags">
+              <span class="tag">%100 Ege Pamuğu Bukle</span>
+              <span class="tag">Traverten Mermer</span>
+              <span class="tag">Doğal Gün Işığı</span>
+              <span class="tag">Bordür Şeritleri</span>
+            </div>
+            <div class="color-swatches">
+              <span style="font-size:0.8rem; color:var(--muted); margin-right:4px;">Korunan Renkler:</span>
+              <div class="swatch swatch-mint" title="Mint Yeşili"></div>
+              <div class="swatch swatch-pink" title="Pudra Pembe"></div>
+              <div class="swatch swatch-navy" title="Lacivert"></div>
+              <div class="swatch swatch-sand" title="Kum Beji"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PİKE BÖLÜMÜ -->
+    <section class="section-block">
+      <div class="section-header">
+        <h2 class="section-title">2. Pike Grubu (Sıfırdan Üretim)</h2>
+        <p class="section-note">Klasörünüzde hiç görseli bulunmayan bu kategori için quiet luxury sahil villası yatak odası sahnesi oluşturulmuştur.</p>
+      </div>
+      <div class="card" style="max-width: 900px; margin: 0 auto;">
+        <div class="card-img-wrap" style="aspect-ratio: 16/11;">
+          <span class="badge badge-new">Yeni Fotoğraf (AI Stüdyo Çekimi)</span>
+          <img src="preview/yeni_pike.jpg" alt="Yeni Lüks Waffle Pike Çekimi">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Fransız Riviera Villası — Waffle Pike Yatak Örtüsü</h3>
+          <p class="card-desc">Akdeniz'e açılan Fransız pencereleri önünde, doğal keten ve fildişi tonlarında %100 Ege pamuğu balpeteği (waffle/gofre) dokulu, püsküllü lüks pike örtüsü.</p>
+          <div class="tags">
+            <span class="tag">%100 Ege Pamuğu Balpeteği</span>
+            <span class="tag">Püsküllü Kenar</span>
+            <span class="tag">Deniz Manzaralı Teras</span>
+            <span class="tag">Doğal İvory Tonu</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer-actions">
+      <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.6rem; margin-bottom:8px;">Görseller Hakkında Ne Düşünüyorsunuz?</h3>
+      <p style="color:var(--muted); max-width:600px; margin: 0 auto;">Tarzı ve ışığı onaylarsanız bu görselleri resmi ürün klasörlerimize alıp, bir sonraki adım olan Hero (Giriş) görseli üretimine geçebiliriz.</p>
+    </div>
+  </div>
+</body>
+</html>

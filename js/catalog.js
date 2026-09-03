@@ -26,26 +26,24 @@
 
     list.innerHTML = CATEGORIES.map((c) => {
       const models = c.models || [];
-      const badge = c.badge ? c.badge[state.lang] : '';
       return `
-        <article class="ecat-collection" id="${c.id}" style="margin-bottom: 50px; border-bottom: 1px solid var(--line); padding-bottom: 40px;">
-          <div class="ecat-collection-fig" style="position: relative;">
-            ${badge ? `<span class="badge badge-new" style="position:absolute; top:16px; left:16px; z-index:2;">${esc(badge)}</span>` : ''}
-            <img src="${c.img}" alt="${esc(c[state.lang])}" loading="lazy" style="aspect-ratio: 4/3; width:100%; object-fit:cover; border-radius:8px;">
+        <article class="ecat-collection" id="${c.id}">
+          <div class="ecat-collection-fig">
+            <img src="${c.img}" alt="${esc(c[state.lang])}" loading="lazy">
           </div>
           <div class="ecat-collection-body">
             <p class="eyebrow">${models.length} ${t('modal.unit')}</p>
             <h2 class="ecat-collection-title">${esc(c[state.lang])}</h2>
-            <p class="ecat-collection-desc" style="font-size:1.05rem; line-height:1.6; color:var(--ink-soft); margin-bottom:20px;">
+            <p class="ecat-collection-desc">
               ${esc(c.d[state.lang])}
             </p>
-            
+
             ${models.length > 0 ? `
-              <div class="ecat-models-grid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap:12px; margin-bottom:24px;">
+              <div class="ecat-models-grid">
                 ${models.map((m) => `
-                  <div style="background:var(--bg-soft); border-radius:6px; overflow:hidden; border:1px solid var(--line);">
-                    <img src="${m.img}" alt="${esc(m.n[state.lang])}" loading="lazy" style="width:100%; aspect-ratio:1/1; object-fit:cover; display:block;">
-                    <p style="font-size:0.75rem; padding:6px; text-align:center; font-weight:500; color:var(--ink);">${esc(m.n[state.lang])}</p>
+                  <div class="ecat-model">
+                    <img src="${m.img}" alt="${esc(m.n[state.lang])}" loading="lazy">
+                    <p>${esc(m.n[state.lang])}</p>
                   </div>
                 `).join('')}
               </div>
@@ -64,7 +62,7 @@
 
     list.innerHTML = `
       <div class="ecat-design-group">
-        <h3 class="ecat-design-group-title" style="font-family:var(--font-serif); font-size:2.2rem; margin-bottom:24px;">
+        <h3 class="ecat-design-group-title">
           ${t('catalog.title')}
         </h3>
         <div class="ecat-design-grid">
@@ -76,18 +74,18 @@
   function designCard(d) {
     const label = `${d[state.lang].n} — COQ D’OR`;
     return `
-      <article class="ecat-design" id="${d.id}" style="border:1px solid var(--line); border-radius:8px; overflow:hidden; background:var(--bg-card);">
-        <figure class="ecat-design-fig" style="aspect-ratio:1/1; overflow:hidden; background:var(--bg-soft);">
-          <img src="${d.img}" alt="${esc(label)}" loading="lazy" style="width:100%; height:100%; object-fit:cover;">
+      <article class="ecat-design" id="${d.id}">
+        <figure class="ecat-design-fig">
+          <img src="${d.img}" alt="${esc(label)}" loading="lazy">
           <figcaption>
             <span>${esc(d[state.lang].t)}</span>
             <p>${esc(d[state.lang].n)}</p>
           </figcaption>
         </figure>
-        <div class="ecat-design-body" style="padding:16px;">
-          <h4 style="font-family:var(--font-serif); font-size:1.3rem; margin-bottom:6px;">${esc(d[state.lang].n)}</h4>
-          <p class="ecat-design-desc" style="font-size:0.88rem; color:var(--ink-soft); margin-bottom:12px;">${esc(d[state.lang].d)}</p>
-          <dl class="ecat-design-specs" style="font-size:0.8rem; margin-bottom:16px;">
+        <div class="ecat-design-body">
+          <h4 class="ecat-design-title">${esc(d[state.lang].n)}</h4>
+          <p class="ecat-design-desc">${esc(d[state.lang].d)}</p>
+          <dl class="ecat-design-specs">
             <dt>${t('modal.specs')}</dt><dd>${t('modal.specsV')}</dd>
             <dt>${t('ecat.coll')}</dt><dd>${esc(d[state.lang].t)}</dd>
           </dl>

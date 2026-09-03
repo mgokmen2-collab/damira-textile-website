@@ -14,7 +14,7 @@
     activeCategory: null,      // Seçili ürün grubu filtresi
     selectedProductType: 'havlu', // Modalda seçili ürün tipi varyasyonu
     quote: [],                 // Teklife eklenen öğeler: { id, name, productType }
-    visibleCount: 12,          // Sayfalama (25 desen için ilk başta 12)
+    visibleCount: 8,           // Sayfalama (25 desen için ilk başta 8)
     currentDesign: null,       // Modalda açık desen
     lastTrigger: null
   };
@@ -62,14 +62,17 @@
     if (!grid) return;
 
     grid.innerHTML = CATEGORIES.map((c) => {
-      const badgeText = c.badge ? c.badge[state.lang] : '';
       const modelCount = c.models ? c.models.length : 4;
+      // 3/4 kutuya tam sığan görseller (ratio ≈ 0.75) zoom in alır,
+      // diğerleri contain katmanıyla hover'da tam görünür
+      const ratio = c.ratio || 1;
+      const fit = ratio >= 0.70 && ratio <= 0.80 ? 'fit' : 'crop';
       return `
         <article class="collection-card reveal">
-          <a href="#catalog" data-cat="${c.id}" aria-label="${esc(c[state.lang])}">
+          <a href="#catalog" data-cat="${c.id}" aria-label="${esc(c[state.lang])} — ${modelCount} ${t('modal.unit')}">
             <figure>
-              ${badgeText ? `<span class="badge badge-new" style="z-index:2; position:absolute; top:12px; left:12px; font-size:0.75rem;">${esc(badgeText)}</span>` : ''}
-              <img class="cc-cover" src="${c.img}" alt="${esc(c[state.lang])}" loading="lazy" style="aspect-ratio: 4/3; object-fit: cover;">
+              <img class="cc-cover" src="${c.img}" alt="${esc(c[state.lang])} koleksiyonu" loading="lazy" data-fit="${fit}">
+              ${fit === 'crop' ? `<img class="cc-contain" src="${c.img}" alt="" aria-hidden="true" loading="lazy">` : ''}
               <figcaption>
                 ${esc(c[state.lang])}
                 <span class="collection-count">${modelCount} ${t('modal.unit')}</span>
@@ -173,7 +176,7 @@
 
   function resetFilters() {
     state.activeCategory = null;
-    state.visibleCount = 12;
+    state.visibleCount = 8;
     syncChips();
     renderDesigns();
     history.replaceState(null, null, ' ');
@@ -181,11 +184,15 @@
 
   function designCard(d) {
     const label = `${d[state.lang].n} — COQ D’OR`;
+    // Kare kutuya tam sığan desenler (native oran ≈ 1) zoom in alır, diğerleri contain katmanıyla tam görünür
+    const ratio = d.ratio || 1;
+    const fit = ratio >= 0.85 && ratio <= 1.18 ? 'fit' : 'crop';
     return `
       <li class="product-card reveal revealed">
         <button type="button" data-open="${d.id}" aria-label="${esc(label)}">
-          <figure style="aspect-ratio: 1/1; background: var(--bg-soft); overflow: hidden;">
-            <img class="pc-cover" src="${d.img}" alt="${esc(label)}" loading="lazy" style="width:100%; height:100%; object-fit:cover;">
+          <figure>
+            <img class="pc-cover" src="${d.img}" alt="${esc(label)}" loading="lazy" data-fit="${fit}">
+            ${fit === 'crop' ? `<img class="pc-contain" src="${d.img}" alt="" aria-hidden="true" loading="lazy">` : ''}
             <figcaption>
               <span>${esc(d[state.lang].t)}</span>
               <p>${esc(d[state.lang].n)}</p>
@@ -223,13 +230,11 @@
     ];
 
     const optionsHtml = `
-      <div class="modal-combo-select" style="margin: 16px 0; padding: 14px; background: var(--bg-soft); border-radius: 8px; border: 1px solid var(--line);">
-        <p style="font-weight: 600; font-size: 0.88rem; margin-bottom: 8px; color: var(--ink);">
-          🏷️ ${t('modal.chooseProduct')}
-        </p>
-        <div class="combo-chips" style="display: flex; flex-wrap: wrap; gap: 8px;">
+      <div class="modal-combo-select">
+        <span class="combo-label">${t('modal.chooseProduct')}</span>
+        <div class="combo-chips">
           ${productOptions.map((opt) => `
-            <button type="button" class="chip combo-chip ${state.selectedProductType === opt.id ? 'active' : ''}" data-type="${opt.id}" style="${state.selectedProductType === opt.id ? 'background:var(--ink); color:#fff; font-weight:600;' : ''}">
+            <button type="button" class="chip combo-chip ${state.selectedProductType === opt.id ? 'active' : ''}" data-type="${opt.id}">
               ${opt.label}
             </button>
           `).join('')}
@@ -239,20 +244,16 @@
     els.modalSpecs.innerHTML = `
       <dt>${t('modal.specs')}</dt><dd>${t('modal.specsV')}</dd>
       <dt>${t('ecat.coll')}</dt><dd>${esc(d[state.lang].t)}</dd>
-      <div style="grid-column: span 2;">${optionsHtml}</div>`;
+      <div class="modal-combo-col">${optionsHtml}</div>`;
 
     // Seçim butonlarını dinle
     els.modalSpecs.querySelectorAll('.combo-chip').forEach((btn) => {
       btn.addEventListener('click', () => {
         state.selectedProductType = btn.dataset.type;
         els.modalSpecs.querySelectorAll('.combo-chip').forEach((b) => {
-          b.style.background = '';
-          b.style.color = '';
-          b.style.fontWeight = '';
+          b.classList.remove('active');
         });
-        btn.style.background = 'var(--ink)';
-        btn.style.color = '#fff';
-        btn.style.fontWeight = '600';
+        btn.classList.add('active');
         updateModalQuoteBtn();
       });
     });
@@ -505,7 +506,7 @@
 
     if (els.loadMoreBtn) {
       els.loadMoreBtn.addEventListener('click', () => {
-        state.visibleCount += 12;
+        state.visibleCount += 8;
         renderDesigns();
       });
     }

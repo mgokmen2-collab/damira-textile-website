@@ -34,9 +34,9 @@
       en: 'Towel Collection',
       fr: 'Collection Serviettes',
       d: {
-        tr: '550 g/m² yoğun bukle %100 Ege pamuğu banyo ve el havluları. Traverten mermer bordürlü ve waffle gofre nakış bantlı zengin pastel renk paleti.',
-        en: '550 g/m² dense-loop 100% Aegean cotton bath and hand towels. Ribbed flat-weave and waffle embroidered border bands in rich pastel hues.',
-        fr: 'Serviettes de bain et de toilette en 100% coton égéen 550 g/m². Finitions liteau plat ou gaufré pour broderie, palette raffinée de teintes pastel.'
+        tr: '210 g/m² seçkin %100 Ege pamuğu banyo ve el havluları. Traverten mermer bordürlü ve waffle gofre nakış bantlı zengin pastel renk paleti.',
+        en: 'Refined 210 g/m² 100% Aegean cotton bath and hand towels. Ribbed flat-weave and waffle embroidered border bands in rich pastel hues.',
+        fr: 'Serviettes de bain et de toilette en 100% coton égéen 210 g/m². Finitions liteau plat ou gaufré pour broderie, palette raffinée de teintes pastel.'
       },
       models: [
         { id: 'h1', n: { tr: 'Traverten Lüks Banyo & El Havlu Seti', en: 'Travertine Luxury Bath & Hand Set', fr: 'Parure Serviettes Travertin de Luxe' }, img: 'koleksiyonlar/HAVLU/havlu_1_Traverten_Mermer_Set_new.jpg' },
@@ -49,9 +49,9 @@
       id: 'pike',
       img: 'koleksiyonlar/pike/pike_2_Fransiz_Riviera_Sezlong_new.jpeg',
       ratio: 3/4,
-      tr: 'Pike & Yatak Örtüsü',
-      en: 'Piqué & Bed Covers',
-      fr: 'Piqués & Couvre-Lits',
+      tr: 'Pike & Yatak Örtüsü Koleksiyonu',
+      en: 'Piqué & Bed Cover Collection',
+      fr: 'Collection Piqués & Couvre-Lits',
       d: {
         tr: 'Fransız Riviera villaları ve sahil otelleri için %100 Ege pamuğu balpeteği gofre pikeler. Nefes alan jakar dokuma ve el düğümlü püsküller.',
         en: 'Designed for French Riviera seaside villas: 100% Aegean cotton honeycomb waffle piqués. Breathable jacquard weaves and hand-tied fringed tassels.',
@@ -68,9 +68,9 @@
       id: 'pestemal',
       img: 'koleksiyonlar/pestemal/ca04c60c-7400-46bb-9fad-15a089f6f37f.JPG_202609041340.jpeg',
       ratio: 3/4,
-      tr: 'Peştemal & Fouta',
-      en: 'Foutas & Peshtemals',
-      fr: 'Foutas & Peshtemals',
+      tr: 'Peştemal & Fouta Koleksiyonu',
+      en: 'Fouta & Peshtemal Collection',
+      fr: 'Collection Foutas & Peshtemals',
       d: {
         tr: 'Özel plajlar, lüks havuz başları ve yatlar için %100 Ege pamuğu elmas jakar dokumalı peştemaller. Hızlı kuruyan, son derece hafif ve yüksek emici.',
         en: '100% Aegean cotton diamond-jacquard foutas for private beaches, luxury pools and yacht decks. Ultra-light, fast-drying and exceptionally absorbent.',
@@ -87,9 +87,9 @@
       id: 'canta',
       img: 'koleksiyonlar/canta/Wine_bag_with_botanical_print_202609031318_new.jpeg',
       ratio: 3/4,
-      tr: 'Kanvas Çanta & Şarap Kılıfı',
-      en: 'Canvas Bags & Wine Sleeves',
-      fr: 'Sacs en Toile & Étuis à Vin',
+      tr: 'Çanta & Şarap Kılıfı Koleksiyonu',
+      en: 'Bag & Wine Sleeve Collection',
+      fr: 'Collection Sacs & Étuis à Vin',
       d: {
         tr: 'Ağır gramajlı ham pamuk kanvas şarap taşıma çantaları ve büzgülü şişe kılıfları. Riviera bağları ve sahil armalarıyla eko-baskılı.',
         en: 'Heavyweight raw cotton canvas wine bags and drawstring bottle sleeves. Eco-printed with Riviera vineyard and coastal insignias.',
@@ -104,9 +104,9 @@
       id: 'hediyelik',
       img: 'items/designs/chats_new.jpg',
       ratio: 3/4,
-      tr: 'Butik Hediyelik & Özel Nakış',
-      en: 'Boutique Gifts & Insignias',
-      fr: 'Cadeaux & Broderies Fines',
+      tr: 'Hediyelik & Özel Nakış Koleksiyonu',
+      en: 'Gift & Insignia Collection',
+      fr: 'Collection Cadeaux & Broderies Fines',
       d: {
         tr: 'Lüks butik oteller ve konsept mağazalar için özel kedi ve köpek ırkı nakışlı misafir havluları, seyahat keseleri ve kişiselleştirilmiş armalar.',
         en: 'Embroidered guest towels, travel pouches and custom emblems featuring fine animal breeds for luxury concept stores and boutique hotels.',
@@ -409,7 +409,7 @@
       'modal.addQuote': 'Teklife Ekle',
       'modal.pdf': 'E-Kataloğu Aç',
       'modal.specs': 'Materyal & Üretim',
-      'modal.specsV': '%100 Ege Pamuğu · Nakış (38.000 dikiş) veya Eko-Baskı',
+      'modal.specsV': '%100 Ege Pamuğu · Hassas Nakış veya Eko-Baskı',
       'modal.unit': 'model / seçenek',
       'modal.chooseProduct': 'Bu Deseni Hangi Üründe İstersiniz?',
 
@@ -467,9 +467,9 @@
       'atelier.title': 'Dokunuşu hissettiren kalite.',
       'atelier.lede': '%100 saf Ege pamuğu bukle havlular, nefes alan müslinler ve balpeteği pikeler. Hassas endüstriyel nakış ve yüksek çözünürlüklü su bazlı eko-baskı teknolojisi.',
       'atelier.f1': '%100 Ege Pamuğu',
-      'atelier.f1d': '450-550 g/m² havlu · 300 g/m² pike',
+      'atelier.f1d': '210 g/m² havlu · 300 g/m² pike',
       'atelier.f2': 'Nakış & Baskı',
-      'atelier.f2d': '38.000 dikiş / desen & su bazlı eko-baskı',
+      'atelier.f2d': 'Hassas nakış işçiliği & su bazlı eko-baskı',
       'atelier.f3': 'Özel Üretim',
       'atelier.f3d': 'Otel veya butiğinize özel logo/arma',
       'atelier.link': 'Özel üretim şartları için bize yazın →',
@@ -494,7 +494,7 @@
       'form.sending': 'Gönderiliyor…',
       'form.success': 'Talebiniz başarıyla alındı. 2 iş günü içinde toptan fiyat listemizle dönüş yapacağız.',
 
-      'footer.note': 'Nice, Fransa · toptan turistik ve otel tekstili üreticisi',
+      'footer.note': 'Fransa · toptan turistik ve otel tekstili üreticisi',
 
       'ecat.eyebrow': 'E-KATALOG · 2026',
       'ecat.title': 'Ürün Grupları ve Desenler.',
@@ -549,7 +549,7 @@
       'modal.addQuote': 'Add to Quote',
       'modal.pdf': 'Open E-Catalog',
       'modal.specs': 'Materials & Craft',
-      'modal.specsV': '100% Aegean Cotton · 38,000 stitches embroidery or eco-print',
+      'modal.specsV': '100% Aegean Cotton · Fine embroidery or eco-print',
       'modal.unit': 'models / styles',
       'modal.chooseProduct': 'Apply This Design On Which Product?',
 
@@ -607,9 +607,9 @@
       'atelier.title': 'Quality you can truly feel.',
       'atelier.lede': '100% pure Aegean cotton terry towels, airy muslins and honeycomb piqués. Industrial embroidery and high-definition water-based printing.',
       'atelier.f1': '100% Aegean Cotton',
-      'atelier.f1d': '450-550 g/m² towels · 300 g/m² piqués',
-      'atelier.f2': 'Embroidery & Print',
-      'atelier.f2d': '38,000 stitches per design & eco-printing',
+      'atelier.f1d': '210 g/m² towels · 300 g/m² piqués',
+      'atelier.f2': 'Embroidery & Printing',
+      'atelier.f2d': 'Fine embroidery craftsmanship & water-based eco-printing',
       'atelier.f3': 'Custom Insignia',
       'atelier.f3d': 'Custom crests tailored for your hotel/brand',
       'atelier.link': 'Contact us for bespoke hotel branding →',
@@ -634,7 +634,7 @@
       'form.sending': 'Sending…',
       'form.success': 'Your request has been received. Our team will contact you within 2 business days.',
 
-      'footer.note': 'Nice, France · B2B manufacturer of hospitality and boutique resort textiles',
+      'footer.note': 'France · B2B manufacturer of hospitality and boutique resort textiles',
 
       'ecat.eyebrow': 'E-CATALOG · 2026',
       'ecat.title': 'Collections & Regional Designs.',
@@ -689,7 +689,7 @@
       'modal.addQuote': 'Ajouter au Devis',
       'modal.pdf': 'Ouvrir l’E-Catalogue',
       'modal.specs': 'Matière & Savoir-faire',
-      'modal.specsV': '100% Coton Égéen · 38 000 points broderie ou impression éco',
+      'modal.specsV': '100% Coton Égéen · Broderie fine ou impression éco',
       'modal.unit': 'modèles / options',
       'modal.chooseProduct': 'Sur Quel Produit Souhaitez-vous ce Motif ?',
 
@@ -747,9 +747,9 @@
       'atelier.title': 'Une matière qui se ressent.',
       'atelier.lede': 'Éponge 100% pur coton égéen, mousselines aérées et piqués nid d’abeille. Broderie industrielle haute précision et impression écologique à l’eau.',
       'atelier.f1': '100% Coton Égéen',
-      'atelier.f1d': 'Serviettes 450-550 g/m² · Piqués 300 g/m²',
+      'atelier.f1d': 'Serviettes 210 g/m² · Piqués 300 g/m²',
       'atelier.f2': 'Broderie & Impression',
-      'atelier.f2d': '38 000 points par motif & impression éco',
+      'atelier.f2d': 'Savoir-faire de broderie fine & impression éco à base d’eau',
       'atelier.f3': 'Personnalisation',
       'atelier.f3d': 'Blasons et logos sur mesure pour votre établissement',
       'atelier.link': 'Contactez-nous pour vos projets sur mesure →',
@@ -774,7 +774,7 @@
       'form.sending': 'Envoi en cours…',
       'form.success': 'Votre demande a bien été reçue. Notre service commercial vous répondra sous 2 jours ouvrés.',
 
-      'footer.note': 'Nice, France · Confectionneur grossiste de linge pour l’hôtellerie et les boutiques de charme',
+      'footer.note': 'France · Confectionneur grossiste de linge pour l’hôtellerie et les boutiques de charme',
 
       'ecat.eyebrow': 'E-CATALOGUE · 2026',
       'ecat.title': 'Gammes de Produits et Motifs Côtiers.',

@@ -106,6 +106,24 @@
   /* ============================================================
      1) ÜRÜN GRUPLARI — koleksiyon kartları → inceleme paneli
      ============================================================ */
+  /* Koleksiyon kartı başlığını kart genişliğine otomatik sığdır */
+  function fitCollectionTitles() {
+    const grid = els.collectionGrid;
+    if (!grid) return;
+    grid.querySelectorAll('.cc-title').forEach((el) => {
+      const fig = el.closest('figure');
+      if (!fig) return;
+      const avail = fig.clientWidth - 32;   // figcaption yatay padding
+      let size = 24;                         // varsayılan (--text-2xl)
+      el.style.fontSize = '';
+      // Taşana kadar küçült (alt sınır 13px)
+      while (size > 13 && el.scrollWidth > avail) {
+        size -= 0.5;
+        el.style.fontSize = size + 'px';
+      }
+    });
+  }
+
   function renderCollections() {
     const grid = els.collectionGrid;
     if (!grid) return;
@@ -114,14 +132,15 @@
       const count = (c.models || []).length;
       const ratio = c.ratio || 1;
       const fit = ratio >= 0.70 && ratio <= 0.80 ? 'fit' : 'crop';
+      const name = c[state.lang];
       return `
         <article class="collection-card reveal">
-          <button type="button" class="cc-open" data-open-group="${c.id}" aria-label="${esc(c[state.lang])} — ${count} ${t('modal.unit')}">
+          <button type="button" class="cc-open" data-open-group="${c.id}" aria-label="${esc(name)} — ${count} ${t('modal.unit')}">
             <figure>
-              <img class="cc-cover" src="${c.img}" alt="${esc(c[state.lang])}" loading="lazy" data-fit="${fit}">
+              <img class="cc-cover" src="${c.img}" alt="${esc(name)}" loading="lazy" data-fit="${fit}">
               ${fit === 'crop' ? `<img class="cc-contain" src="${c.img}" alt="" aria-hidden="true" loading="lazy">` : ''}
               <figcaption>
-                ${esc(c[state.lang])}
+                <span class="cc-title">${esc(name)}</span>
                 <span class="collection-count">${count} ${t('modal.unit')}</span>
               </figcaption>
             </figure>
@@ -129,6 +148,8 @@
           </button>
         </article>`;
     }).join('');
+
+    fitCollectionTitles();
 
     grid.querySelectorAll('[data-open-group]').forEach((btn) => {
       btn.addEventListener('click', () => openGroupPanel(btn.dataset.openGroup));

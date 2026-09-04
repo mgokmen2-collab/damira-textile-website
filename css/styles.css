@@ -325,7 +325,9 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
   white-space: nowrap;
 }
 @media (max-width: 480px) {
-  .hero-note { font-size: 0.58rem; letter-spacing: 0.02em; }
+  /* 320px'de nowrap nota satırı min-content'i (≈314px) esnetip yatay taşmaya yol açıyordu;
+     sarılmaya izin verilince sütun daralır, taşma kaybolur */
+  .hero-note { font-size: 0.58rem; letter-spacing: 0.02em; white-space: normal; text-wrap: balance; line-height: 1.5; }
 }
 .hero-figure {
   min-width: 0;
@@ -1104,7 +1106,8 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
 .design-cat-label { font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-deep); }
 
 @media (max-width: 768px) {
-  .slider-arrow { width: 40px; height: 40px; }
+  /* 44px: dokunma hedefi minimumu (40px kurstan kısaydı) */
+  .slider-arrow { width: 44px; height: 44px; }
   .gm-actions .btn { min-width: 100%; }
   .pending-box { padding: var(--space-4); }
 }

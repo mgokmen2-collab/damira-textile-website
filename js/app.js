@@ -137,6 +137,15 @@
   }
 
   /* ---------- Grup inceleme paneli: model slider ---------- */
+
+  /* Overlay (modal/panel) açıkken arka planı erişilmez yap */
+  const OVERLAY_BG = ['#main', '#siteHeader', '.site-footer', '#mobileNav'];
+  function setOverlay(on) {
+    OVERLAY_BG.forEach((sel) => {
+      $$(sel).forEach((el) => { if (on) el.setAttribute('inert', ''); else el.removeAttribute('inert'); });
+    });
+  }
+
   function openGroupPanel(cid, opts) {
     const c = catById(cid);
     if (!c || !els.groupModal) return;
@@ -151,6 +160,7 @@
     buildGmTrack(c, models);
     els.groupModal.classList.add('open');
     document.body.style.overflow = 'hidden';
+    setOverlay(true);
     gmGo(0);
     gmAuto(true);
     els.gmClose.focus();
@@ -160,6 +170,7 @@
     els.groupModal.classList.remove('open');
     document.body.style.overflow = '';
     gmAuto(false);
+    setOverlay(false);
     state.group = null;
     state.gCtx = null;
   }
@@ -175,7 +186,7 @@
           </figure>
           <div class="slide-cap">
             <span class="slide-name">${esc(m.n[state.lang])}</span>
-            <span class="slide-meta">${esc(c[state.lang])}${m.n[state.lang] ? ' · ' + esc(m.n[state.lang]) : ''}</span>
+            <span class="slide-meta">${esc(c[state.lang])}</span>
           </div>
         </div>`;
     }).join('');
@@ -209,9 +220,12 @@
     });
   }
 
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
   function gmAuto(on) {
     if (els.gmTimer) { clearInterval(els.gmTimer); els.gmTimer = null; }
     if (!on || !state.group) return;
+    if (prefersReducedMotion.matches) return;   // hareketi azalt: otomatik geçiş kapalı
     els.gmTimer = setInterval(() => {
       if (!state.group) return;
       const c = catById(state.group);
@@ -231,13 +245,12 @@
     els.gmTrack.style.transform = `translateX(-${state.gIndex * 100}%)`;
     els.gmCount.textContent = `${state.gIndex + 1} / ${n}`;
     els.gmDots.querySelectorAll('[data-gdot]').forEach((d, i) => d.classList.toggle('active', i === state.gIndex));
-    els.gmSummary.innerHTML = `<strong>${esc(m.n[state.lang])}</strong>`;
+    els.gmSummary.textContent = t('panel.noDesign');
     els.gmActions.innerHTML = `
       <button class="btn btn-outline" data-plain="${c.id}:${m.id}">${t('panel.plain')}</button>
       <button class="btn btn-gold-line" data-attach="${c.id}:${m.id}">${t('panel.attach')}</button>
       <a class="btn btn-ghost" href="catalog.html#${c.id}">${t('panel.openCatalog')}</a>
     `;
-    els.gmHint.textContent = t('panel.hint');
 
     els.gmActions.querySelector('[data-plain]').addEventListener('click', (e) => {
       const [cid2, mid2] = e.currentTarget.dataset.plain.split(':');
@@ -451,13 +464,13 @@
     state.msIndex = 0;
     els.modal.hidden = false;
     document.body.style.overflow = 'hidden';
+    setOverlay(true);
 
     els.modalCollection.textContent = catLabel(d.cat) || 'COQ D’OR — MAISON DE LINGE';
     els.modalTitle.textContent = d[state.lang].n;
     els.modalDesc.textContent = d[state.lang].d;
     els.modalSpecs.innerHTML = `
       <dt>${t('modal.specs')}</dt><dd>${t('modal.specsV')}</dd>
-      <dt>${t('ecat.coll')}</dt><dd>${esc(catLabel(d.cat) || d[state.lang].t)}</dd>
     `;
 
     // Varyant slider'ı
@@ -494,6 +507,7 @@
   function closeDesignModal() {
     els.modal.hidden = true;
     document.body.style.overflow = '';
+    setOverlay(false);
     state.currentDesign = null;
     if (state.lastTrigger && document.contains(state.lastTrigger)) state.lastTrigger.focus();
     state.lastTrigger = null;
@@ -577,7 +591,7 @@
       state.quote = state.quote.filter((q) => q.key !== key);
       toast(t('quote.plain'));
     } else {
-      state.quote.push({ key, title: `${d[state.lang].n} (${t('ecat.coll')})` });
+      state.quote.push({ key, title: `${d[state.lang].n} (${catLabel(d.cat)})` });
       toast(t('quote.added') + ' ' + d[state.lang].n);
     }
     persistQuote();
@@ -752,8 +766,7 @@
       gmPrev: $('#gmPrev'),
       gmNext: $('#gmNext'),
       gmSummary: $('#gmSummary'),
-      gmActions: $('#gmActions'),
-      gmHint: $('#gmHint')
+      gmActions: $('#gmActions')
     });
 
     loadQuote();

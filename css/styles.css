@@ -1000,7 +1000,6 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
 .gm-actions .btn { flex: 1 1 auto; min-width: 180px; }
 .btn-gold-line { border: 1px solid var(--gold-deep); color: var(--gold-deep); }
 .btn-gold-line:hover { background: var(--gold-deep); color: var(--bg); }
-.gm-hint { font-size: 0.85rem; color: var(--ink-faint); text-align: center; margin-top: var(--space-4); font-style: italic; }
 .sel-designs { display: inline-flex; flex-wrap: wrap; gap: 6px; align-items: center; }
 .sel-designs .chip { padding: 4px 10px; min-height: 0; font-size: 0.72rem; }
 .clear-attached { font-size: 0.78rem; font-weight: 600; color: var(--gold-deep); padding: 4px 6px; min-height: 0; border-bottom: 1px solid transparent; }
@@ -1047,6 +1046,9 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
   max-width: 1440px; margin: 0 auto;
   display: flex; align-items: center; justify-content: space-between;
   gap: var(--space-4); flex-wrap: wrap;
+}
+.quote-sticky-actions {
+  display: flex; gap: var(--space-4); align-items: center; flex-wrap: wrap;
 }
 .quote-sticky .sticky-count { font-size: 0.9rem; color: var(--ink-soft); }
 .quote-sticky .sticky-count strong { color: var(--ink); }

@@ -10,7 +10,7 @@
   const { CATEGORIES, DESIGNS, I18N } = window.DAMIRA;
 
   const state = {
-    lang: localStorage.getItem('damira-lang') || 'tr'
+    lang: localStorage.getItem('damira-lang') || 'fr'
   };
 
   const $ = (s) => document.querySelector(s);

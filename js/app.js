@@ -13,7 +13,7 @@
   const LANG_ORDER = ['fr', 'en', 'tr']; // Dil sırası: FR → EN → TR
 
   const state = {
-    lang: localStorage.getItem('damira-lang') || 'tr',
+    lang: localStorage.getItem('damira-lang') || 'fr',
     activeCat: null,          // desen filtresi: seçili ürün grubu (chip) — boş = tümü
     quote: [],                // teklif kalemleri (localStorage'da)
     visibleCount: 8,          // desen sayfalama

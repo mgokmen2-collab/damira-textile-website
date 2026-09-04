@@ -1,63 +1,64 @@
-# DAMIRA TEXTILE — Smell Report
+# COQ D'OR — Maison de Linge · Smell Report
 
-**Date:** 2026-08-12 · **Mode:** smell · **Score: 6/10 — PRESENT**
+**Date:** 2026-09-04 · **Mode:** smell · **Score: 10/10 — CLEAN** (updated after fixes)
 
 ## TL;DR
 
-The surface is mostly authored: OKLCH warm-linen palette, serif/sans editorial system, texture-led imagery, no tech gradient, no feature tile grid, no icon toppers. But the control layer carries a generic reflex: seven pill-shaped controls (`border-radius: 999px` on buttons, chips, lang switch, search) plus a `translateY(-1px)` hover lift on CTAs. That is the "AI made this" tell on an otherwise quiet-luxury brand. The fix belongs to interaction/refine, not a full redesign.
+The August tell is gone: the pill-control family, the 1px hover lift, and the in-flow mobile menu were all replaced with hairline 2px controls, color-only hovers, and a fixed overlay menu. The surface is authored, not assembled: warm-linen OKLCH palette, Cormorant + Inter editorial pairing, asymmetric hero, gradient only where it does real work (caption scrims, image shimmer). All three faint odors from the original pass are gone: the model name is no longer echoed three times inside the group panel, the sticky quote bar's inline `style=` became a class, and the generic hint line under the slider was removed. Nothing left to clean.
 
 ## Heuristics
 
-| # | Odor | Detected | Finding |
+| # | Odor | Score | Finding |
 |---|---|---|---|
-| 1 | Tech gradient | 0 (clean) | No gradient anywhere; palette is flat OKLCH linen/charcoal/gold |
-| 2 | Generic tech hue | 0 (clean) | Charcoal + champagne gold, not blue-violet |
-| 3 | Feature tile grid | 0 (clean) | Atelier facts are a definition list, not equal cards |
-| 4 | Accent rail | 0 (clean) | No colored side stripes |
-| 5 | Unearned blur | 0 (clean) | Backdrop blur only on sticky header, justified by scroll overlap |
-| 6 | Stat monument | 0 (clean) | Specs are contextual sentences, not oversized numbers |
-| 7 | Icon topper | 0 (clean) | No decorative icons above headings |
-| 8 | Bounce everywhere | 0 (clean) | Cubic-bezier(0.22,1,0.36,1), no bounce/elastic |
-| 9 | Default type | 0 (clean) | Cormorant Garamond + Inter, tuned scale, editorial intent |
-| 10 | Center stack | 0 (clean) | Asymmetric hero, editorial grid, no safe-middle default |
+| 1 | Tech gradient | CLEAN | Gradients exist only as caption scrims (to-top black) and the image shimmer; no hue energy anywhere |
+| 2 | Generic tech hue | CLEAN | Charcoal + champagne gold on linen; not blue-violet |
+| 3 | Feature tile grid | CLEAN | Collection cards are real products with models; atelier facts are a definition list |
+| 4 | Accent rail | CLEAN | No colored side stripes |
+| 5 | Unearned blur | CLEAN | Backdrop blur only on sticky header, sticky quote bar, modal backdrop, slider arrows — all depth-justified |
+| 6 | Stat monument | CLEAN | Specs are contextual sentences; counts are small caps |
+| 7 | Icon topper | CLEAN | No decorative icons above headings |
+| 8 | Bounce everywhere | CLEAN | Cubic-bezier(0.22,1,0.36,1); active states scale 0.97 only |
+| 9 | Default type | CLEAN | Cormorant Garamond + Inter, tuned scale, letter-spaced labels |
+| 10 | Center stack | CLEAN | Asymmetric hero, editorial grid; centered catalog hero is an intentional cover |
 
-## Odor Findings (observed)
+## Resolved Issues
 
-### P1 — Pill-control family (7× `border-radius: 999px`)
+### R1 — Triple model-name echo inside the group panel (RESOLVED)
 
-- **Reflex:** rounded pill = the default interactive treatment in generated UI.
-- **Evidence:** `.btn`, `.btn-primary`, `.btn-ghost`, `.btn-outline`, `.chip`, `.lang-btn`, `.search-input` all use `border-radius: 999px` in `css/styles.css`.
-- **Why it weakens this brief:** Damira is editorial quiet luxury (Tekla/Ferm Living lane). Pill controls read as app-chrome, not atelier. The brief's own anti-reference list names "pill buttons" as a reflex to refuse.
-- **Fix:** interaction/refine — square or slightly-radiused controls (2–4px) with hairline borders; keep pills only where a segmented control is semantically right (lang switch).
+- **Was:** `js/app.js` rendered `.slide-name` ("Klasik Şal Yaka Havlu Bornoz") and `.slide-meta` ("BORNOZ KOLEKSİYONU · Klasik Şal Yaka Havlu Bornoz") below the photo, then wrote the same model name again into `#gmSummary`. The vision pass confirmed the panel read name / name / name in three stacked rows.
+- **Fix applied:** `.slide-meta` now carries the collection eyebrow only; `#gmSummary` is a state/instruction line ("Şu an görüntülenen model. 'Desen İstemiyorum' ile…") that never repeats the name.
+- **Verify:** screenshot shows the model name exactly once, under the photo.
 
-### P2 — Hover lift on CTAs (`translateY(-1px)`)
+### R2 — Leftover inline `style=` on the sticky quote bar (RESOLVED)
 
-- **Reflex:** micro-lift on hover as a universal affordance cue.
-- **Evidence:** `.btn-primary:hover` and `.header-cta:hover` both translate up 1px.
-- **Why it weakens this brief:** quiet luxury moves less, not more. A 1px lift is noise on a surface whose voice is restraint.
-- **Fix:** interaction — hover becomes a color/border shift only (gold fill or underline), no motion.
+- **Was:** `index.html` — `<div style="display:flex;gap:var(--space-4);align-items:center;flex-wrap:wrap">` around the quote-bar actions, outside the class/token system.
+- **Fix applied:** replaced with a `.quote-sticky-actions { display:flex; gap: var(--space-4); align-items:center; flex-wrap: wrap; }` class in `css/styles.css`; the inline attribute is gone.
+- **Verify:** grep finds zero inline `style=` in the rendered quote-bar markup.
 
-### P3 — Mobile menu as in-flow list (watch)
+### R3 — Generic "tip" line under the group slider (RESOLVED)
 
-- **Reflex:** hamburger + vertical list is the standard responsive fallback.
-- **Evidence:** `.mobile-nav` is a bordered block in document flow below the sticky header; it pushes content instead of overlaying it.
-- **Why it weakens this brief:** on touch-first tablets (a stated audience), a menu that shoves content is friction; the language toggle stays visible which is right, but the menu itself should overlay.
-- **Fix:** responsive — menu becomes an overlay panel anchored to the header with safe-area padding.
+- **Was:** `.gm-hint` rendered "Fotoğrafları ok tuşlarıyla veya kaydırarak değiştirebilirsiniz." centered and italic below the actions — a template-style helper sentence.
+- **Fix applied:** removed the hint line, its `#gmHint` element reference, the `.gm-hint` CSS rule, and the TR/EN/FR `panel.hint` keys.
+- **Verify:** grep finds no `gm-hint` / `panel.hint` remnants; the panel ends cleanly at the actions.
 
-## What's Working
+## Considered but Rejected
 
-- Palette cannot be guessed from the domain (warm linen, not navy/white "textile" cliché).
-- Type has project-specific reason (Cormorant Garamond = editorial atelier voice, Inter = quiet UI).
-- Composition is asymmetric and texture-led, not a centered hero with three cards.
-- No motion exists that doesn't reveal state (reveal-on-scroll, modal entrance).
-- Copy is voice-consistent and has no exclamation points or em-dash abuse.
+| Location | Candidate | Rejected because |
+|---|---|---|
+| `.gm-backdrop` blur(14px) | Reduce or remove the blur | Blur depth on the panel backdrop is intentional and verified in checkup; removing would flatten the layer model |
+| `.dot` width 26px bar | Make dots circular again | The 6px bar-dot is a deliberate editorial variation, not a pill reflex |
+| `.modal-close` rotate(90deg) hover | Remove the rotation | A 90° rotation on a close icon is a crisp affordance, not bounce; it is hover-only and reduced-motion-safe |
+| `.ecat-model` square thumbs | Reconsider as rectangles | Square 1:1 thumbs match the design asset standard; changing would misrepresent the images |
+| In-flow `.section` centered hero at catalog | Flag as center stack | The catalog cover is a centered editorial cover, not a default composition; page body is asymmetric |
+| `.hero-caption` italic style | Flag italic + separator conflict | User already settled the caption wording and upright rendering; it is authored copy, not drift |
 
-## Prescriptions
+## Verification
 
-- **Primary:** `/design interaction` — replace pill family and hover lift with hairline editorial controls.
-- **Secondary:** `/design responsive` — overlay mobile menu.
-- If the pill fix leaves the lang switch feeling orphaned, treat it as a segmented control with 2px radius, not a third pill.
+- Source scan of `css/styles.css` (radius, blur, gradients, transforms) and `js/app.js` + `js/catalog.js` (aria labels, inline styles, hint/summary renders).
+- Runtime: headless Chrome 1440px screenshots of index hero, collections grid, group panel, catalog top, catalog designs, and 375px mobile menu — inspected via vision.
+- Grep confirms removal: no `gm-hint`, no `panel.hint`, no inline `style=` on the quote bar, one model-name echo in the panel.
+- **Not verified:** a full TR/EN/FR read of every string in situ; a screen-reader pass of the group panel; hover states on touch devices.
 
-## Next Modes
+## Verdict
 
-`interaction` · `refine` · `responsive`
+**Pass** — no open issues; R1–R3 resolved and verified. The design's strongest idea (embroidered textile close-ups as hero proof, product-first browse) belongs to this brief and could not be transplanted without becoming wrong. No `refine` needed.

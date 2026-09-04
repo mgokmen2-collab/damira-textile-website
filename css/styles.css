@@ -400,7 +400,7 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
   display: grid; grid-template-columns: repeat(12, 1fr);
   gap: var(--space-4);
 }
-.collection-card { grid-column: span 4; position: relative; }
+.collection-card { grid-column: span 4; position: relative; min-width: 0; }
 .collection-card a { display: block; }
 /* Kartın tamamı tıklanabilir buton (JS render eder) */
 .cc-open {
@@ -469,7 +469,7 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
   display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: var(--space-9);
 }
-.product-card { position: relative; }
+.product-card { position: relative; min-width: 0; }
 .product-card button { display: block; width: 100%; text-align: left; }
 .product-card figure { position: relative; overflow: hidden; border-radius: 4px; background: var(--bg-soft); aspect-ratio: 1 / 1; }
 .product-card figure::after {
@@ -587,7 +587,7 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 .quote-empty { font-size: 0.92rem; color: var(--ink-faint); margin-bottom: var(--space-4); }
 
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
-.field { margin-bottom: var(--space-4); }
+.field { margin-bottom: var(--space-4); min-width: 0; }
 .field label { display: block; font-size: 0.85rem; font-weight: 500; margin-bottom: 6px; line-height: 1.4; }
 .field input, .field textarea {
   width: 100%; font: inherit; font-size: 1rem;
@@ -676,7 +676,7 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
   letter-spacing: 0.01em; line-height: var(--lh-snug);
 }
 .ecat-collection-actions { display: flex; gap: var(--space-4); flex-wrap: wrap; }
-.ecat-collection-actions .btn { min-width: 200px; }
+.ecat-collection-actions .btn { min-width: min(200px, 100%); }
 
 /* Desen grupları */
 .ecat-designs { background: var(--bg-soft); }
@@ -737,7 +737,7 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 }
 .ecat-design-desc { font-size: var(--text-sm); color: var(--ink-soft); line-height: 1.6; }
 .ecat-design-specs {
-  display: grid; grid-template-columns: auto 1fr; gap: 2px 12px;
+  display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px 12px;
   font-size: 0.85rem; padding-top: var(--space-4);
   border-top: 1px solid var(--line);
   font-variant-numeric: tabular-nums;
@@ -759,9 +759,9 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 }
 
 @media (max-width: 768px) {
-  .ecat-collection { grid-template-columns: 1fr; }
+  .ecat-collection { grid-template-columns: minmax(0, 1fr); }
   .ecat-collection:nth-child(even) .ecat-collection-fig { order: 0; }
-  .ecat-design-grid { grid-template-columns: 1fr; }
+  .ecat-design-grid { grid-template-columns: minmax(0, 1fr); }
 }
 
 /* ===== Footer ===== */
@@ -868,10 +868,11 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
 }
 
 @media (max-width: 1024px) {
-  .hero { grid-template-columns: 1fr; }
+  /* minmax(0,1fr): içerik min-content'i (uzun başlık/satır) track'i esnetip taşma yaratmasın */
+  .hero { grid-template-columns: minmax(0, 1fr); }
   /* Mobilde video metnin üstünde (deneme) */
   .hero .hero-figure { order: -1; }
-  .atelier-inner, .contact-inner { grid-template-columns: 1fr; }
+  .atelier-inner, .contact-inner { grid-template-columns: minmax(0, 1fr); }
   .collection-card { grid-column: span 6; }
 }
 
@@ -884,16 +885,35 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
   .catalog-head { flex-direction: column; align-items: flex-start; }
   .catalog-tools { align-items: flex-start; }
   .filter-chips { justify-content: flex-start; }
-  .form-row { grid-template-columns: 1fr; }
-  .modal-panel { grid-template-columns: 1fr; max-height: 92vh; }
+  .form-row { grid-template-columns: minmax(0, 1fr); }
+  .modal-panel { grid-template-columns: minmax(0, 1fr); max-height: 92vh; }
 }
 
 @media (max-width: 480px) {
   body { font-size: 15px; }
   .hero-actions { flex-direction: column; }
   .hero-actions .btn { width: 100%; }
-  .product-grid { grid-template-columns: 1fr; }
+  .product-grid { grid-template-columns: minmax(0, 1fr); }
   .lang-switch { order: -1; }
+  .footer-inner > * { max-width: 100%; }
+  .footer-links { flex-wrap: wrap; justify-content: center; }
+  /* 12 sütunlu grid'in boşluk toplamı dar ekranda tek başına taşma yaratır;
+     tek sütuna inilir (kartlar span 12'den auto'ya geçer) */
+  .collection-grid { grid-template-columns: 1fr; }
+  .collection-card { grid-column: auto; }
+  .ecat-design-thumbs { flex-wrap: wrap; }
+  .product-info { flex-wrap: wrap; }
+}
+
+/* Aşırı zoom (320px @ %200 = 160 CSS px): header tek satıra sığmaz;
+   marka kendi satırına, aksiyonlar kendi içinde iki satıra sarılır,
+   hiçbir kontrol kırpılmaz */
+@media (max-width: 240px) {
+  :root { --header-h: 236px; }
+  .header-inner { flex-wrap: wrap; gap: 12px; }
+  .brand { flex-basis: 100%; }
+  .header-actions { flex-wrap: wrap; row-gap: 8px; }
+  .lang-switch { order: 0; }
 }
 
 /* ===== Touch devices: dokunma anında zoom =====

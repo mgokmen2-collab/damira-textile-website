@@ -22,7 +22,7 @@
         <img class="brand-logo-img" src="logos/yatay_header.png" alt="COQ D'OR — Maison de Linge">
       </a>
 
-      <nav class="site-nav" aria-label="Ana gezinme">
+      <nav class="site-nav" aria-label="Ana gezinme" data-i18n-aria="ui.nav">
         <a href="#collections" data-i18n="nav.collections">Koleksiyonlar</a>
         <a href="catalog.html" data-i18n="nav.catalog">E-Katalog</a>
         <a href="#catalog" data-i18n="nav.designs">Desenler</a>
@@ -31,13 +31,13 @@
       </nav>
 
       <div class="header-actions">
-        <div class="lang-switch" role="group" aria-label="Dil seçimi">
+        <div class="lang-switch" role="group" aria-label="Dil seçimi" data-i18n-aria="ui.lang">
           <button class="lang-btn" data-lang="fr" aria-pressed="false">FR</button>
           <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
           <button class="lang-btn" data-lang="tr" aria-pressed="true">TR</button>
         </div>
         <a class="header-cta" href="#contact" data-i18n="nav.quote" id="quoteLink">Teklif Al</a>
-        <button class="nav-toggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Menüyü aç">
+        <button class="nav-toggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Menüyü aç" data-i18n-aria="ui.menu">
           <span></span><span></span>
         </button>
       </div>
@@ -233,13 +233,13 @@
   <div class="modal" id="productModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
     <div class="modal-backdrop" data-close-modal></div>
     <div class="modal-panel">
-      <button class="modal-close" data-close-modal aria-label="Kapat">×</button>
+      <button class="modal-close" data-close-modal aria-label="Kapat" data-i18n-aria="ui.close">×</button>
       <figure class="modal-figure" id="modalFigure">
         <div class="ms-viewport">
           <div class="ms-track" id="msTrack"></div>
         </div>
-        <button class="slider-arrow prev ms-prev" aria-label="Önceki">‹</button>
-        <button class="slider-arrow next ms-next" aria-label="Sonraki">›</button>
+        <button class="slider-arrow prev ms-prev" aria-label="Önceki" data-i18n-aria="ui.prev">‹</button>
+        <button class="slider-arrow next ms-next" aria-label="Sonraki" data-i18n-aria="ui.next">›</button>
         <div class="slider-dots ms-dots" id="msDots"></div>
       </figure>
       <div class="modal-body">
@@ -259,7 +259,7 @@
   <div class="group-modal" id="groupModal" role="dialog" aria-modal="true" aria-labelledby="gmTitle">
     <div class="gm-backdrop" data-gm-close></div>
     <div class="gm-panel">
-      <button class="gm-close" data-gm-close aria-label="Kapat">×</button>
+      <button class="gm-close" data-gm-close aria-label="Kapat" data-i18n-aria="ui.close">×</button>
       <div class="gm-body">
         <p class="eyebrow" id="gmGroup"></p>
         <div class="slider-wrap" id="sliderWrap">
@@ -268,11 +268,12 @@
             <span class="slider-count" id="gmCount"></span>
           </div>
           <div class="slider" id="gmSlider">
-            <button class="slider-arrow prev" id="gmPrev" aria-label="Önceki model">‹</button>
+            <button class="slider-arrow prev" id="gmPrev" aria-label="Önceki model" data-i18n-aria="ui.prevModel">‹</button>
             <div class="slider-track" id="gmTrack"></div>
-            <button class="slider-arrow next" id="gmNext" aria-label="Sonraki model">›</button>
+            <button class="slider-arrow next" id="gmNext" aria-label="Sonraki model" data-i18n-aria="ui.nextModel">›</button>
           </div>
           <div class="slider-dots" id="gmDots"></div>
+          <p class="visually-hidden" id="gmStatus" aria-live="polite"></p>
           <div class="slider-actions">
             <div class="sel-summary" id="gmSummary"></div>
             <div class="gm-actions" id="gmActions"></div>

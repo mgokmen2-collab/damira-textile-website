@@ -142,6 +142,14 @@
     $$('[data-i18n-ph]').forEach((el) => {
       el.placeholder = t(el.getAttribute('data-i18n-ph'));
     });
+    $$('[data-i18n-aria]').forEach((el) => {
+      if (el.classList && el.classList.contains('nav-toggle')) return;
+      el.setAttribute('aria-label', t(el.getAttribute('data-i18n-aria')));
+    });
+    const navToggle = $('.nav-toggle');
+    if (navToggle) {
+      navToggle.setAttribute('aria-label', navToggle.getAttribute('aria-expanded') === 'true' ? t('ui.closeMenu') : t('ui.menu'));
+    }
     document.title = state.lang === 'tr'
       ? 'E-Katalog — COQ D’OR | Maison de Linge · Koleksiyonlar & Desenler'
       : state.lang === 'fr'

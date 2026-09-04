@@ -84,7 +84,14 @@
       else el.textContent = val;
     });
     $$('[data-i18n-ph]').forEach((el) => { el.placeholder = t(el.getAttribute('data-i18n-ph')); });
-    $$('[data-i18n-aria]').forEach((el) => { el.setAttribute('aria-label', t(el.getAttribute('data-i18n-aria'))); });
+    $$('[data-i18n-aria]').forEach((el) => {
+      if (el.classList && el.classList.contains('nav-toggle')) return;
+      el.setAttribute('aria-label', t(el.getAttribute('data-i18n-aria')));
+    });
+    const navToggle = $('.nav-toggle');
+    if (navToggle) {
+      navToggle.setAttribute('aria-label', navToggle.getAttribute('aria-expanded') === 'true' ? t('ui.closeMenu') : t('ui.menu'));
+    }
     document.title = state.lang === 'tr'
       ? 'COQ D’OR — Maison de Linge | Nice, Fransa · Toptan Lüks Tekstil'
       : state.lang === 'fr'
@@ -212,7 +219,7 @@
         </div>`;
     }).join('');
     els.gmDots.innerHTML = models.map((m, i) =>
-      `<button class="dot" data-gdot="${i}" aria-label="${t('panel.prev')} ${i + 1}"></button>`
+      `<button class="dot" data-gdot="${i}" aria-label="${t('ui.variant')} ${i + 1}"></button>`
     ).join('');
 
     // Ok butonları: prev sola (index-1), next sağa (index+1) — terslik düzeltildi
@@ -265,6 +272,7 @@
 
     els.gmTrack.style.transform = `translateX(-${state.gIndex * 100}%)`;
     els.gmCount.textContent = `${state.gIndex + 1} / ${n}`;
+    if (els.gmStatus) els.gmStatus.textContent = `${t('ui.sliderStatus')} ${m.n[state.lang]}`;
     els.gmDots.querySelectorAll('[data-gdot]').forEach((d, i) => d.classList.toggle('active', i === state.gIndex));
     els.gmSummary.textContent = t('panel.noDesign');
     els.gmActions.innerHTML = `
@@ -500,7 +508,7 @@
       `<div class="ms-slide"><img src="${src}" alt="${esc(d[state.lang].n)} — COQ D’OR" loading="lazy"></div>`
     ).join('');
     els.msDots.innerHTML = imgs.length > 1
-      ? imgs.map((x, i) => `<button class="dot ${i === 0 ? 'active' : ''}" data-msdot="${i}" aria-label="Varyant ${i + 1}"></button>`).join('')
+      ? imgs.map((x, i) => `<button class="dot ${i === 0 ? 'active' : ''}" data-msdot="${i}" aria-label="${t('ui.variant')} ${i + 1}"></button>`).join('')
       : '';
     els.msTrack.style.transform = 'translateX(0%)';
 
@@ -720,6 +728,7 @@
   function setNav(open) {
     if (!els.navToggle || !els.mobileNav) return;
     els.navToggle.setAttribute('aria-expanded', String(open));
+    els.navToggle.setAttribute('aria-label', open ? t('ui.closeMenu') : t('ui.menu'));
     els.mobileNav.hidden = !open;
     document.body.style.overflow = open ? 'hidden' : '';
     if (open) {
@@ -737,6 +746,18 @@
     });
     els.mobileNav.querySelectorAll('a').forEach((a) => {
       a.addEventListener('click', () => setNav(false));
+    });
+    els.mobileNav.addEventListener('keydown', (e) => {
+      if (e.key !== 'Tab' || els.mobileNav.hidden) return;
+      const links = els.mobileNav.querySelectorAll('a');
+      if (!links.length) return;
+      if (e.shiftKey && document.activeElement === links[0]) {
+        e.preventDefault();
+        links[links.length - 1].focus();
+      } else if (!e.shiftKey && document.activeElement === links[links.length - 1]) {
+        e.preventDefault();
+        links[0].focus();
+      }
     });
   }
 
@@ -784,6 +805,7 @@
       gmSlider: $('#gmSlider'),
       gmTrack: $('#gmTrack'),
       gmDots: $('#gmDots'),
+      gmStatus: $('#gmStatus'),
       gmPrev: $('#gmPrev'),
       gmNext: $('#gmNext'),
       gmSummary: $('#gmSummary'),

@@ -72,6 +72,12 @@
   --dur-long: 700ms;      /* section reveals, brand entrances */
 }
 
+/* Anchor targets: sabit header altında başlıklar kesilmesin */
+main [id],
+section[id], .ecat-hero, #catalogMain [id] {
+  scroll-margin-top: calc(var(--header-h) + 12px);
+}
+
 /* ===== Reset / base ===== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -160,7 +166,12 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 }
 @media (max-width: 480px) {
   .header-inner { gap: clamp(8px, 2.5vw, 12px); padding-top: 28px; padding-bottom: 28px; }
+  /* Çok dar ekranlarda (320px + zoom) aksiyonlar taşmasın: logo esneyip küçülür */
+  .header-inner { min-width: 0; }
+  .brand { flex: 1 1 auto; }
+  .brand-logo-img { max-width: 100%; }
 }
+
 .brand { display: flex; align-items: center; gap: 14px; margin-right: auto; text-decoration: none; }
 .brand-logo-img {
   height: 96px;
@@ -169,6 +180,9 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
   object-fit: contain;
   display: block;
 }
+/* Logo flex içinde daralabilsin (taşma önlemi) */
+.brand { min-width: 0; }
+.brand-logo-img { min-width: 0; }
 @media (max-width: 768px) {
   .brand-logo-img {
     height: 68px;
@@ -860,7 +874,6 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
   .hero-actions .btn { width: 100%; }
   .product-grid { grid-template-columns: 1fr; }
   .lang-switch { order: -1; }
-  .section, .ecat-section, .ecat-hero { scroll-margin-top: calc(var(--header-h) + 8px); }
 }
 
 /* ===== Touch devices: dokunma anında zoom =====
@@ -921,6 +934,7 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
   animation: gmIn var(--dur-med) var(--ease);
 }
 @keyframes gmIn { from { opacity: 0; transform: translateY(20px) scale(0.985); } to { opacity: 1; transform: none; } }
+.gm-body { padding: clamp(20px, 4vw, 44px); }
 .gm-close {
   position: absolute; top: 12px; right: 12px; z-index: 3;
   width: 44px; height: 44px; border-radius: 50%;

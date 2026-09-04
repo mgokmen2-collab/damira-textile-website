@@ -1,87 +1,137 @@
-/* DAMIRA TEXTILE — e-katalog renderer (catalog.html)
- * Koleksiyonları ve desenleri zengin düzenle listeler; i18n destekli.
+/* COQ D'OR — MAISON DE LINGE (E-Katalog Katmanı)
+ * Ürün grupları (büyük görsel + model thumb'ları → tıklayınca ana görsel değişir)
+ * 25 Bölgesel Desen & Çok Dilli (TR / EN / FR) — dil sırası FR → EN → TR
  */
 (function () {
   'use strict';
 
-  document.documentElement.classList.add('js'); // reveal gate: only when JS runs
+  document.documentElement.classList.add('js');
 
-  const { COLLECTIONS, PRODUCTS, I18N } = window.DAMIRA;
+  const { CATEGORIES, DESIGNS, I18N } = window.DAMIRA;
 
   const state = {
-    lang: localStorage.getItem('damira-lang') || 'tr'
+    lang: localStorage.getItem('damira-lang') || 'fr'
   };
 
   const $ = (s) => document.querySelector(s);
   const $$ = (s) => document.querySelectorAll(s);
 
-  const t = (key) => (I18N[state.lang] && I18N[state.lang][key]) || I18N.tr[key] || key;
+  const t = (key) => (I18N[state.lang] && I18N[state.lang][key]) || (I18N.tr && I18N.tr[key]) || key;
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  const collById = (id) => COLLECTIONS.find((c) => c.id === id);
-  const collName = (c) => c[state.lang];
-  const collDesc = (c) => (c.d && c.d[state.lang]) || '';
-  const productsOf = (id) => PRODUCTS.filter((p) => p.coll === id);
 
-  function renderCollections() {
+  const CAT_LABELS = {
+    riviera: 'cat.riviera', provence: 'cat.provence', atlantik: 'cat.atlantik',
+    kuzey: 'cat.kuzey', adalar: 'cat.adalar', guney: 'cat.guney'
+  };
+  const catLabel = (code) => (code && CAT_LABELS[code] ? t(CAT_LABELS[code]) : '');
+
+  /* ---------- Ürün grupları: büyük görsel + model thumb'ları ---------- */
+  function renderCategories() {
     const list = $('#ecatCollectionList');
-    list.innerHTML = COLLECTIONS.map((c) => {
-      const count = productsOf(c.id).length;
-      const ratio = c.ratio || 1;
+    if (!list) return;
+
+    list.innerHTML = CATEGORIES.map((c) => {
+      const models = c.models || [];
+      const first = models[0] || {};
       return `
-        <article class="ecat-collection" id="coll-${c.id}">
+        <article class="ecat-collection" id="${c.id}" data-group="${c.id}">
           <div class="ecat-collection-fig">
-            <img src="${c.img}" alt="${esc(collName(c))} koleksiyonu" loading="lazy" style="aspect-ratio: ${ratio}">
+            <img src="${c.img}" alt="${esc(c[state.lang])}" class="ecat-main-img" data-main="${c.id}">
           </div>
           <div class="ecat-collection-body">
-            <p class="eyebrow">${count} ${t('ecat.designs')}</p>
-            <h2 class="ecat-collection-title">${esc(collName(c))}</h2>
-            <p class="ecat-collection-desc">${esc(collDesc(c))}</p>
-            <a class="text-link" href="#coll-${c.id}-designs" data-i18n="ecat.viewDesigns">Desenleri Gör →</a>
+            <p class="eyebrow">${models.length} ${t('modal.unit')}</p>
+            <h2 class="ecat-collection-title">${esc(c[state.lang])}</h2>
+            <p class="ecat-collection-desc">${esc(c.d[state.lang])}</p>
+            ${models.length > 0 ? `
+              <div class="ecat-models-grid" data-thumbs="${c.id}">
+                ${models.map((m) => {
+                  // Ana görsel hangi modelin fotoğrafıysa o thumb başlangıçta aktif
+                  const isActive = m.img === c.img;
+                  return `
+                    <button type="button" class="ecat-model${isActive ? ' active' : ''}" data-thumb="${c.id}:${m.id}" data-src="${m.img}" aria-label="${esc(m.n[state.lang])}">
+                      <img src="${m.img}" alt="${esc(m.n[state.lang])}" loading="lazy">
+                      <p>${esc(m.n[state.lang])}</p>
+                    </button>`;
+                }).join('')}
+              </div>
+            ` : ''}
+            <div class="ecat-collection-actions">
+              <a class="btn btn-primary btn-sm" href="index.html#${c.id}" data-i18n="panel.view">İncele &amp; Teklife Ekle</a>
+              <a class="btn btn-ghost btn-sm" href="index.html#contact" data-i18n="ecat.quoteModel">Fiyat Teklifi İste</a>
+            </div>
           </div>
         </article>`;
     }).join('');
+
+    // Thumb'a tıklayınca ana büyük görsel değişir
+    $$('.ecat-model[data-thumb]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const [gid] = btn.dataset.thumb.split(':');
+        const main = document.querySelector(`.ecat-main-img[data-main="${gid}"]`);
+        if (!main) return;
+        main.src = btn.dataset.src;
+        main.alt = btn.querySelector('p').textContent;
+        // Aktif thumb vurgusu
+        const wrap = document.querySelector(`[data-thumbs="${gid}"]`);
+        if (wrap) {
+          wrap.querySelectorAll('.ecat-model').forEach((x) => x.classList.remove('active'));
+          btn.classList.add('active');
+        }
+      });
+    });
   }
+
+  /* ---------- 25 şehir deseni (bölgesel gruplu) ---------- */
+  const CAT_ORDER = ['riviera', 'provence', 'atlantik', 'kuzey', 'adalar', 'guney'];
 
   function renderDesigns() {
     const list = $('#ecatDesignList');
     if (!list) return;
-    list.innerHTML = COLLECTIONS.map((c) => {
-      const items = productsOf(c.id);
-      return `
-        <div class="ecat-design-group" id="coll-${c.id}-designs">
-          <h3 class="ecat-design-group-title">${esc(collName(c))}</h3>
-          <div class="ecat-design-grid">
-            ${items.map(designCard).join('')}
-          </div>
-        </div>`;
-    }).join('');
+
+    const groups = CAT_ORDER.map((cat) => ({
+      cat,
+      items: DESIGNS.filter((d) => d.cat === cat)
+    })).filter((g) => g.items.length);
+
+    list.innerHTML = groups.map((g) => `
+      <div class="ecat-design-group">
+        <h3 class="ecat-design-group-title">${esc(catLabel(g.cat))}</h3>
+        <div class="ecat-design-grid">
+          ${g.items.map(designCard).join('')}
+        </div>
+      </div>
+    `).join('');
   }
 
-  function designCard(p) {
-    const c = collById(p.coll);
-    const ratio = p.ratio || 1;
-    const label = `${p[state.lang].n} — ${collName(c)}`;
+  function designCard(d) {
+    const label = `${d[state.lang].n} — COQ D’OR`;
+    const gal = (d.gallery || []).slice(0, 3);
+    const thumbs = gal.length
+      ? `<div class="ecat-design-thumbs">${gal.map((src) => `<img src="${src}" alt="" loading="lazy">`).join('')}</div>`
+      : '';
     return `
-      <article class="ecat-design">
+      <article class="ecat-design" id="${d.id}">
         <figure class="ecat-design-fig">
-          <img src="${p.img}" alt="${esc(label)}" loading="lazy" style="aspect-ratio: ${ratio}">
+          <img src="${d.img}" alt="${esc(label)}" loading="lazy">
           <figcaption>
-            <span>${esc(p[state.lang].t)}</span>
-            <p>${esc(p[state.lang].n)}</p>
+            <span>${esc(d[state.lang].t)}</span>
+            <p>${esc(d[state.lang].n)}</p>
           </figcaption>
         </figure>
+        ${thumbs}
         <div class="ecat-design-body">
-          <p class="ecat-design-desc">${esc(p[state.lang].d)}</p>
+          <h4 class="ecat-design-title">${esc(d[state.lang].n)}</h4>
+          <p class="ecat-design-desc">${esc(d[state.lang].d)}</p>
           <dl class="ecat-design-specs">
             <dt>${t('modal.specs')}</dt><dd>${t('modal.specsV')}</dd>
-            <dt>${t('ecat.coll')}</dt><dd>${esc(collName(c))}</dd>
-            <dt>${t('modal.unit')}</dt><dd>${esc(p[state.lang].t)}</dd>
+            <dt>${t('ecat.coll')}</dt><dd>${esc(d[state.lang].t)}</dd>
           </dl>
-          <a class="btn btn-outline btn-sm" href="index.html#contact" data-i18n="ecat.quoteDesign">Teklif İste</a>
+          <a class="btn btn-outline btn-sm btn-block" href="index.html#${d.id}" data-i18n="designs.detail">İncele</a>
         </div>
       </article>`;
   }
 
+  /* ---------- Dil ---------- */
   function applyI18n() {
     document.documentElement.lang = state.lang;
     $$('[data-i18n]').forEach((el) => {
@@ -92,16 +142,42 @@
     $$('[data-i18n-ph]').forEach((el) => {
       el.placeholder = t(el.getAttribute('data-i18n-ph'));
     });
+    $$('[data-i18n-aria]').forEach((el) => {
+      if (el.classList && el.classList.contains('nav-toggle')) return;
+      el.setAttribute('aria-label', t(el.getAttribute('data-i18n-aria')));
+    });
+    const navToggle = $('.nav-toggle');
+    if (navToggle) {
+      navToggle.setAttribute('aria-label', navToggle.getAttribute('aria-expanded') === 'true' ? t('ui.closeMenu') : t('ui.menu'));
+    }
     document.title = state.lang === 'tr'
-      ? 'E-Katalog — DAMIRA TEXTILE | Tüm Koleksiyonlar ve Desenler'
+      ? 'E-Katalog — COQ D’OR | Maison de Linge · Koleksiyonlar & Desenler'
       : state.lang === 'fr'
-        ? 'E-Catalogue — DAMIRA TEXTILE | Toutes les collections et motifs'
-        : 'E-Catalog — DAMIRA TEXTILE | All Collections & Designs';
+        ? 'E-Catalogue — COQ D’OR | Maison de Linge · Gammes & Dessins'
+        : 'E-Catalog — COQ D’OR | Maison de Linge · Collections & Designs';
+
     $$('.lang-btn').forEach((btn) => {
       btn.setAttribute('aria-pressed', String(btn.dataset.lang === state.lang));
     });
-    renderCollections();
+
+    renderCategories();
     renderDesigns();
+    checkUrlHash();
+  }
+
+  /* ---------- URL Hash odaklama ---------- */
+  function checkUrlHash() {
+    const hash = window.location.hash.replace('#', '').trim().toLowerCase();
+    if (!hash) return;
+
+    const el = document.getElementById(hash);
+    if (el) {
+      setTimeout(() => {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        el.style.outline = '2px solid var(--gold-deep)';
+        setTimeout(() => { el.style.outline = ''; }, 3000);
+      }, 200);
+    }
   }
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -113,8 +189,8 @@
       });
     });
 
-    // Mobil menü: app.js'teki bindNav'ı kullan (odak yönetimi + Escape dahil)
-    if (window.DAMIRA.bindNav) window.DAMIRA.bindNav();
+    if (window.DAMIRA && window.DAMIRA.bindNav) window.DAMIRA.bindNav();
+    window.addEventListener('hashchange', checkUrlHash);
 
     applyI18n();
   });

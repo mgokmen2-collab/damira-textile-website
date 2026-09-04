@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>DAMIRA TEXTILE — Nice, Fransa | Toptan Turistik Tekstil</title>
-  <meta name="description" content="DAMIRA TEXTILE, Nice merkezli turistik tekstil üreticisi. Toptan işlemeli keten tekstil koleksiyonları: Monaco, Corsica, Vendée, Baie de Somme. B2B katalog, teklif ve numune talebi.">
-  <link rel="icon" type="image/png" href="logos/logo-dg.png">
+  <title>COQ D'OR — Maison de Linge | Nice, Fransa · Toptan Lüks Otel & Butik Tekstili</title>
+  <meta name="description" content="COQ D'OR (Maison de Linge), Nice merkezli lüks tekstil üreticisi. %100 Ege pamuğu bornoz, havlu, pike, peştemal, çanta ve hediyelik koleksiyonları. Hassas nakış ve yüksek çözünürlüklü baskı.">
+  <link rel="icon" type="image/png" href="logos/kare_horoz.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=2.9">
+  <link rel="stylesheet" href="css/styles.css?v=3.2">
 </head>
 <body>
   <a class="skip-link" href="#main" data-i18n="skip">İçeriğe atla</a>
@@ -18,15 +18,11 @@
   <!-- ===== HEADER ===== -->
   <header class="site-header" id="siteHeader">
     <div class="header-inner">
-      <a class="brand" href="#top" aria-label="DAMIRA TEXTILE — ana sayfa">
-        <img class="brand-logo" src="logos/logo-dg.png" alt="DAMIRA TEXTILE — DG monogramı">
-        <span class="brand-text">
-          <strong>DAMIRA</strong>
-          <span class="brand-textile"><span class="brand-textile-letters">T&nbsp;E&nbsp;X&nbsp;T&nbsp;I&nbsp;L&nbsp;E</span></span>
-        </span>
+      <a class="brand" href="#top" aria-label="COQ D'OR — Maison de Linge">
+        <img class="brand-logo-img" src="logos/yatay_header.png" alt="COQ D'OR — Maison de Linge">
       </a>
 
-      <nav class="site-nav" aria-label="Ana gezinme">
+      <nav class="site-nav" aria-label="Ana gezinme" data-i18n-aria="ui.nav">
         <a href="#collections" data-i18n="nav.collections">Koleksiyonlar</a>
         <a href="catalog.html" data-i18n="nav.catalog">E-Katalog</a>
         <a href="#catalog" data-i18n="nav.designs">Desenler</a>
@@ -35,13 +31,13 @@
       </nav>
 
       <div class="header-actions">
-        <div class="lang-switch" role="group" aria-label="Dil seçimi">
-          <button class="lang-btn" data-lang="tr" aria-pressed="true">TR</button>
-          <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+        <div class="lang-switch" role="group" aria-label="Dil seçimi" data-i18n-aria="ui.lang">
           <button class="lang-btn" data-lang="fr" aria-pressed="false">FR</button>
+          <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+          <button class="lang-btn" data-lang="tr" aria-pressed="true">TR</button>
         </div>
-        <a class="header-cta" href="#contact" data-i18n="nav.quote">Teklif Al</a>
-        <button class="nav-toggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Menüyü aç">
+        <a class="header-cta" href="#contact" data-i18n="nav.quote" id="quoteLink">Teklif Al</a>
+        <button class="nav-toggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Menüyü aç" data-i18n-aria="ui.menu">
           <span></span><span></span>
         </button>
       </div>
@@ -54,28 +50,33 @@
     <a href="#catalog" data-i18n="nav.designs">Desenler</a>
     <a href="#atelier" data-i18n="nav.atelier">Atölye</a>
     <a href="#contact" data-i18n="nav.contact">İletişim</a>
-    <a class="mobile-cta" href="#contact" data-i18n="nav.quote">Teklif Al</a>
+    <a class="mobile-cta" href="#contact" data-i18n="nav.quote" id="mobileQuoteLink">Teklif Al</a>
   </div>
 
   <main id="main">
     <!-- ===== HERO ===== -->
     <section class="hero" id="top">
       <div class="hero-inner">
-        <p class="eyebrow" data-i18n="hero.eyebrow">NICE · FRANSA · 1976'DAN BERİ</p>
         <h1 class="hero-title">
-          <span data-i18n="hero.title1">Riviera'nın kumaşları,</span><br>
-          <em class="gold" data-i18n="hero.title2">nakışla dokunmuş anıları.</em>
+          <span data-i18n="hero.title1">Otel, butik &amp; hediyelik tekstilde</span><br>
+          <em class="gold" data-i18n="hero.title2">toptan üretim.</em>
         </h1>
-        <p class="hero-lede" data-i18n="hero.lede">Turistik tekstilin toptan üreticisi. Her desen, Fransız kıyılarının bir köşesini keten üzerine işler; otelinize, mağazanıza ve misafirlerinize taşınmak üzere.</p>
+        <p class="hero-lede" data-i18n="hero.lede">Otel, butik ve konsept mağazalar için %100 Ege pamuğundan bornoz, havlu, pike, peştemal, çanta ve hediyelik koleksiyonları. Hassas nakış ve yüksek çözünürlüklü baskı üretimi.</p>
+
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#collections" data-i18n="hero.cta1">Koleksiyonları İncele</a>
+          <a class="btn btn-primary" href="catalog.html" data-i18n="hero.cta1">E-Kataloğu İncele</a>
           <a class="btn btn-ghost" href="#contact" data-i18n="hero.cta2">Numune &amp; Fiyat Teklifi</a>
         </div>
-        <p class="hero-note" data-i18n="hero.note">B2B · Min. sipariş: 100 adet / desen · Tüm Avrupa'ya teslimat</p>
+        <p class="hero-note" data-i18n="hero.note">B2B · Min. sipariş: 100 adet / model · Tüm Avrupa'ya teslimat</p>
       </div>
       <figure class="hero-figure">
-        <img class="hero-img" src="items/corsica/ChatGPT%20Image%206%20Tem%202026%2014_11_22.jpg" alt="Corsica Ceneviz kulesi ve zeytin dalı işlemeli keten kumaş detayı" loading="eager">
-        <figcaption class="hero-caption" data-i18n="hero.caption">"Tour Génoise" — Damira Atölye nakışı, %100 keten</figcaption>
+        <div class="hero-media-wrap">
+          <video class="hero-video" autoplay muted loop playsinline poster="items/giris-foto-new-2k.jpeg">
+            <source src="videos/hero-coqdor.mp4" type="video/mp4">
+            <img src="items/giris-foto-new-2k.jpeg" alt="COQ D'OR lüks bornoz, havlu, pike, çanta ve hediyelik koleksiyonu">
+          </video>
+        </div>
+        <figcaption class="hero-caption" data-i18n="hero.caption">COQ D'OR MAISON DE LINGE, Koleksiyon Vitrini - %100 Ege pamuğu</figcaption>
       </figure>
     </section>
 
@@ -83,7 +84,7 @@
     <section class="collections section" id="collections">
       <div class="section-head">
         <p class="eyebrow" data-i18n="collections.eyebrow">KOLEKSİYONLAR</p>
-        <h2 class="section-title" data-i18n="collections.title">Bir bölge, bir hikâye,<br>bir dizi desen.</h2>
+        <h2 class="section-title" data-i18n="collections.title">Bir ürün, bir dokunuş, bir zarafet.</h2>
         <p class="section-lede" data-i18n="collections.lede">Her koleksiyon, Fransız kıyılarının bir köşesinden ilham alır. Koleksiyonları seçin, kataloğu filtreleyin.</p>
       </div>
       <div class="collection-grid" id="collectionGrid"><!-- JS ile doldurulur --></div>
@@ -94,7 +95,7 @@
       <div class="section-head catalog-head">
         <div>
           <p class="eyebrow" data-i18n="catalog.eyebrow">DESENLER</p>
-          <h2 class="section-title" data-i18n="catalog.title">Riviera'nın nakışları, ketene işlenmiş hikâyeler.</h2>
+          <h2 class="section-title" data-i18n="catalog.title">Bir bölge, bir hikâye, bir dizi desen.</h2>
           <p class="section-lede catalog-lede" data-i18n="catalog.lede">Her desen, Fransız kıyılarının bir köşesini %100 keten üzerine işler. Koleksiyon seçin ve teklifinize ekleyin.</p>
         </div>
         <div class="catalog-tools">
@@ -102,7 +103,7 @@
             <p class="catalog-count" id="catalogCount" aria-live="polite"></p>
             <button class="reset-btn" id="resetBtn" hidden data-i18n="catalog.reset">Filtreyi Temizle</button>
           </div>
-          <div class="filter-chips" id="filterChips" role="group" aria-label="Koleksiyon filtresi"></div>
+          <div class="filter-chips" id="filterChips" role="group" aria-label="Desen kategorisi filtresi" data-i18n-aria="designs.filterLabel"></div>
         </div>
       </div>
 
@@ -124,24 +125,24 @@
     <section class="atelier section" id="atelier">
       <div class="atelier-inner">
         <figure class="atelier-figure">
-          <img src="items/marseille/ChatGPT%20Image%208%20Tem%202026%2011_46_44.jpg" alt="Notre-Dame de la Garde bazilikası, altın Meryem heykeli işlemeli keten kumaş detayı" loading="lazy">
+          <img src="koleksiyonlar/pike/pike_4_Dokuma_Puskul_Detay.jpeg" alt="COQ D'OR — %100 Ege pamuğu waffle dokuma ve el düğümlü püskül kumaş detayı" loading="lazy">
         </figure>
         <div class="atelier-copy">
-          <p class="eyebrow" data-i18n="atelier.eyebrow">ATÖLYE</p>
-          <h2 class="section-title" data-i18n="atelier.title">Dokunuşu<br>hissettiren kumaş.</h2>
-          <p class="section-lede" data-i18n="atelier.lede">Keten, pamuk ve keten-pamuk karışımları; elle yönlendirilen makine nakışı. Her desen, renk haslığı ve aşınma direnci testlerinden geçer.</p>
+          <p class="eyebrow" data-i18n="atelier.eyebrow">ATÖLYE &amp; ÜRETİM</p>
+          <h2 class="section-title" data-i18n="atelier.title">Dokunuşu<br>hissettiren kalite.</h2>
+          <p class="section-lede" data-i18n="atelier.lede">%100 saf Ege pamuğu bukle havlular, nefes alan müslinler ve balpeteği pikeler. Hassas endüstriyel nakış ve yüksek çözünürlüklü su bazlı eko-baskı teknolojisi.</p>
           <dl class="atelier-facts">
             <div>
-              <dt data-i18n="atelier.f1">%100 Keten</dt>
-              <dd data-i18n="atelier.f1d">Dokuma: 210 g/m², doğal yıkamalı</dd>
+              <dt data-i18n="atelier.f1">%100 Ege Pamuğu</dt>
+              <dd data-i18n="atelier.f1d">450-550 g/m² havlu · 300 g/m² pike</dd>
             </div>
             <div>
-              <dt data-i18n="atelier.f2">Nakış</dt>
-              <dd data-i18n="atelier.f2d">38.000 dikiş / desen, saten dolgu</dd>
+              <dt data-i18n="atelier.f2">Nakış &amp; Baskı</dt>
+              <dd data-i18n="atelier.f2d">38.000 dikiş / desen &amp; eko-baskı</dd>
             </div>
             <div>
               <dt data-i18n="atelier.f3">Özel Üretim</dt>
-              <dd data-i18n="atelier.f3d">Kendi motifinizi sipariş edin</dd>
+              <dd data-i18n="atelier.f3d">Otel veya butiğinize özel arma</dd>
             </div>
           </dl>
           <a class="text-link" href="#contact" data-i18n="atelier.link">Özel üretim için bize yazın →</a>
@@ -154,20 +155,20 @@
       <div class="contact-inner">
         <div class="contact-copy">
           <p class="eyebrow" data-i18n="contact.eyebrow">TEKLİF &amp; İLETİŞİM</p>
-          <h2 class="section-title" data-i18n="contact.title">Bir teklif alın.</h2>
-          <p class="section-lede" data-i18n="contact.lede">Desenleri seçin, formu doldurun; fiyat listesi ve numune programı iki iş günü içinde yanınızda.</p>
+          <h2 class="section-title" data-i18n="contact.title">Toptan Teklif Alın.</h2>
+          <p class="section-lede" data-i18n="contact.lede">Ürün grubunu veya desenleri seçin, formu doldurun; toptan fiyat listesi ve numune programı iki iş günü içinde yanınızda.</p>
           <address class="contact-meta">
-            <p>DAMIRA TEXTILE SAS</p>
+            <p><strong>COQ D'OR — Maison de Linge SAS</strong></p>
             <p data-i18n="contact.addr">12, Avenue de la Californie, 06200 Nice, France</p>
-            <p><a href="mailto:hello@damiratextile.com">hello@damiratextile.com</a></p>
+            <p><a href="mailto:contact@coqdor-linge.com">contact@coqdor-linge.com</a></p>
             <p><a href="tel:+33493000000">+33 4 93 00 00 00</a></p>
           </address>
         </div>
         <form class="quote-form" id="quoteForm" novalidate>
           <div class="form-selected">
-            <p class="form-label" data-i18n="form.selected">Teklife eklenen desenler</p>
+            <p class="form-label" data-i18n="form.selected">Teklife eklenen ürünler / desenler</p>
             <div class="quote-items" id="quoteItems"><!-- JS --></div>
-            <p class="quote-empty" id="quoteEmpty" data-i18n="form.noSelection">Henüz desen seçilmedi. Katalogları inceleyin.</p>
+            <p class="quote-empty" id="quoteEmpty" data-i18n="form.noSelection">Henüz ürün seçilmedi. Koleksiyon ve desenleri inceleyin.</p>
           </div>
           <div class="form-row">
             <div class="field">
@@ -175,7 +176,7 @@
               <input id="fName" name="name" type="text" required autocomplete="name">
             </div>
             <div class="field">
-              <label for="fCompany" data-i18n="form.company">Firma</label>
+              <label for="fCompany" data-i18n="form.company">Firma / Otel / Mağaza</label>
               <input id="fCompany" name="company" type="text" autocomplete="organization">
             </div>
           </div>
@@ -204,22 +205,42 @@
   <!-- ===== FOOTER ===== -->
   <footer class="site-footer">
     <div class="footer-inner">
-      <p class="footer-brand">DAMIRA <span>TEXTILE</span></p>
-      <p class="footer-note" data-i18n="footer.note">Nice, Fransa · toptan turistik tekstil</p>
+      <p class="footer-brand">COQ D'OR <span>MAISON DE LINGE</span></p>
+      <p class="footer-note" data-i18n="footer.note">Fransa · toptan turistik ve otel tekstili</p>
       <div class="footer-links">
         <a href="#collections" data-i18n="nav.collections">Koleksiyonlar</a>
+        <a href="catalog.html" data-i18n="nav.catalog">E-Katalog</a>
         <a href="#contact" data-i18n="nav.contact">İletişim</a>
       </div>
     </div>
   </footer>
 
+  <!-- ===== STICKY QUOTE BAR (sepet doluysa görünür) ===== -->
+  <div class="quote-sticky" id="quoteSticky" hidden>
+    <div class="quote-sticky-inner">
+      <span class="sticky-count" id="stickyCount"></span>
+      <div class="quote-sticky-actions">
+        <button class="btn btn-outline btn-sm" id="clearQuoteBtn" hidden data-i18n="quote.clearQuote">Sepeti Temizle</button>
+        <a class="btn btn-primary btn-sm" href="#contact" id="stickyGoForm">Teklif Oluştur →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MODELE DESEN BAĞLAMA (pending bar) ===== -->
+  <div class="pending-bar" id="pendingBar" hidden></div>
+
   <!-- ===== MODAL ===== -->
   <div class="modal" id="productModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
     <div class="modal-backdrop" data-close-modal></div>
     <div class="modal-panel">
-      <button class="modal-close" data-close-modal aria-label="Kapat">×</button>
-      <figure class="modal-figure">
-        <img id="modalImg" src="" alt="">
+      <button class="modal-close" data-close-modal aria-label="Kapat" data-i18n-aria="ui.close">×</button>
+      <figure class="modal-figure" id="modalFigure">
+        <div class="ms-viewport">
+          <div class="ms-track" id="msTrack"></div>
+        </div>
+        <button class="slider-arrow prev ms-prev" aria-label="Önceki" data-i18n-aria="ui.prev">‹</button>
+        <button class="slider-arrow next ms-next" aria-label="Sonraki" data-i18n-aria="ui.next">›</button>
+        <div class="slider-dots ms-dots" id="msDots"></div>
       </figure>
       <div class="modal-body">
         <p class="eyebrow" id="modalCollection"></p>
@@ -228,11 +249,42 @@
         <dl class="modal-specs" id="modalSpecs"></dl>
         <div class="modal-actions">
           <button class="btn btn-primary" id="modalQuoteBtn" data-i18n="modal.addQuote">Teklife Ekle</button>
-          <a class="btn btn-outline" id="modalPdfLink" href="#" data-i18n="modal.pdf">PDF Kataloğu İndir</a>
+          <a class="btn btn-outline" id="modalPdfLink" href="catalog.html" data-i18n="modal.pdf">E-Kataloğu Aç</a>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- ===== ÜRÜN GRUBU İNCELEME PANELİ (slider) ===== -->
+  <div class="group-modal" id="groupModal" role="dialog" aria-modal="true" aria-labelledby="gmTitle">
+    <div class="gm-backdrop" data-gm-close></div>
+    <div class="gm-panel">
+      <button class="gm-close" data-gm-close aria-label="Kapat" data-i18n-aria="ui.close">×</button>
+      <div class="gm-body">
+        <p class="eyebrow" id="gmGroup"></p>
+        <div class="slider-wrap" id="sliderWrap">
+          <div class="slider-head">
+            <h3 class="slider-title" id="gmTitle"></h3>
+            <span class="slider-count" id="gmCount"></span>
+          </div>
+          <div class="slider" id="gmSlider">
+            <button class="slider-arrow prev" id="gmPrev" aria-label="Önceki model" data-i18n-aria="ui.prevModel">‹</button>
+            <div class="slider-track" id="gmTrack"></div>
+            <button class="slider-arrow next" id="gmNext" aria-label="Sonraki model" data-i18n-aria="ui.nextModel">›</button>
+          </div>
+          <div class="slider-dots" id="gmDots"></div>
+          <p class="visually-hidden" id="gmStatus" aria-live="polite"></p>
+          <div class="slider-actions">
+            <div class="sel-summary" id="gmSummary"></div>
+            <div class="gm-actions" id="gmActions"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TOAST ===== -->
+  <div class="toast" id="toast" role="status"></div>
 
   <script src="js/data.js"></script>
   <script src="js/app.js"></script>

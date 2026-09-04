@@ -9,8 +9,8 @@
   const CATEGORIES = [
     {
       id: 'bornoz',
-      img: 'koleksiyonlar/bornoz/M26_3246.jpg',
-      ratio: 4/3,
+      img: 'koleksiyonlar/bornoz/M26_3246.jpg_2K_202609041322.jpeg',
+      ratio: 3/4,
       tr: 'Bornoz Koleksiyonu',
       en: 'Bathrobe Collection',
       fr: 'Collection Peignoirs',
@@ -20,16 +20,16 @@
         fr: 'Peignoirs haut de gamme en 100% coton égéen : éponge col châle, kimono nid d’abeille et peignoirs spa à capuche. Qualité hôtellerie 5 étoiles et spa.'
       },
       models: [
-        { id: 'b1', n: { tr: 'Klasik Şal Yaka Havlu Bornoz', en: 'Classic Shawl Collar Terry Robe', fr: 'Peignoir Éponge Col Châle' }, img: 'koleksiyonlar/bornoz/M26_3246.jpg' },
-        { id: 'b2', n: { tr: 'Balpeteği Waffle Kimono Bornoz', en: 'Waffle Honeycomb Kimono Robe', fr: 'Peignoir Kimono Nid d’Abeille' }, img: 'koleksiyonlar/bornoz/M26_3279.jpg' },
-        { id: 'b3', n: { tr: 'Krem Waffle Kimono Bornoz', en: 'Cream Waffle Kimono Robe', fr: 'Peignoir Kimono Nid d’Abeille Écru' }, img: 'koleksiyonlar/bornoz/M26_3419.jpg' },
-        { id: 'b4', n: { tr: 'Kapüşonlu Antrasit Spa Bornozu', en: 'Hooded Charcoal Spa Robe', fr: 'Peignoir Spa à Capuche Anthracite' }, img: 'koleksiyonlar/bornoz/M26_3382.jpg' }
+        { id: 'b1', n: { tr: 'Klasik Şal Yaka Havlu Bornoz', en: 'Classic Shawl Collar Terry Robe', fr: 'Peignoir Éponge Col Châle' }, img: 'koleksiyonlar/bornoz/M26_3246.jpg_2K_202609041322.jpeg' },
+        { id: 'b2', n: { tr: 'Balpeteği Waffle Kimono Bornoz', en: 'Waffle Honeycomb Kimono Robe', fr: 'Peignoir Kimono Nid d’Abeille' }, img: 'koleksiyonlar/bornoz/M26_3279.jpg_202609041333.jpeg' },
+        { id: 'b3', n: { tr: 'Krem Waffle Kimono Bornoz', en: 'Cream Waffle Kimono Robe', fr: 'Peignoir Kimono Nid d’Abeille Écru' }, img: 'koleksiyonlar/bornoz/M26_3419.jpg_202609041333.jpeg' },
+        { id: 'b4', n: { tr: 'Kapüşonlu Antrasit Spa Bornozu', en: 'Hooded Charcoal Spa Robe', fr: 'Peignoir Spa à Capuche Anthracite' }, img: 'koleksiyonlar/bornoz/M26_3382.jpg_202609041333.jpeg' }
       ]
     },
     {
       id: 'havlu',
-      img: 'koleksiyonlar/HAVLU/havlu_1_Traverten_Mermer_Set.jpg',
-      ratio: 4/3,
+      img: 'koleksiyonlar/HAVLU/havlu_1_Traverten_Mermer_Set_new.jpg',
+      ratio: 3/4,
       tr: 'Havlu Koleksiyonu',
       en: 'Towel Collection',
       fr: 'Collection Serviettes',
@@ -39,7 +39,7 @@
         fr: 'Serviettes de bain et de toilette en 100% coton égéen 550 g/m². Finitions liteau plat ou gaufré pour broderie, palette raffinée de teintes pastel.'
       },
       models: [
-        { id: 'h1', n: { tr: 'Traverten Lüks Banyo & El Havlu Seti', en: 'Travertine Luxury Bath & Hand Set', fr: 'Parure Serviettes Travertin de Luxe' }, img: 'koleksiyonlar/HAVLU/havlu_1_Traverten_Mermer_Set.jpg' },
+        { id: 'h1', n: { tr: 'Traverten Lüks Banyo & El Havlu Seti', en: 'Travertine Luxury Bath & Hand Set', fr: 'Parure Serviettes Travertin de Luxe' }, img: 'koleksiyonlar/HAVLU/havlu_1_Traverten_Mermer_Set_new.jpg' },
         { id: 'h2', n: { tr: 'Gofre / Waffle Bordürlü Spa Havlusu', en: 'Waffle Border Ribbed Spa Towel', fr: 'Serviette Spa à Liteau Gaufré' }, img: 'koleksiyonlar/HAVLU/havlu_2_Gofre_Bordurlu.jpeg' },
         { id: 'h3', n: { tr: 'Pastel Nane Yeşili Banyo Havlusu', en: 'Pastel Mint Green Bath Towel', fr: 'Drap de Bain Vert Menthe Pastel' }, img: 'koleksiyonlar/HAVLU/havlu_3_Mint_Yesili_Asili.jpeg' },
         { id: 'h4', n: { tr: 'Pudra Pembe Lüks Banyo Havlusu', en: 'Dusty Rose Blush Bath Towel', fr: 'Drap de Bain Rose Poudré' }, img: 'koleksiyonlar/HAVLU/havlu_4_Pudra_Pembe_Kuvet.jpeg' }
@@ -47,8 +47,8 @@
     },
     {
       id: 'pike',
-      img: 'koleksiyonlar/pike/pike_2_Fransiz_Riviera_Sezlong.jpeg',
-      ratio: 4/3,
+      img: 'koleksiyonlar/pike/pike_2_Fransiz_Riviera_Sezlong_new.jpeg',
+      ratio: 3/4,
       tr: 'Pike & Yatak Örtüsü',
       en: 'Piqué & Bed Covers',
       fr: 'Piqués & Couvre-Lits',
@@ -58,7 +58,7 @@
         fr: 'Conçus pour les villas et hôtels de la Côte d’Azur : piqués nid d’abeille en 100% coton égéen. Tissage jacquard respirant et finitions franges nouées main.'
       },
       models: [
-        { id: 'pk1', n: { tr: 'Saint-Tropez Şezlong Waffle Pike', en: 'Saint-Tropez Sunbed Waffle Piqué', fr: 'Piqué Transat Saint-Tropez' }, img: 'koleksiyonlar/pike/pike_2_Fransiz_Riviera_Sezlong.jpeg' },
+        { id: 'pk1', n: { tr: 'Saint-Tropez Şezlong Waffle Pike', en: 'Saint-Tropez Sunbed Waffle Piqué', fr: 'Piqué Transat Saint-Tropez' }, img: 'koleksiyonlar/pike/pike_2_Fransiz_Riviera_Sezlong_new.jpeg' },
         { id: 'pk2', n: { tr: 'Riviera Sahil Villası Yatak Örtüsü', en: 'Riviera Coastal Villa Bed Cover', fr: 'Dessus de Lit Villa Riviera' }, img: 'koleksiyonlar/pike/pike_1_Villa_Yatak_Odasi_Waffle.jpg' },
         { id: 'pk3', n: { tr: 'Provence Taş Villa Adaçayı Pike', en: 'Provence Manor Sage Green Throw', fr: 'Piqué Vert Sauge Manoir de Provence' }, img: 'koleksiyonlar/pike/pike_3_Provence_Tas_Villa_Yesil.jpeg' },
         { id: 'pk4', n: { tr: 'Makro Lif & Petek Dokuma Detayı', en: 'Macro Honeycomb Weave Detail', fr: 'Détail Tissage Nid d’Abeille' }, img: 'koleksiyonlar/pike/pike_4_Dokuma_Puskul_Detay.jpeg' }
@@ -66,8 +66,8 @@
     },
     {
       id: 'pestemal',
-      img: 'koleksiyonlar/pestemal/ca04c60c-7400-46bb-9fad-15a089f6f37f.JPG',
-      ratio: 4/3,
+      img: 'koleksiyonlar/pestemal/ca04c60c-7400-46bb-9fad-15a089f6f37f.JPG_202609041340.jpeg',
+      ratio: 3/4,
       tr: 'Peştemal & Fouta',
       en: 'Foutas & Peshtemals',
       fr: 'Foutas & Peshtemals',
@@ -77,16 +77,16 @@
         fr: 'Foutas en 100% coton égéen à tissage jacquard losange pour plages privées et yachts. Séchage rapide, légèreté et absorption exceptionnelle.'
       },
       models: [
-        { id: 'ps1', n: { tr: 'Geleneksel Elmas Jakar Peştemal', en: 'Traditional Diamond Jacquard Fouta', fr: 'Fouta Jacquard Losange Traditionnelle' }, img: 'koleksiyonlar/pestemal/ca04c60c-7400-46bb-9fad-15a089f6f37f.JPG' },
-        { id: 'ps2', n: { tr: 'Riviera Çizgili Klasik Peştemal', en: 'Riviera Striped Classic Fouta', fr: 'Fouta Rayée Classique Riviera' }, img: 'koleksiyonlar/pestemal/6b0fdef9-8fc4-4d0c-85d6-a0377c1ecca6.JPG' },
-        { id: 'ps3', n: { tr: 'Okyanus Mavisi Jakarlı Peştemal', en: 'Ocean Blue Jacquard Fouta', fr: 'Fouta Jacquard Bleu Océan' }, img: 'koleksiyonlar/pestemal/1e7ec679-44b3-4c7c-9bc7-71bac847b151.JPG' },
-        { id: 'ps4', n: { tr: 'Güneş Sarısı Nakış Numune Peştemal', en: 'Sunshine Yellow Fouta Sample', fr: 'Fouta Jaune Soleil Spéciale Broderie' }, img: 'koleksiyonlar/pestemal/5e9943c8-1c4b-4a8d-bf99-1539df57dee6.JPG' }
+        { id: 'ps1', n: { tr: 'Geleneksel Elmas Jakar Peştemal', en: 'Traditional Diamond Jacquard Fouta', fr: 'Fouta Jacquard Losange Traditionnelle' }, img: 'koleksiyonlar/pestemal/ca04c60c-7400-46bb-9fad-15a089f6f37f.JPG_202609041340.jpeg' },
+        { id: 'ps2', n: { tr: 'Riviera Çizgili Klasik Peştemal', en: 'Riviera Striped Classic Fouta', fr: 'Fouta Rayée Classique Riviera' }, img: 'koleksiyonlar/pestemal/6b0fdef9-8fc4-4d0c-85d6-a0377c1ecca6.JPG_202609041340.jpeg' },
+        { id: 'ps3', n: { tr: 'Okyanus Mavisi Jakarlı Peştemal', en: 'Ocean Blue Jacquard Fouta', fr: 'Fouta Jacquard Bleu Océan' }, img: 'koleksiyonlar/pestemal/1e7ec679-44b3-4c7c-9bc7-71bac847b151.JPG_202609041340.jpeg' },
+        { id: 'ps4', n: { tr: 'Güneş Sarısı Nakış Numune Peştemal', en: 'Sunshine Yellow Fouta Sample', fr: 'Fouta Jaune Soleil Spéciale Broderie' }, img: 'koleksiyonlar/pestemal/5e9943c8-1c4b-4a8d-bf99-1539df57dee6.JPG_202609041340.jpeg' }
       ]
     },
     {
       id: 'canta',
-      img: 'koleksiyonlar/canta/Wine_bag_with_botanical_print_202609031318.jpeg',
-      ratio: 4/3,
+      img: 'koleksiyonlar/canta/Wine_bag_with_botanical_print_202609031318_new.jpeg',
+      ratio: 3/4,
       tr: 'Kanvas Çanta & Şarap Kılıfı',
       en: 'Canvas Bags & Wine Sleeves',
       fr: 'Sacs en Toile & Étuis à Vin',
@@ -97,13 +97,13 @@
       },
       models: [
         { id: 'c1', n: { tr: 'Kulplu Kanvas Şarap Çantası (Marseille)', en: 'Canvas Wine Tote Bag (Marseille)', fr: 'Sac Porte-Bouteille en Toile (Marseille)' }, img: 'koleksiyonlar/canta/Canvas_wine_bag_mockup_202609031318.jpeg' },
-        { id: 'c2', n: { tr: 'Büzgülü Kanvas Şişe Kılıfı (Monaco)', en: 'Drawstring Canvas Bottle Sleeve (Monaco)', fr: 'Étui Bouteille à Cordon (Monaco)' }, img: 'koleksiyonlar/canta/Wine_bag_with_botanical_print_202609031318.jpeg' }
+        { id: 'c2', n: { tr: 'Büzgülü Kanvas Şişe Kılıfı (Monaco)', en: 'Drawstring Canvas Bottle Sleeve (Monaco)', fr: 'Étui Bouteille à Cordon (Monaco)' }, img: 'koleksiyonlar/canta/Wine_bag_with_botanical_print_202609031318_new.jpeg' }
       ]
     },
     {
       id: 'hediyelik',
-      img: 'items/designs/chats.jpg',
-      ratio: 4/3,
+      img: 'items/designs/chats_new.jpg',
+      ratio: 3/4,
       tr: 'Butik Hediyelik & Özel Nakış',
       en: 'Boutique Gifts & Insignias',
       fr: 'Cadeaux & Broderies Fines',
@@ -113,9 +113,9 @@
         fr: 'Serviettes d’invités et trousses brodées de races canines et félines de prestige pour boutiques de luxe et hôtels de charme.'
       },
       models: [
-        { id: 'g1', n: { tr: 'Safkan Kedi Nakışlı Misafir Havlusu (4 Irk)', en: 'Pedigree Cat Embroidered Guest Towel', fr: 'Serviette d’Invité Chats de Race (4 Motifs)' }, img: 'items/designs/chats.jpg', gallery: ['items/designs/kedi-irk/3-irk-set.jpg'] },
+        { id: 'g1', n: { tr: 'Safkan Kedi Nakışlı Misafir Havlusu (4 Irk)', en: 'Pedigree Cat Embroidered Guest Towel', fr: 'Serviette d’Invité Chats de Race (4 Motifs)' }, img: 'items/designs/chats_new.jpg', gallery: ['items/designs/kedi-irk/3-irk-set.jpg'] },
         { id: 'g2', n: { tr: 'Safkan Köpek Nakışlı Misafir Havlusu (5 Irk)', en: 'Pedigree Dog Embroidered Guest Towel', fr: 'Serviette d’Invité Chiens de Race (5 Motifs)' }, img: 'items/designs/chiens.jpg' },
-        { id: 'g3', n: { tr: 'COQ D’OR Fermuarlı Kanvas Seyahat Kesesi', en: 'COQ D’OR Canvas Zipper Travel Pouch', fr: 'Trousse de Voyage Zippée COQ D’OR' }, img: 'items/giris-foto.jpeg' }
+        { id: 'g3', n: { tr: 'COQ D’OR Fermuarlı Kanvas Seyahat Kesesi', en: 'COQ D’OR Canvas Zipper Travel Pouch', fr: 'Trousse de Voyage Zippée COQ D’OR' }, img: 'items/giris-foto-new-2k.jpeg' }
       ]
     }
   ];
@@ -124,7 +124,7 @@
   const DESIGNS = [
     {
       id: 'monaco',
-      img: 'items/designs/monaco.jpg',
+      img: 'items/designs/monaco.jpg_202609041355.jpeg',
       gallery: ["items/designs/monaco/v1.jpg", "items/designs/monaco/v2.jpg"],
       ratio: 1,
       cat: 'riviera',
@@ -144,7 +144,7 @@
     },
     {
       id: 'saint-tropez',
-      img: 'items/designs/saint-tropez.jpg',
+      img: 'items/designs/saint-tropez.jpg_202609041355.jpeg',
       gallery: ["items/designs/saint-tropez/v1.jpg"],
       ratio: 1,
       cat: 'riviera',
@@ -184,7 +184,7 @@
     },
     {
       id: 'provence',
-      img: 'items/designs/provence.jpg',
+      img: 'items/designs/provence.jpg_202609041355.jpeg',
       gallery: ["items/designs/provence/v1.jpg", "items/designs/provence/v2.jpg", "items/designs/provence/v3.jpg"],
       ratio: 1,
       cat: 'provence',
@@ -204,7 +204,7 @@
     },
     {
       id: 'bretagne',
-      img: 'items/designs/bretagne.jpg',
+      img: 'items/designs/bretagne.jpg_202609041355.jpeg',
       gallery: ["items/designs/bretagne/v1.jpg", "items/designs/bretagne/v2.jpg", "items/designs/bretagne/v3.jpg"],
       ratio: 1,
       cat: 'atlantik',
@@ -214,7 +214,7 @@
     },
     {
       id: 'baie-de-somme',
-      img: 'items/designs/baie-de-somme.jpg',
+      img: 'items/designs/baie-de-somme.jpg_202609041355.jpeg',
       gallery: ["items/designs/baie-de-somme/v1.jpg", "items/designs/baie-de-somme/v2.jpg", "items/designs/baie-de-somme/v3.jpg"],
       ratio: 1,
       cat: 'kuzey',
@@ -244,7 +244,7 @@
     },
     {
       id: 'corsica',
-      img: 'items/designs/corsica.jpg',
+      img: 'items/designs/corsica.jpg_202609041355.jpeg',
       gallery: ["items/designs/corsica/v1.jpg", "items/designs/corsica/v2.jpg"],
       ratio: 1,
       cat: 'adalar',
@@ -254,7 +254,7 @@
     },
     {
       id: 'marseille',
-      img: 'items/designs/marseille.jpg',
+      img: 'items/designs/marseille.jpg_202609041355.jpeg',
       gallery: ["items/designs/marseille/v1.jpg", "items/designs/marseille/v2.jpg"],
       ratio: 1,
       cat: 'provence',
@@ -362,7 +362,7 @@
     },
     {
       id: 'charente-maritime',
-      img: 'items/designs/charente-maritime.jpg',
+      img: 'items/designs/charente-maritime.jpg_202609041355.jpeg',
       gallery: ["items/designs/charente-maritime/v1.jpg", "items/designs/charente-maritime/v2.jpg"],
       ratio: 1,
       cat: 'atlantik',

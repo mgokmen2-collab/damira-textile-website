@@ -1049,21 +1049,39 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
   background: var(--gold-deep);
 }
 
-/* Tam Ekran Zoom Butonları (Hem Desen Hem Model Modalı) */
-.modal-zoom-btn {
-  position: absolute; top: 12px; left: 12px; z-index: 4;
+/* Görsel Üst Kontrol Barı: Sol: Tam Ekran, Sağ: Sayaç */
+.figure-bar {
+  position: absolute; top: 12px; left: 14px; right: 14px; z-index: 5;
+  display: flex; align-items: center; justify-content: space-between;
+  pointer-events: none;
+}
+.figure-bar .modal-zoom-btn {
+  position: static;
+  pointer-events: auto;
   display: inline-flex; align-items: center; gap: 6px;
-  padding: 6px 12px; border-radius: 20px;
+  padding: 6px 14px; border-radius: 20px;
   background: color-mix(in oklch, var(--bg) 90%, transparent);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
   border: 1px solid var(--line-strong);
   color: var(--ink); font-size: 0.75rem; font-weight: 600;
   letter-spacing: 0.04em; text-transform: uppercase;
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(26, 25, 24, 0.1);
+  box-shadow: 0 2px 6px rgba(26, 25, 24, 0.08);
   transition: background 0.2s, border-color 0.2s, transform 0.15s;
 }
-.modal-zoom-btn:hover { background: var(--bg); border-color: var(--gold-deep); transform: scale(1.03); }
+.figure-bar .modal-zoom-btn:hover { background: var(--bg); border-color: var(--gold-deep); transform: scale(1.03); }
+.figure-bar .slider-count {
+  pointer-events: auto;
+  font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--gold-deep); font-variant-numeric: tabular-nums; font-weight: 600;
+  padding: 5px 12px; border-radius: 20px;
+  background: color-mix(in oklch, var(--bg) 90%, transparent);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--line-strong);
+  box-shadow: 0 2px 6px rgba(26, 25, 24, 0.08);
+  white-space: nowrap;
+}
+.figure-bar .slider-count:empty { display: none; }
 .modal-figure { position: relative; cursor: zoom-in; }
 
 /* Sağ Sütun: Başlık, Model Bilgisi ve Aksiyonlar */
@@ -1074,16 +1092,12 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
 }
 .modal-head-meta,
 .gm-head-meta {
-  display: flex; align-items: baseline; justify-content: space-between;
-  gap: var(--space-4); margin-bottom: 2px;
+  display: block; margin-bottom: 2px;
   padding-right: 48px; /* Sağ üst kapatma çarpısının altına girmesini engeller */
 }
 .modal-head-meta .eyebrow,
-.gm-head-meta .eyebrow { margin: 0; }
-.slider-count {
-  font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--gold-deep); font-variant-numeric: tabular-nums; font-weight: 600;
-  white-space: nowrap;
+.gm-head-meta .eyebrow {
+  margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .gm-panel .modal-title {
   font-family: var(--font-serif); font-weight: 500;
@@ -1122,6 +1136,17 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
   .gm-figure { min-height: 300px; height: 46vh; }
   .gm-figure .slider { height: 100%; }
   .gm-body { padding: 20px 16px; }
+
+  /* Mobilde sağ üstte kapatma çarpısı olduğu için figure-bar sağdan 64px pay bırakır */
+  .figure-bar {
+    top: 10px; left: 10px; right: 64px;
+  }
+  .figure-bar .modal-zoom-btn {
+    padding: 5px 10px; font-size: 0.7rem; gap: 4px;
+  }
+  .figure-bar .slider-count {
+    padding: 4px 10px; font-size: 0.72rem;
+  }
 }
 
 /* ==========================================================================
@@ -1162,34 +1187,38 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
   display: flex; align-items: center; justify-content: center;
   overflow: hidden; padding: 10px 0;
   min-height: 0; touch-action: pan-y;
+  position: relative; z-index: 1;
 }
 .lb-img {
   max-width: 95vw; max-height: 80vh;
   object-fit: contain; display: block;
   user-select: none; -webkit-user-select: none;
   filter: drop-shadow(0 16px 40px rgba(0,0,0,0.6));
-  transition: transform 0.2s var(--ease), opacity 0.2s ease;
+  transition: opacity 0.15s ease;
+  pointer-events: auto;
 }
 .lb-prev, .lb-next {
   position: absolute; top: 50%; transform: translateY(-50%);
-  width: 52px; height: 52px; border-radius: 50%;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  color: #fff; font-size: 1.8rem; line-height: 1;
+  width: 54px; height: 54px; border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff; font-size: 1.9rem; line-height: 1;
   display: flex; align-items: center; justify-content: center;
-  cursor: pointer; z-index: 2;
+  cursor: pointer; z-index: 50; pointer-events: auto;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
   transition: background 0.2s, border-color 0.2s, transform 0.15s;
 }
 .lb-prev:hover, .lb-next:hover {
-  background: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.35);
   border-color: var(--gold);
-  transform: translateY(-50%) scale(1.05);
+  transform: translateY(-50%) scale(1.08);
 }
 .lb-prev { left: 20px; }
 .lb-next { right: 20px; }
 @media (max-width: 600px) {
-  .lb-prev { left: 8px; width: 42px; height: 42px; font-size: 1.4rem; }
-  .lb-next { right: 8px; width: 42px; height: 42px; font-size: 1.4rem; }
+  .lb-prev { left: 8px; width: 44px; height: 44px; font-size: 1.5rem; }
+  .lb-next { right: 8px; width: 44px; height: 44px; font-size: 1.5rem; }
 }
 .lb-bar {
   display: flex; align-items: center; justify-content: space-between;

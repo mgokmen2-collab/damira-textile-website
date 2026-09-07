@@ -1313,14 +1313,44 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
   .lb-next { right: 8px; width: 44px; height: 44px; font-size: 1.5rem; }
 }
 .lb-bar {
-  display: flex; align-items: center; justify-content: space-between;
-  width: min(840px, 100%); padding-top: 10px;
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 16px;
+  width: min(840px, 100%); padding-top: 12px;
   color: #fff; z-index: 2;
+  box-sizing: border-box;
 }
-.lb-meta { display: flex; flex-direction: column; gap: 2px; }
-.lb-eyebrow { font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); }
-.lb-name { font-family: var(--font-serif); font-size: 1.25rem; font-weight: 500; line-height: 1.2; color: #fff; }
-.lb-count { font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.7); font-variant-numeric: tabular-nums; }
+.lb-meta {
+  display: flex; flex-direction: column; gap: 3px;
+  flex: 1; min-width: 0;
+}
+.lb-eyebrow {
+  font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gold);
+  line-height: 1.2;
+}
+.lb-name {
+  font-family: var(--font-serif);
+  font-size: clamp(1.05rem, 3vw, 1.35rem);
+  font-weight: 500; line-height: 1.25;
+  color: #fff;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+.lb-count {
+  flex-shrink: 0;
+  white-space: nowrap;
+  font-size: 0.82rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+  font-variant-numeric: tabular-nums;
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  align-self: flex-end;
+  margin-bottom: 2px;
+}
 
 /* Modele desen bağlama (pending bar) — desen arşivi bölümünün altında sabit */
 .pending-bar {

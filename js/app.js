@@ -508,9 +508,9 @@
     let items;
     let startIdx;
     if (imgs2.length > 1) {
-      items = imgs2.map((src, i) => ({
+      items = imgs2.map((src) => ({
         src: src,
-        title: `${d2[state.lang].n} (${i + 1} / ${imgs2.length})`,
+        title: d2[state.lang].n,
         eyebrow: catLabel(d2.cat) || 'COQ D’OR'
       }));
       startIdx = state.msIndex;

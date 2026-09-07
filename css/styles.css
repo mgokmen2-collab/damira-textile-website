@@ -800,7 +800,7 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
   to   { opacity: 1; transform: none; }
 }
 .modal-close {
-  position: absolute; top: 12px; right: 12px; z-index: 2;
+  position: absolute; top: 12px; right: 12px; z-index: 10;
   width: 44px; height: 44px; border-radius: 50%;
   background: var(--bg); color: var(--ink);
   font-size: 1.4rem; line-height: 1;
@@ -811,17 +811,18 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 .modal-close:hover { transform: rotate(90deg); }
 .modal-figure {
   background: var(--bg-soft);
-  display: flex; align-items: center; justify-content: center;
+  display: flex; flex-direction: column;
   overflow: hidden;
   position: relative;
+  height: 100%; min-height: 380px;
 }
 /* Görsel kendi native oranında (JS aspect-ratio set eder), asla kırpılmaz */
-.modal-figure img { width: 100%; height: 100%; object-fit: contain; display: block; }
-/* Desen modalı varyant slider'ı — tüm kareler aynı yükseklikte, görseller dikey ortalanır */
-.modal-figure .ms-viewport { width: 100%; height: min(62vh, 560px); overflow: hidden; }
-.modal-figure .ms-track { display: flex; height: 100%; transition: transform var(--dur-med) var(--ease); }
-.modal-figure .ms-slide { flex: 0 0 100%; min-width: 0; display: flex; align-items: center; justify-content: center; }
-.modal-figure .ms-slide img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.modal-figure img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
+/* Desen modalı varyant slider'ı — figure-bar altında kalan esnek görsel alanı */
+.modal-figure .ms-viewport { position: relative; flex: 1; min-height: 0; width: 100%; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.modal-figure .ms-track { display: flex; height: 100%; width: 100%; transition: transform var(--dur-med) var(--ease); }
+.modal-figure .ms-slide { flex: 0 0 100%; height: 100%; min-width: 0; display: flex; align-items: center; justify-content: center; cursor: zoom-in; }
+.modal-figure .ms-slide img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
 .modal-body { padding: clamp(24px, 3vw, 36px); }
 .modal-title { font-family: var(--font-serif); font-weight: 500; font-size: 2rem; line-height: 1.15; margin-bottom: 8px; text-wrap: balance; }
 .modal-desc { color: var(--ink-soft); line-height: 1.65; margin-bottom: var(--space-4); }
@@ -977,7 +978,7 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
 }
 @keyframes gmIn { from { opacity: 0; transform: translateY(20px) scale(0.985); } to { opacity: 1; transform: none; } }
 .gm-close {
-  position: absolute; top: 12px; right: 12px; z-index: 3;
+  position: absolute; top: 12px; right: 12px; z-index: 10;
   width: 44px; height: 44px; border-radius: 50%;
   background: var(--bg); color: var(--ink); font-size: 1.4rem; line-height: 1;
   display: flex; align-items: center; justify-content: center;
@@ -990,15 +991,15 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
 .gm-figure {
   background: var(--bg-soft);
   position: relative;
-  display: flex; flex-direction: column; justify-content: center;
+  display: flex; flex-direction: column;
   overflow: hidden;
   height: 100%; min-height: 380px;
 }
 .gm-figure .slider {
-  position: relative; width: 100%; height: min(60vh, 520px);
-  overflow: hidden;
+  position: relative; flex: 1; min-height: 0; width: 100%;
+  overflow: hidden; display: flex; align-items: center; justify-content: center;
 }
-.gm-figure .slider-track { display: flex; height: 100%; transition: transform var(--dur-med) var(--ease); }
+.gm-figure .slider-track { display: flex; height: 100%; width: 100%; transition: transform var(--dur-med) var(--ease); }
 .gm-figure .slide {
   flex: 0 0 100%; height: 100%; min-width: 0;
   display: flex; align-items: center; justify-content: center;
@@ -1049,36 +1050,35 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
   background: var(--gold-deep);
 }
 
-/* Görsel Üst Kontrol Barı: Sol: Tam Ekran, Sağ: Sayaç */
+/* Görsel Üst Paneli: Fotoğrafın YUKARISINDA bağımsız üst şerit (asla fotoğrafın üstüne binmez) */
 .figure-bar {
-  position: absolute; top: 12px; left: 14px; right: 14px; z-index: 5;
+  position: relative;
+  width: 100%; box-sizing: border-box;
+  padding: 12px 18px;
   display: flex; align-items: center; justify-content: space-between;
-  pointer-events: none;
+  background: var(--bg-soft);
+  border-bottom: 1px solid var(--line);
+  flex-shrink: 0; z-index: 3;
 }
 .figure-bar .modal-zoom-btn {
-  position: static;
-  pointer-events: auto;
   display: inline-flex; align-items: center; gap: 6px;
   padding: 6px 14px; border-radius: 20px;
-  background: color-mix(in oklch, var(--bg) 90%, transparent);
-  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  background: var(--bg);
   border: 1px solid var(--line-strong);
   color: var(--ink); font-size: 0.75rem; font-weight: 600;
   letter-spacing: 0.04em; text-transform: uppercase;
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(26, 25, 24, 0.08);
+  box-shadow: 0 1px 4px rgba(26, 25, 24, 0.06);
   transition: background 0.2s, border-color 0.2s, transform 0.15s;
 }
-.figure-bar .modal-zoom-btn:hover { background: var(--bg); border-color: var(--gold-deep); transform: scale(1.03); }
+.figure-bar .modal-zoom-btn:hover { background: var(--bg-soft); border-color: var(--gold-deep); transform: scale(1.02); }
 .figure-bar .slider-count {
-  pointer-events: auto;
   font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
   color: var(--gold-deep); font-variant-numeric: tabular-nums; font-weight: 600;
-  padding: 5px 12px; border-radius: 20px;
-  background: color-mix(in oklch, var(--bg) 90%, transparent);
-  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  padding: 4px 12px; border-radius: 20px;
+  background: var(--bg);
   border: 1px solid var(--line-strong);
-  box-shadow: 0 2px 6px rgba(26, 25, 24, 0.08);
+  box-shadow: 0 1px 4px rgba(26, 25, 24, 0.06);
   white-space: nowrap;
 }
 .figure-bar .slider-count:empty { display: none; }
@@ -1129,23 +1129,31 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
 
 /* Responsive: Tablet ve Mobilde Tek Sütun */
 @media (max-width: 768px) {
-  .gm-panel {
+  .gm-panel, .modal-panel {
     grid-template-columns: minmax(0, 1fr);
     max-height: 92vh; overflow-y: auto;
   }
-  .gm-figure { min-height: 300px; height: 46vh; }
-  .gm-figure .slider { height: 100%; }
-  .gm-body { padding: 20px 16px; }
+  .gm-figure, .modal-figure {
+    height: auto; min-height: 0;
+  }
+  .gm-figure .slider, .modal-figure .ms-viewport {
+    height: 44vh; min-height: 260px;
+  }
+  .gm-body, .modal-body { padding: 18px 16px; }
 
-  /* Mobilde sağ üstte kapatma çarpısı olduğu için figure-bar sağdan 64px pay bırakır */
+  /* Mobilde sağ üstteki kapatma çarpısı (top: 8px, right: 8px) ile aynı hizada:
+     figure-bar sağdan 52px pay bırakır, fotoğraf bu barın ALTINDA tertemiz başlar! */
   .figure-bar {
-    top: 10px; left: 10px; right: 64px;
+    padding: 10px 52px 10px 12px;
   }
   .figure-bar .modal-zoom-btn {
     padding: 5px 10px; font-size: 0.7rem; gap: 4px;
   }
   .figure-bar .slider-count {
-    padding: 4px 10px; font-size: 0.72rem;
+    padding: 3px 8px; font-size: 0.72rem;
+  }
+  .modal-close, .gm-close {
+    width: 36px; height: 36px; top: 7px; right: 8px; font-size: 1.25rem; z-index: 10;
   }
 }
 

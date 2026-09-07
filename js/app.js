@@ -246,51 +246,12 @@
       d.addEventListener('click', (e) => { e.stopPropagation(); gmGo(+d.dataset.gdot); gmAuto(true); });
     });
 
-    // Tıklayınca tam ekran Lightbox (kaydırma yapılmadıysa)
-    let gmSuppressClick = false;
-    els.gmTrack.querySelectorAll('.slide').forEach((slide) => {
-      slide.addEventListener('click', (e) => {
-        if (gmSuppressClick) return;
-        if (e.target.closest('.slider-arrow') || e.target.closest('.dot')) return;
-        openGroupLightbox();
-      });
-    });
-
     if (els.gmZoomBtn) {
       els.gmZoomBtn.onclick = (e) => {
         e.stopPropagation();
         openGroupLightbox();
       };
     }
-
-    // Mobil dokunmatik kaydırma (swipe & pointer)
-    let gmTouchStartX = null;
-    let gmTouchStartY = null;
-
-    const onGmStart = (e) => {
-      const pt = e.touches ? e.touches[0] : e;
-      gmTouchStartX = pt.clientX;
-      gmTouchStartY = pt.clientY;
-    };
-    const onGmEnd = (e) => {
-      if (gmTouchStartX === null) return;
-      const pt = e.changedTouches ? e.changedTouches[0] : e;
-      const dx = pt.clientX - gmTouchStartX;
-      const dy = pt.clientY - gmTouchStartY;
-      if (Math.abs(dx) > 30 && Math.abs(dx) > Math.abs(dy)) {
-        gmGo(state.gIndex + (dx < 0 ? 1 : -1));
-        gmAuto(true);
-        gmSuppressClick = true;
-        setTimeout(() => { gmSuppressClick = false; }, 400);
-      }
-      gmTouchStartX = null;
-      gmTouchStartY = null;
-    };
-
-    els.gmTrack.addEventListener('touchstart', onGmStart, { passive: true });
-    els.gmTrack.addEventListener('touchend', onGmEnd, { passive: true });
-    els.gmTrack.addEventListener('pointerdown', onGmStart);
-    els.gmTrack.addEventListener('pointerup', onGmEnd);
 
     // Klavye
     els.gmTrack.tabIndex = 0;
@@ -540,6 +501,33 @@
     return [d.img].concat(g);
   }
 
+  function openDesignLightbox() {
+    const d2 = designById(state.currentDesign);
+    if (!d2) return;
+    const imgs2 = designGallery(d2);
+    let items;
+    let startIdx;
+    if (imgs2.length > 1) {
+      items = imgs2.map((src, i) => ({
+        src: src,
+        title: `${d2[state.lang].n} (${i + 1} / ${imgs2.length})`,
+        eyebrow: catLabel(d2.cat) || 'COQ D’OR'
+      }));
+      startIdx = state.msIndex;
+    } else {
+      const list = filteredDesigns();
+      items = list.map((item) => ({
+        src: item.img,
+        title: item[state.lang].n,
+        eyebrow: catLabel(item.cat) || 'COQ D’OR',
+        designId: item.id
+      }));
+      startIdx = list.findIndex((item) => item.id === d2.id);
+      if (startIdx < 0) startIdx = 0;
+    }
+    openLightbox('design', items, startIdx);
+  }
+
   function openDesignModal(id) {
     const d = designById(id);
     if (!d || !els.modal) return;
@@ -598,72 +586,6 @@
       els.modalCount.style.display = imgs.length > 1 ? 'inline-block' : 'none';
     }
 
-    // Mobil dokunmatik kaydırma (swipe & pointer) ve tıkla Lightbox ayrımı
-    let msTouchX = null;
-    let msTouchY = null;
-    let msSuppressClick = false;
-
-    const onMsStart = (e) => {
-      const pt = e.touches ? e.touches[0] : e;
-      msTouchX = pt.clientX;
-      msTouchY = pt.clientY;
-    };
-    const onMsEnd = (e) => {
-      if (msTouchX === null) return;
-      const pt = e.changedTouches ? e.changedTouches[0] : e;
-      const dx = pt.clientX - msTouchX;
-      const dy = pt.clientY - msTouchY;
-      if (Math.abs(dx) > 30 && Math.abs(dx) > Math.abs(dy)) {
-        if (imgs.length > 1) {
-          msGo(state.msIndex + (dx < 0 ? 1 : -1));
-        }
-        msSuppressClick = true;
-        setTimeout(() => { msSuppressClick = false; }, 400);
-      }
-      msTouchX = null;
-      msTouchY = null;
-    };
-
-    els.msTrack.addEventListener('touchstart', onMsStart, { passive: true });
-    els.msTrack.addEventListener('touchend', onMsEnd, { passive: true });
-    els.msTrack.addEventListener('pointerdown', onMsStart);
-    els.msTrack.addEventListener('pointerup', onMsEnd);
-
-    const openDesignLightbox = () => {
-      const d2 = designById(state.currentDesign);
-      if (!d2) return;
-      const imgs2 = designGallery(d2);
-      let items;
-      let startIdx;
-      if (imgs2.length > 1) {
-        items = imgs2.map((src, i) => ({
-          src: src,
-          title: `${d2[state.lang].n} (${i + 1} / ${imgs2.length})`,
-          eyebrow: catLabel(d2.cat) || 'COQ D’OR'
-        }));
-        startIdx = state.msIndex;
-      } else {
-        const list = filteredDesigns();
-        items = list.map((item) => ({
-          src: item.img,
-          title: item[state.lang].n,
-          eyebrow: catLabel(item.cat) || 'COQ D’OR',
-          designId: item.id
-        }));
-        startIdx = list.findIndex((item) => item.id === d2.id);
-        if (startIdx < 0) startIdx = 0;
-      }
-      openLightbox('design', items, startIdx);
-    };
-
-    els.msTrack.querySelectorAll('.ms-slide').forEach((sl, idx) => {
-      sl.onclick = (e) => {
-        if (msSuppressClick) return;
-        if (e.target.closest('.slider-arrow') || e.target.closest('.dot')) return;
-        state.msIndex = idx;
-        openDesignLightbox();
-      };
-    });
     if (els.modalZoomBtn) {
       els.modalZoomBtn.onclick = (e) => {
         e.stopPropagation();
@@ -1111,25 +1033,193 @@
     if (els.lbPrev) els.lbPrev.onclick = handleLbPrev;
     if (els.lbNext) els.lbNext.onclick = handleLbNext;
 
-    // Lightbox dokunmatik kaydırma (swipe)
-    if (els.lbViewport) {
-      let lbTouchX = null;
-      let lbTouchY = null;
-      els.lbViewport.addEventListener('touchstart', (e) => {
-        if (e.target.closest('.lb-prev') || e.target.closest('.lb-next') || e.target.closest('.lb-close')) return;
-        lbTouchX = e.touches[0].clientX;
-        lbTouchY = e.touches[0].clientY;
+    /* ============================================================
+       EVRENSEL DOKUNMATİK KAYDIRMA & DOKUNMA YÖNETİCİSİ (Swipe & Tap)
+       iOS Safari, iOS Chrome ve Android için %100 kararlı swipe
+       ============================================================ */
+    function attachSwipeManager(containerEl, getOptions) {
+      if (!containerEl) return;
+
+      let startX = 0;
+      let startY = 0;
+      let startTime = 0;
+      let isHorizontal = null;
+      let isTouchActive = false;
+      let suppressClickUntil = 0;
+
+      containerEl.addEventListener('touchstart', (e) => {
+        if (e.target.closest('.slider-arrow') || e.target.closest('.dot') || e.target.closest('.modal-zoom-btn') || e.target.closest('.lb-close')) return;
+        const t = e.touches[0];
+        startX = t.clientX;
+        startY = t.clientY;
+        startTime = Date.now();
+        isHorizontal = null;
+        isTouchActive = true;
       }, { passive: true });
-      els.lbViewport.addEventListener('touchend', (e) => {
-        if (lbTouchX === null) return;
-        const dx = e.changedTouches[0].clientX - lbTouchX;
-        const dy = e.changedTouches[0].clientY - lbTouchY;
-        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
-          lbGo(dx < 0 ? 1 : -1);
+
+      containerEl.addEventListener('touchmove', (e) => {
+        if (!isTouchActive) return;
+        const t = e.touches[0];
+        const dx = t.clientX - startX;
+        const dy = t.clientY - startY;
+
+        if (isHorizontal === null) {
+          if (Math.abs(dx) > 6 || Math.abs(dy) > 6) {
+            isHorizontal = Math.abs(dx) > Math.abs(dy);
+          }
         }
-        lbTouchX = null;
-        lbTouchY = null;
+
+        // Yatay kaydırma: iOS Safari'nin dikey kaydırma başlatmasını ve touchcancel üretmesini ENGELLER!
+        if (isHorizontal === true && e.cancelable) {
+          e.preventDefault();
+        }
+      }, { passive: false });
+
+      containerEl.addEventListener('touchend', (e) => {
+        if (!isTouchActive) return;
+        isTouchActive = false;
+
+        const t = e.changedTouches ? e.changedTouches[0] : e;
+        const dx = t.clientX - startX;
+        const dy = t.clientY - startY;
+        const dt = Date.now() - startTime;
+
+        const opts = typeof getOptions === 'function' ? getOptions() : getOptions;
+        const absX = Math.abs(dx);
+        const absY = Math.abs(dy);
+
+        // Yatay kaydırma algılandı
+        if ((isHorizontal === true || absX > absY) && absX > 22) {
+          suppressClickUntil = Date.now() + 450;
+          if (dx < 0) {
+            if (opts.onNext) opts.onNext();
+          } else {
+            if (opts.onPrev) opts.onPrev();
+          }
+          return;
+        }
+
+        // Sabit tek dokunuş (tap)
+        if (absX < 12 && absY < 12 && dt < 450) {
+          suppressClickUntil = Date.now() + 450;
+          if (opts.onTap) opts.onTap();
+        }
       }, { passive: true });
+
+      containerEl.addEventListener('touchcancel', (e) => {
+        if (!isTouchActive) return;
+        isTouchActive = false;
+        const t = e.changedTouches ? e.changedTouches[0] : null;
+        if (t) {
+          const dx = t.clientX - startX;
+          const dy = t.clientY - startY;
+          const absX = Math.abs(dx);
+          const absY = Math.abs(dy);
+          if ((isHorizontal === true || absX > absY) && absX > 25) {
+            suppressClickUntil = Date.now() + 450;
+            const opts = typeof getOptions === 'function' ? getOptions() : getOptions;
+            if (opts) {
+              if (dx < 0 && opts.onNext) opts.onNext();
+              else if (dx > 0 && opts.onPrev) opts.onPrev();
+            }
+          }
+        }
+        isHorizontal = null;
+      }, { passive: true });
+
+      // Masaüstü tıklaması (fare ile tıklandığında Lightbox açma)
+      containerEl.addEventListener('click', (e) => {
+        if (Date.now() < suppressClickUntil) return;
+        if (e.target.closest('.slider-arrow') || e.target.closest('.dot') || e.target.closest('.modal-zoom-btn') || e.target.closest('.lb-close')) return;
+        const opts = typeof getOptions === 'function' ? getOptions() : getOptions;
+        if (opts && opts.onTap) opts.onTap();
+      });
+
+      // Masaüstü fare ile sürükleme (mouse drag) desteği
+      let isMouseDown = false;
+      let mouseStartX = 0;
+      let mouseStartY = 0;
+
+      containerEl.addEventListener('mousedown', (e) => {
+        if (e.target.closest('.slider-arrow') || e.target.closest('.dot') || e.target.closest('.modal-zoom-btn') || e.target.closest('.lb-close')) return;
+        isMouseDown = true;
+        mouseStartX = e.clientX;
+        mouseStartY = e.clientY;
+      });
+
+      window.addEventListener('mouseup', (e) => {
+        if (!isMouseDown) return;
+        isMouseDown = false;
+        const dx = e.clientX - mouseStartX;
+        const dy = e.clientY - mouseStartY;
+
+        const opts = typeof getOptions === 'function' ? getOptions() : getOptions;
+        if (!opts) return;
+
+        if (Math.abs(dx) > 35 && Math.abs(dx) > Math.abs(dy)) {
+          suppressClickUntil = Date.now() + 450;
+          if (dx < 0) {
+            if (opts.onNext) opts.onNext();
+          } else {
+            if (opts.onPrev) opts.onPrev();
+          }
+        }
+      });
+    }
+
+    // 1. Koleksiyon Modalı (Group Modal) Swipe & Tap
+    if (els.gmSlider) {
+      attachSwipeManager(els.gmSlider, {
+        onNext: () => { gmGo(state.gIndex + 1); gmAuto(true); },
+        onPrev: () => { gmGo(state.gIndex - 1); gmAuto(true); },
+        onTap: () => { openGroupLightbox(); }
+      });
+    }
+
+    // 2. Desen Modalı (Product Modal) Swipe & Tap
+    const msViewport = $('#productModal .ms-viewport');
+    if (msViewport) {
+      attachSwipeManager(msViewport, () => ({
+        onNext: () => {
+          const d = designById(state.currentDesign);
+          if (!d) return;
+          const g = designGallery(d);
+          if (g.length > 1 && window._msGo) {
+            window._msGo(state.msIndex + 1);
+          } else {
+            const list = filteredDesigns();
+            const curIdx = list.findIndex((item) => item.id === d.id);
+            if (curIdx >= 0 && list.length > 1) {
+              const nextDesign = list[(curIdx + 1) % list.length];
+              openDesignModal(nextDesign.id);
+            }
+          }
+        },
+        onPrev: () => {
+          const d = designById(state.currentDesign);
+          if (!d) return;
+          const g = designGallery(d);
+          if (g.length > 1 && window._msGo) {
+            window._msGo(state.msIndex - 1);
+          } else {
+            const list = filteredDesigns();
+            const curIdx = list.findIndex((item) => item.id === d.id);
+            if (curIdx >= 0 && list.length > 1) {
+              const prevDesign = list[((curIdx - 1) % list.length + list.length) % list.length];
+              openDesignModal(prevDesign.id);
+            }
+          }
+        },
+        onTap: () => { openDesignLightbox(); }
+      }));
+    }
+
+    // 3. Tam Ekran Lightbox Swipe
+    if (els.lbViewport) {
+      attachSwipeManager(els.lbViewport, {
+        onNext: () => lbGo(1),
+        onPrev: () => lbGo(-1)
+      });
     }
 
     if (els.clearQuoteBtn) els.clearQuoteBtn.addEventListener('click', () => {

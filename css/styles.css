@@ -877,7 +877,7 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 .modal-figure .ms-slide { flex: 0 0 100%; height: 100%; min-width: 0; display: flex; align-items: center; justify-content: center; cursor: zoom-in; }
 .modal-figure .ms-slide img {
   max-width: 100%; max-height: 100%; object-fit: contain; display: block;
-  user-select: none; -webkit-user-drag: none; pointer-events: none;
+  user-select: none; -webkit-user-drag: none;
 }
 .modal-body { padding: clamp(24px, 3vw, 36px); }
 .modal-title { font-family: var(--font-serif); font-weight: 500; font-size: 2rem; line-height: 1.15; margin-bottom: 8px; text-wrap: balance; }
@@ -1068,7 +1068,7 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
 .gm-figure .slide-fig img {
   max-width: 100%; max-height: 100%;
   object-fit: contain; display: block;
-  user-select: none; -webkit-user-drag: none; pointer-events: none;
+  user-select: none; -webkit-user-drag: none;
 }
 /* Evrensel Slider Ok Butonları (Hem Desen Hem Model Modalı) */
 .slider-arrow {
@@ -1238,7 +1238,7 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
 }
 
 .slider, .slider-track, .ms-viewport, .ms-track {
-  touch-action: pan-y;
+  touch-action: pan-y pinch-zoom;
 }
 
 /* ==========================================================================

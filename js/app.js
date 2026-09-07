@@ -184,7 +184,6 @@
     state.gIndex = 0;
     state.gCtx = opts || null;
     els.gmGroup.textContent = c[state.lang];
-    els.gmTitle.textContent = t('panel.title');
     buildGmTrack(c, models);
     els.groupModal.classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -203,32 +202,54 @@
     state.gCtx = null;
   }
 
+  function openGroupLightbox() {
+    const c = catById(state.group);
+    if (!c || !c.models || !c.models.length) return;
+    const items = c.models.map((mod) => ({
+      src: mod.img,
+      title: mod.n[state.lang],
+      eyebrow: c[state.lang]
+    }));
+    openLightbox('group', items, state.gIndex);
+  }
+
   function buildGmTrack(c, models) {
     els.gmTrack.innerHTML = models.map((m) => {
       const srcs = [m.img, m.gallery && m.gallery[1], m.img2].filter(Boolean);
       return `
-        <div class="slide">
+        <div class="slide" title="${t('ui.zoom')}">
           <figure class="slide-fig">
             <img src="${srcs[0]}" alt="${esc(m.n[state.lang])}" loading="lazy" data-role="main">
             ${srcs.length > 1 ? `<img src="${srcs[1]}" alt="" aria-hidden="true" loading="lazy" class="slide-alt">` : ''}
           </figure>
-          <div class="slide-cap">
-            <span class="slide-name">${esc(m.n[state.lang])}</span>
-            <span class="slide-meta">${esc(c[state.lang])}</span>
-          </div>
         </div>`;
     }).join('');
     els.gmDots.innerHTML = models.map((m, i) =>
       `<button class="dot" data-gdot="${i}" aria-label="${t('ui.variant')} ${i + 1}"></button>`
     ).join('');
 
-    // Ok butonları: prev sola (index-1), next sağa (index+1) — terslik düzeltildi
-    els.gmNext.onclick = () => { gmGo(state.gIndex + 1); gmAuto(true); };
-    els.gmPrev.onclick = () => { gmGo(state.gIndex - 1); gmAuto(true); };
+    // Ok butonları
+    els.gmNext.onclick = (e) => { e.stopPropagation(); gmGo(state.gIndex + 1); gmAuto(true); };
+    els.gmPrev.onclick = (e) => { e.stopPropagation(); gmGo(state.gIndex - 1); gmAuto(true); };
 
     els.gmDots.querySelectorAll('[data-gdot]').forEach((d) => {
-      d.addEventListener('click', () => { gmGo(+d.dataset.gdot); gmAuto(true); });
+      d.addEventListener('click', (e) => { e.stopPropagation(); gmGo(+d.dataset.gdot); gmAuto(true); });
     });
+
+    // Tıklayınca tam ekran Lightbox
+    els.gmTrack.querySelectorAll('.slide').forEach((slide) => {
+      slide.addEventListener('click', (e) => {
+        if (e.target.closest('.slider-arrow') || e.target.closest('.dot')) return;
+        openGroupLightbox();
+      });
+    });
+
+    if (els.gmZoomBtn) {
+      els.gmZoomBtn.onclick = (e) => {
+        e.stopPropagation();
+        openGroupLightbox();
+      };
+    }
 
     // Swipe (touch)
     let startX = null;
@@ -272,6 +293,8 @@
 
     els.gmTrack.style.transform = `translateX(-${state.gIndex * 100}%)`;
     els.gmCount.textContent = `${state.gIndex + 1} / ${n}`;
+    els.gmTitle.textContent = m.n[state.lang];
+    if (els.gmDesc) els.gmDesc.textContent = c.d ? c.d[state.lang] : '';
     if (els.gmStatus) els.gmStatus.textContent = `${t('ui.sliderStatus')} ${m.n[state.lang]}`;
     els.gmDots.querySelectorAll('[data-gdot]').forEach((d, i) => d.classList.toggle('active', i === state.gIndex));
     els.gmSummary.textContent = t('panel.noDesign');
@@ -505,7 +528,7 @@
     // Varyant slider'ı
     const imgs = designGallery(d);
     els.msTrack.innerHTML = imgs.map((src) =>
-      `<div class="ms-slide"><img src="${src}" alt="${esc(d[state.lang].n)} — COQ D’OR" loading="lazy"></div>`
+      `<div class="ms-slide" title="${t('ui.zoom')}"><img src="${src}" alt="${esc(d[state.lang].n)} — COQ D’OR" loading="lazy"></div>`
     ).join('');
     els.msDots.innerHTML = imgs.length > 1
       ? imgs.map((x, i) => `<button class="dot ${i === 0 ? 'active' : ''}" data-msdot="${i}" aria-label="${t('ui.variant')} ${i + 1}"></button>`).join('')
@@ -518,13 +541,40 @@
       els.msTrack.style.transform = `translateX(-${state.msIndex * 100}%)`;
       els.msDots.querySelectorAll('[data-msdot]').forEach((dd, i) => dd.classList.toggle('active', i === state.msIndex));
     };
+    window._msGo = msGo;
+
     const msNext = els.modal.querySelector('.ms-next');
     const msPrev = els.modal.querySelector('.ms-prev');
-    msNext.onclick = () => msGo(state.msIndex + 1);
-    msPrev.onclick = () => msGo(state.msIndex - 1);
+    if (msNext) msNext.onclick = (e) => { e.stopPropagation(); msGo(state.msIndex + 1); };
+    if (msPrev) msPrev.onclick = (e) => { e.stopPropagation(); msGo(state.msIndex - 1); };
     els.msDots.querySelectorAll('[data-msdot]').forEach((dd) => {
-      dd.onclick = () => msGo(+dd.dataset.msdot);
+      dd.onclick = (e) => { e.stopPropagation(); msGo(+dd.dataset.msdot); };
     });
+
+    const openDesignLightbox = () => {
+      const d2 = designById(state.currentDesign);
+      if (!d2) return;
+      const imgs2 = designGallery(d2);
+      const items = imgs2.map((src, i) => ({
+        src: src,
+        title: `${d2[state.lang].n} ${imgs2.length > 1 ? `(${i + 1} / ${imgs2.length})` : ''}`,
+        eyebrow: catLabel(d2.cat) || 'COQ D’OR'
+      }));
+      openLightbox('design', items, state.msIndex);
+    };
+
+    els.msTrack.querySelectorAll('.ms-slide').forEach((sl) => {
+      sl.onclick = (e) => {
+        if (e.target.closest('.slider-arrow') || e.target.closest('.dot')) return;
+        openDesignLightbox();
+      };
+    });
+    if (els.modalZoomBtn) {
+      els.modalZoomBtn.onclick = (e) => {
+        e.stopPropagation();
+        openDesignLightbox();
+      };
+    }
 
     const alreadyIn = state.quote.some((q) => q.key === 'design:' + id);
     els.modalQuoteBtn.textContent = alreadyIn ? '✓ ' + t('modal.inQuote') : t('modal.addQuote');
@@ -541,6 +591,68 @@
     if (state.lastTrigger && document.contains(state.lastTrigger)) state.lastTrigger.focus();
     state.lastTrigger = null;
     if (!state.activeCat) history.replaceState(null, null, ' ');
+  }
+
+  /* ============================================================
+     EVRENSEL LIGHTBOX (Tam Ekran Görsel İnceleme)
+     ============================================================ */
+  state.lb = {
+    open: false,
+    source: null,
+    items: [],
+    index: 0
+  };
+
+  function openLightbox(source, items, initialIndex) {
+    if (!items || !items.length || !els.siteLightbox) return;
+    state.lb.open = true;
+    state.lb.source = source;
+    state.lb.items = items;
+    state.lb.index = ((initialIndex % items.length) + items.length) % items.length;
+    els.siteLightbox.hidden = false;
+    document.body.style.overflow = 'hidden';
+    updateLightbox();
+    if (els.lbClose) els.lbClose.focus();
+  }
+
+  function closeLightbox() {
+    if (!els.siteLightbox) return;
+    els.siteLightbox.hidden = true;
+    state.lb.open = false;
+    if (state.lb.source === 'group' && state.group) {
+      gmGo(state.lb.index);
+    } else if (state.lb.source === 'design' && typeof window._msGo === 'function') {
+      window._msGo(state.lb.index);
+    }
+    state.lb.items = [];
+    const stillModal = (els.modal && !els.modal.hidden) || (els.groupModal && els.groupModal.classList.contains('open'));
+    document.body.style.overflow = stillModal ? 'hidden' : '';
+  }
+
+  function lbGo(delta) {
+    if (!state.lb.open || !state.lb.items.length) return;
+    const n = state.lb.items.length;
+    state.lb.index = (((state.lb.index + delta) % n) + n) % n;
+    updateLightbox();
+  }
+
+  function updateLightbox() {
+    const item = state.lb.items[state.lb.index];
+    if (!item) return;
+    if (els.lbPrev) els.lbPrev.style.display = state.lb.items.length > 1 ? 'flex' : 'none';
+    if (els.lbNext) els.lbNext.style.display = state.lb.items.length > 1 ? 'flex' : 'none';
+
+    if (els.lbImg) {
+      els.lbImg.style.opacity = '0.3';
+      els.lbImg.src = item.src;
+      els.lbImg.alt = item.title || '';
+      els.lbImg.onload = () => {
+        els.lbImg.style.opacity = '1';
+      };
+    }
+    if (els.lbEyebrow) els.lbEyebrow.textContent = item.eyebrow || '';
+    if (els.lbName) els.lbName.textContent = item.title || '';
+    if (els.lbCount) els.lbCount.textContent = `${state.lb.index + 1} / ${state.lb.items.length}`;
   }
 
   function trapModalFocus(e) {
@@ -809,7 +921,20 @@
       gmPrev: $('#gmPrev'),
       gmNext: $('#gmNext'),
       gmSummary: $('#gmSummary'),
-      gmActions: $('#gmActions')
+      gmActions: $('#gmActions'),
+      gmDesc: $('#gmDesc'),
+      gmZoomBtn: $('#gmZoomBtn'),
+      modalZoomBtn: $('#modalZoomBtn'),
+      siteLightbox: $('#siteLightbox'),
+      lbClose: $('#siteLightbox .lb-close'),
+      lbBackdrop: $('#siteLightbox .lb-backdrop'),
+      lbPrev: $('#lbPrev'),
+      lbNext: $('#lbNext'),
+      lbImg: $('#lbImg'),
+      lbEyebrow: $('#lbEyebrow'),
+      lbName: $('#lbName'),
+      lbCount: $('#lbCount'),
+      lbViewport: $('#lbViewport')
     });
 
     loadQuote();
@@ -850,6 +975,31 @@
     if (els.gmClose) {
       $$('[data-gm-close]').forEach((el) => el.addEventListener('click', closeGroupPanel));
     }
+    $$('[data-lb-close]').forEach((el) => el.addEventListener('click', closeLightbox));
+    if (els.lbPrev) els.lbPrev.addEventListener('click', (e) => { e.stopPropagation(); lbGo(-1); });
+    if (els.lbNext) els.lbNext.addEventListener('click', (e) => { e.stopPropagation(); lbGo(1); });
+
+    // Lightbox dokunmatik kaydırma (swipe)
+    if (els.lbViewport) {
+      let lbTouchX = null;
+      let lbTouchY = null;
+      els.lbViewport.addEventListener('touchstart', (e) => {
+        lbTouchX = e.touches[0].clientX;
+        lbTouchY = e.touches[0].clientY;
+      }, { passive: true });
+      els.lbViewport.addEventListener('touchend', (e) => {
+        if (lbTouchX === null) return;
+        const dx = e.changedTouches[0].clientX - lbTouchX;
+        const dy = e.changedTouches[0].clientY - lbTouchY;
+        // Yatay kaydırma dikeyden fazlaysa
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+          lbGo(dx < 0 ? 1 : -1);
+        }
+        lbTouchX = null;
+        lbTouchY = null;
+      }, { passive: true });
+    }
+
     if (els.clearQuoteBtn) els.clearQuoteBtn.addEventListener('click', () => {
       state.quote = [];
       persistQuote();
@@ -863,6 +1013,11 @@
     }
 
     document.addEventListener('keydown', (e) => {
+      if (state.lb && state.lb.open) {
+        if (e.key === 'Escape') { closeLightbox(); return; }
+        if (e.key === 'ArrowLeft') { lbGo(-1); return; }
+        if (e.key === 'ArrowRight') { lbGo(1); return; }
+      }
       if (e.key === 'Escape') {
         if (els.groupModal && els.groupModal.classList.contains('open')) { closeGroupPanel(); return; }
         if (els.modal && !els.modal.hidden) { closeDesignModal(); return; }

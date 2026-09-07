@@ -952,7 +952,7 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
 }
 
 /* ==========================================================================
-   ÜRÜN GRUBU İNCELEME PANELİ (grup kartı → slider + sade/desenli ekleme)
+   ÜRÜN GRUBU İNCELEME PANELİ (grup kartı → 2 sütunlu editoryal slider)
    ========================================================================== */
 .group-modal {
   position: fixed; inset: 0; z-index: 100;
@@ -962,7 +962,7 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
 .group-modal.open { display: flex; }
 .gm-backdrop {
   position: absolute; inset: 0;
-  background: rgba(26, 25, 24, 0.45);
+  background: rgba(26, 25, 24, 0.55);
   backdrop-filter: blur(14px) saturate(0.85);
   -webkit-backdrop-filter: blur(14px) saturate(0.85);
   animation: gmFade var(--dur-fast) var(--ease);
@@ -971,13 +971,13 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
 .gm-panel {
   position: relative; z-index: 1;
   background: var(--bg); border-radius: 6px;
-  width: min(1080px, 100%);
-  max-height: 92vh; overflow: auto;
+  width: min(980px, 100%);
+  max-height: 90vh; overflow: hidden;
+  display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
   box-shadow: 0 24px 80px rgba(26, 25, 24, 0.35);
   animation: gmIn var(--dur-med) var(--ease);
 }
 @keyframes gmIn { from { opacity: 0; transform: translateY(20px) scale(0.985); } to { opacity: 1; transform: none; } }
-.gm-body { padding: clamp(20px, 4vw, 44px); }
 .gm-close {
   position: absolute; top: 12px; right: 12px; z-index: 3;
   width: 44px; height: 44px; border-radius: 50%;
@@ -987,66 +987,198 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
   transition: transform var(--dur-short) var(--ease);
 }
 .gm-close:hover { transform: rotate(90deg); }
-.gm-body { padding: clamp(20px, 4vw, 44px); }
 
-/* Slider (tek model, çoklu poz) */
-.slider-wrap { margin-bottom: var(--space-4); }
-.slider-head {
-  display: flex; align-items: baseline; justify-content: space-between;
-  gap: var(--space-4); flex-wrap: wrap; margin-bottom: var(--space-4);
+/* Sol Sütun: Slider & Görsel Alanı */
+.gm-figure {
+  background: var(--bg-soft);
+  position: relative;
+  display: flex; flex-direction: column; justify-content: center;
+  overflow: hidden;
+  height: 100%; min-height: 380px;
 }
-.slider-title {
-  font-family: var(--font-serif); font-weight: 500;
-  font-size: clamp(1.5rem, 3vw, 2.2rem); line-height: var(--lh-tight);
+.gm-figure .slider {
+  position: relative; width: 100%; height: min(60vh, 520px);
+  overflow: hidden;
 }
-.slider-count { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); font-variant-numeric: tabular-nums; }
-.slider { position: relative; overflow: hidden; border-radius: 6px; }
-.slider-track { display: flex; transition: transform var(--dur-med) var(--ease); }
-.slide { flex: 0 0 100%; min-width: 0; }
-.slide-fig { position: relative; aspect-ratio: 16 / 10; background: var(--bg-soft); overflow: hidden; }
-.slide-fig img { width: 100%; height: 100%; object-fit: contain; display: block; }
-.slide-cap { display: flex; justify-content: space-between; gap: var(--space-4); align-items: baseline; margin-top: 10px; flex-wrap: wrap; }
-.slide-name { font-family: var(--font-serif); font-size: 1.375rem; font-weight: 500; line-height: 1.25; }
-.slide-meta { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); }
-.slider-arrow {
+.gm-figure .slider-track { display: flex; height: 100%; transition: transform var(--dur-med) var(--ease); }
+.gm-figure .slide {
+  flex: 0 0 100%; height: 100%; min-width: 0;
+  display: flex; align-items: center; justify-content: center;
+  cursor: zoom-in;
+}
+.gm-figure .slide-fig {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  background: transparent;
+}
+.gm-figure .slide-fig img {
+  max-width: 100%; max-height: 100%;
+  object-fit: contain; display: block;
+}
+.gm-figure .slider-arrow {
   position: absolute; top: 50%; transform: translateY(-50%);
-  width: 48px; height: 48px; border-radius: 50%;
+  width: 44px; height: 44px; border-radius: 50%;
   background: color-mix(in oklch, var(--bg) 88%, transparent);
   backdrop-filter: blur(6px); border: 1px solid var(--line-strong);
-  color: var(--ink); font-size: 1.6rem; line-height: 1;
+  color: var(--ink); font-size: 1.5rem; line-height: 1;
   display: flex; align-items: center; justify-content: center;
   z-index: 2; transition: background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
 }
-.slider-arrow:hover { background: var(--bg); border-color: var(--gold-deep); }
-.slider-arrow.prev { left: 12px; }
-.slider-arrow.next { right: 12px; }
-.slider-dots { display: flex; justify-content: center; gap: 8px; margin-top: var(--space-4); }
-.dot {
-  width: 26px; height: 6px; border-radius: 3px; border: none; padding: 0;
-  background: var(--line-strong); cursor: pointer;
-  transition: background var(--dur-fast) var(--ease), transform var(--dur-instant) var(--ease);
+.gm-figure .slider-arrow:hover { background: var(--bg); border-color: var(--gold-deep); }
+.gm-figure .slider-arrow.prev { left: 10px; }
+.gm-figure .slider-arrow.next { right: 10px; }
+.gm-figure .slider-dots {
+  position: absolute; bottom: 12px; left: 0; right: 0;
+  display: flex; justify-content: center; gap: 6px; z-index: 2;
 }
-.dot.active { background: var(--gold-deep); }
-.dot:active { transform: scale(0.9); }
-.dot:hover { background: var(--ink-faint); }
 
-/* Slider alt bilgi + aksiyonlar */
-.slider-actions {
-  display: flex; flex-direction: column; align-items: stretch;
-  gap: var(--space-4);
-  margin-top: var(--space-4); padding: var(--space-4);
-  background: var(--bg-soft); border: 1px solid var(--line); border-radius: 4px;
+/* Tam Ekran Zoom Butonları (Hem Desen Hem Model Modalı) */
+.modal-zoom-btn {
+  position: absolute; top: 12px; left: 12px; z-index: 2;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 12px; border-radius: 20px;
+  background: color-mix(in oklch, var(--bg) 90%, transparent);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--line-strong);
+  color: var(--ink); font-size: 0.75rem; font-weight: 600;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(26, 25, 24, 0.1);
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
 }
-.sel-summary { font-size: 0.92rem; color: var(--ink-soft); line-height: 1.5; }
-.sel-summary strong { color: var(--ink); font-family: var(--font-serif); font-size: 1.05rem; font-weight: 600; }
-.gm-actions { display: flex; gap: var(--space-4); flex-wrap: wrap; justify-content: center; }
-.gm-actions .btn { flex: 0 1 auto; min-width: 180px; }
+.modal-zoom-btn:hover { background: var(--bg); border-color: var(--gold-deep); transform: scale(1.03); }
+.modal-figure { position: relative; cursor: zoom-in; }
+
+/* Sağ Sütun: Başlık, Model Bilgisi ve Aksiyonlar */
+.gm-body {
+  padding: clamp(20px, 3.2vw, 36px);
+  display: flex; flex-direction: column; justify-content: center;
+  gap: 12px; overflow-y: auto;
+}
+.gm-head-meta {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: var(--space-4); margin-bottom: 2px;
+}
+.gm-head-meta .eyebrow { margin: 0; }
+.gm-panel .slider-count {
+  font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--gold-deep); font-variant-numeric: tabular-nums; font-weight: 600;
+}
+.gm-panel .modal-title {
+  font-family: var(--font-serif); font-weight: 500;
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem); line-height: 1.15;
+  margin: 0; text-wrap: balance;
+}
+.gm-body .modal-desc {
+  font-size: 0.94rem; line-height: 1.55; color: var(--ink-soft);
+  margin: 0;
+}
+.gm-body .sel-summary {
+  font-size: 0.88rem; color: var(--ink-soft); line-height: 1.55;
+  background: var(--bg-soft); padding: 12px 14px; border-radius: 4px;
+}
+.gm-actions {
+  display: flex; flex-direction: column; gap: 8px;
+  margin-top: 4px;
+}
+.gm-actions .btn {
+  width: 100%; min-height: 44px; text-align: center;
+  justify-content: center; font-size: 0.92rem;
+}
 .btn-gold-line { border: 1px solid var(--gold-deep); color: var(--gold-deep); }
 .btn-gold-line:hover { background: var(--gold-deep); color: var(--bg); }
 .sel-designs { display: inline-flex; flex-wrap: wrap; gap: 6px; align-items: center; }
 .sel-designs .chip { padding: 4px 10px; min-height: 0; font-size: 0.72rem; }
 .clear-attached { font-size: 0.78rem; font-weight: 600; color: var(--gold-deep); padding: 4px 6px; min-height: 0; border-bottom: 1px solid transparent; }
 .clear-attached:hover { border-color: var(--gold-deep); }
+
+/* Responsive: Tablet ve Mobilde Tek Sütun */
+@media (max-width: 768px) {
+  .gm-panel {
+    grid-template-columns: minmax(0, 1fr);
+    max-height: 92vh; overflow-y: auto;
+  }
+  .gm-figure { min-height: 300px; height: 46vh; }
+  .gm-figure .slider { height: 100%; }
+  .gm-body { padding: 20px 16px; }
+}
+
+/* ==========================================================================
+   EVRENSEL LIGHTBOX (Tam Ekran Görsel İnceleme)
+   ========================================================================== */
+.lightbox {
+  position: fixed; inset: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: center;
+}
+.lightbox[hidden] { display: none; }
+.lb-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(18, 17, 16, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  animation: fadeIn var(--dur-fast) var(--ease);
+}
+.lb-content {
+  position: relative; z-index: 1;
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: space-between;
+  padding: clamp(14px, 2.5vw, 28px);
+  box-sizing: border-box;
+}
+.lb-close {
+  position: absolute; top: 16px; right: 16px; z-index: 3;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff; font-size: 1.6rem; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: background 0.2s, transform 0.2s;
+}
+.lb-close:hover { background: rgba(255, 255, 255, 0.25); transform: rotate(90deg); }
+.lb-viewport {
+  flex: 1; width: 100%;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; padding: 10px 0;
+  min-height: 0; touch-action: pan-y;
+}
+.lb-img {
+  max-width: 95vw; max-height: 80vh;
+  object-fit: contain; display: block;
+  user-select: none; -webkit-user-select: none;
+  filter: drop-shadow(0 16px 40px rgba(0,0,0,0.6));
+  transition: transform 0.2s var(--ease), opacity 0.2s ease;
+}
+.lb-prev, .lb-next {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 52px; height: 52px; border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff; font-size: 1.8rem; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; z-index: 2;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+}
+.lb-prev:hover, .lb-next:hover {
+  background: rgba(255, 255, 255, 0.28);
+  border-color: var(--gold);
+  transform: translateY(-50%) scale(1.05);
+}
+.lb-prev { left: 20px; }
+.lb-next { right: 20px; }
+@media (max-width: 600px) {
+  .lb-prev { left: 8px; width: 42px; height: 42px; font-size: 1.4rem; }
+  .lb-next { right: 8px; width: 42px; height: 42px; font-size: 1.4rem; }
+}
+.lb-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  width: min(840px, 100%); padding-top: 10px;
+  color: #fff; z-index: 2;
+}
+.lb-meta { display: flex; flex-direction: column; gap: 2px; }
+.lb-eyebrow { font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); }
+.lb-name { font-family: var(--font-serif); font-size: 1.25rem; font-weight: 500; line-height: 1.2; color: #fff; }
+.lb-count { font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.7); font-variant-numeric: tabular-nums; }
 
 /* Modele desen bağlama (pending bar) — desen arşivi bölümünün altında sabit */
 .pending-bar {

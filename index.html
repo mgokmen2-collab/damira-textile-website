@@ -229,7 +229,7 @@
   <!-- ===== MODELE DESEN BAĞLAMA (pending bar) ===== -->
   <div class="pending-bar" id="pendingBar" hidden></div>
 
-  <!-- ===== MODAL ===== -->
+  <!-- ===== MODAL (Desen Detay & Varyantlar) ===== -->
   <div class="modal" id="productModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
     <div class="modal-backdrop" data-close-modal></div>
     <div class="modal-panel">
@@ -241,6 +241,10 @@
         <button class="slider-arrow prev ms-prev" aria-label="Önceki" data-i18n-aria="ui.prev">‹</button>
         <button class="slider-arrow next ms-next" aria-label="Sonraki" data-i18n-aria="ui.next">›</button>
         <div class="slider-dots ms-dots" id="msDots"></div>
+        <button type="button" class="modal-zoom-btn" id="modalZoomBtn" aria-label="Tam ekran incele">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+          <span data-i18n="ui.zoom">Tam Ekran</span>
+        </button>
       </figure>
       <div class="modal-body">
         <p class="eyebrow" id="modalCollection"></p>
@@ -255,30 +259,53 @@
     </div>
   </div>
 
-  <!-- ===== ÜRÜN GRUBU İNCELEME PANELİ (slider) ===== -->
+  <!-- ===== ÜRÜN GRUBU İNCELEME PANELİ (2 Sütunlu Editoryal Mizanpaj) ===== -->
   <div class="group-modal" id="groupModal" role="dialog" aria-modal="true" aria-labelledby="gmTitle">
     <div class="gm-backdrop" data-gm-close></div>
     <div class="gm-panel">
       <button class="gm-close" data-gm-close aria-label="Kapat" data-i18n-aria="ui.close">×</button>
-      <div class="gm-body">
-        <p class="eyebrow" id="gmGroup"></p>
-        <div class="slider-wrap" id="sliderWrap">
-          <div class="slider-head">
-            <h3 class="slider-title" id="gmTitle"></h3>
-            <span class="slider-count" id="gmCount"></span>
-          </div>
-          <div class="slider" id="gmSlider">
-            <button class="slider-arrow prev" id="gmPrev" aria-label="Önceki model" data-i18n-aria="ui.prevModel">‹</button>
-            <div class="slider-track" id="gmTrack"></div>
-            <button class="slider-arrow next" id="gmNext" aria-label="Sonraki model" data-i18n-aria="ui.nextModel">›</button>
-          </div>
-          <div class="slider-dots" id="gmDots"></div>
-          <p class="visually-hidden" id="gmStatus" aria-live="polite"></p>
-          <div class="slider-actions">
-            <div class="sel-summary" id="gmSummary"></div>
-            <div class="gm-actions" id="gmActions"></div>
-          </div>
+      <figure class="gm-figure" id="gmFigure">
+        <div class="slider" id="gmSlider">
+          <button class="slider-arrow prev" id="gmPrev" aria-label="Önceki model" data-i18n-aria="ui.prevModel">‹</button>
+          <div class="slider-track" id="gmTrack"></div>
+          <button class="slider-arrow next" id="gmNext" aria-label="Sonraki model" data-i18n-aria="ui.nextModel">›</button>
         </div>
+        <div class="slider-dots" id="gmDots"></div>
+        <button type="button" class="modal-zoom-btn" id="gmZoomBtn" aria-label="Tam ekran incele">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+          <span data-i18n="ui.zoom">Tam Ekran</span>
+        </button>
+      </figure>
+      <div class="gm-body">
+        <div class="gm-head-meta">
+          <p class="eyebrow" id="gmGroup"></p>
+          <span class="slider-count" id="gmCount"></span>
+        </div>
+        <h3 class="modal-title" id="gmTitle"></h3>
+        <p class="modal-desc" id="gmDesc"></p>
+        <div class="sel-summary" id="gmSummary"></div>
+        <div class="gm-actions" id="gmActions"></div>
+        <p class="visually-hidden" id="gmStatus" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== EVRENSEL LIGHTBOX (Tam Ekran Görsel İnceleme) ===== -->
+  <div class="lightbox" id="siteLightbox" role="dialog" aria-modal="true" aria-label="Tam Ekran Görsel" hidden>
+    <div class="lb-backdrop" data-lb-close></div>
+    <div class="lb-content">
+      <button class="lb-close" data-lb-close aria-label="Kapat">×</button>
+      <button class="slider-arrow prev lb-prev" id="lbPrev" aria-label="Önceki görsel">‹</button>
+      <div class="lb-viewport" id="lbViewport">
+        <img class="lb-img" id="lbImg" src="" alt="">
+      </div>
+      <button class="slider-arrow next lb-next" id="lbNext" aria-label="Sonraki görsel">›</button>
+      <div class="lb-bar">
+        <div class="lb-meta">
+          <p class="lb-eyebrow" id="lbEyebrow"></p>
+          <h4 class="lb-name" id="lbName"></h4>
+        </div>
+        <span class="lb-count" id="lbCount"></span>
       </div>
     </div>
   </div>

@@ -888,7 +888,6 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
   .catalog-tools { align-items: flex-start; }
   .filter-chips { justify-content: flex-start; }
   .form-row { grid-template-columns: minmax(0, 1fr); }
-  .modal-panel { grid-template-columns: minmax(0, 1fr); max-height: 92vh; }
 }
 
 @media (max-width: 480px) {
@@ -1127,17 +1126,34 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
 .clear-attached { font-size: 0.78rem; font-weight: 600; color: var(--gold-deep); padding: 4px 6px; min-height: 0; border-bottom: 1px solid transparent; }
 .clear-attached:hover { border-color: var(--gold-deep); }
 
-/* Responsive: Tablet ve Mobilde Tek Sütun */
+/* Responsive: Tablet ve Mobilde Tek Sütun & Üst Boşluklu Görünüm */
 @media (max-width: 768px) {
+  /* Mobilde modal pencerelerinin yukarıdan boşluk bırakması ve başlığın/araç çubuğunun
+     tarayıcı üst barı veya çentik (notch) altında ezilmesini önleme */
+  .modal, .group-modal {
+    align-items: flex-start;
+    padding: max(28px, calc(env(safe-area-inset-top, 0px) + 20px)) 12px max(24px, calc(env(safe-area-inset-bottom, 0px) + 16px)) 12px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
   .gm-panel, .modal-panel {
     grid-template-columns: minmax(0, 1fr);
-    max-height: 92vh; overflow-y: auto;
+    width: 100%;
+    max-width: 560px;
+    margin: 0 auto;
+    max-height: calc(100vh - 64px);
+    max-height: calc(100dvh - 64px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 12px;
   }
   .gm-figure, .modal-figure {
     height: auto; min-height: 0;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
   }
   .gm-figure .slider, .modal-figure .ms-viewport {
-    height: 44vh; min-height: 260px;
+    height: 38vh; min-height: 230px; max-height: 360px;
   }
   .gm-body, .modal-body { padding: 18px 16px; }
 
@@ -1145,6 +1161,8 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
      figure-bar sağdan 52px pay bırakır, fotoğraf bu barın ALTINDA tertemiz başlar! */
   .figure-bar {
     padding: 10px 52px 10px 12px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
   }
   .figure-bar .modal-zoom-btn {
     padding: 5px 10px; font-size: 0.7rem; gap: 4px;

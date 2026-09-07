@@ -101,6 +101,16 @@
     $$('.lang-btn').forEach((btn) => {
       btn.setAttribute('aria-pressed', String(btn.dataset.lang === state.lang));
     });
+    const langCurrent = $('#langCurrent');
+    if (langCurrent) {
+      langCurrent.textContent = state.lang.toUpperCase();
+    }
+    const langDropdown = $('#langDropdown');
+    const langMobileBtn = $('#langMobileBtn');
+    if (langDropdown && !langDropdown.hidden) {
+      langDropdown.hidden = true;
+      if (langMobileBtn) langMobileBtn.setAttribute('aria-expanded', 'false');
+    }
 
     renderCollections();
     renderFilterChips();
@@ -236,9 +246,11 @@
       d.addEventListener('click', (e) => { e.stopPropagation(); gmGo(+d.dataset.gdot); gmAuto(true); });
     });
 
-    // Tıklayınca tam ekran Lightbox
+    // Tıklayınca tam ekran Lightbox (kaydırma yapılmadıysa)
+    let gmSuppressClick = false;
     els.gmTrack.querySelectorAll('.slide').forEach((slide) => {
       slide.addEventListener('click', (e) => {
+        if (gmSuppressClick) return;
         if (e.target.closest('.slider-arrow') || e.target.closest('.dot')) return;
         openGroupLightbox();
       });
@@ -251,15 +263,34 @@
       };
     }
 
-    // Swipe (touch)
-    let startX = null;
-    els.gmTrack.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, { passive: true });
-    els.gmTrack.addEventListener('touchend', (e) => {
-      if (startX === null) return;
-      const dx = e.changedTouches[0].clientX - startX;
-      if (Math.abs(dx) > 40) { gmGo(state.gIndex + (dx < 0 ? 1 : -1)); gmAuto(true); }
-      startX = null;
-    }, { passive: true });
+    // Mobil dokunmatik kaydırma (swipe & pointer)
+    let gmTouchStartX = null;
+    let gmTouchStartY = null;
+
+    const onGmStart = (e) => {
+      const pt = e.touches ? e.touches[0] : e;
+      gmTouchStartX = pt.clientX;
+      gmTouchStartY = pt.clientY;
+    };
+    const onGmEnd = (e) => {
+      if (gmTouchStartX === null) return;
+      const pt = e.changedTouches ? e.changedTouches[0] : e;
+      const dx = pt.clientX - gmTouchStartX;
+      const dy = pt.clientY - gmTouchStartY;
+      if (Math.abs(dx) > 30 && Math.abs(dx) > Math.abs(dy)) {
+        gmGo(state.gIndex + (dx < 0 ? 1 : -1));
+        gmAuto(true);
+        gmSuppressClick = true;
+        setTimeout(() => { gmSuppressClick = false; }, 400);
+      }
+      gmTouchStartX = null;
+      gmTouchStartY = null;
+    };
+
+    els.gmTrack.addEventListener('touchstart', onGmStart, { passive: true });
+    els.gmTrack.addEventListener('touchend', onGmEnd, { passive: true });
+    els.gmTrack.addEventListener('pointerdown', onGmStart);
+    els.gmTrack.addEventListener('pointerup', onGmEnd);
 
     // Klavye
     els.gmTrack.tabIndex = 0;
@@ -567,15 +598,36 @@
       els.modalCount.style.display = imgs.length > 1 ? 'inline-block' : 'none';
     }
 
-    // Mobil dokunmatik kaydırma (swipe)
+    // Mobil dokunmatik kaydırma (swipe & pointer) ve tıkla Lightbox ayrımı
     let msTouchX = null;
-    els.msTrack.ontouchstart = (e) => { msTouchX = e.touches[0].clientX; };
-    els.msTrack.ontouchend = (e) => {
-      if (msTouchX === null) return;
-      const dx = e.changedTouches[0].clientX - msTouchX;
-      if (Math.abs(dx) > 40 && imgs.length > 1) { msGo(state.msIndex + (dx < 0 ? 1 : -1)); }
-      msTouchX = null;
+    let msTouchY = null;
+    let msSuppressClick = false;
+
+    const onMsStart = (e) => {
+      const pt = e.touches ? e.touches[0] : e;
+      msTouchX = pt.clientX;
+      msTouchY = pt.clientY;
     };
+    const onMsEnd = (e) => {
+      if (msTouchX === null) return;
+      const pt = e.changedTouches ? e.changedTouches[0] : e;
+      const dx = pt.clientX - msTouchX;
+      const dy = pt.clientY - msTouchY;
+      if (Math.abs(dx) > 30 && Math.abs(dx) > Math.abs(dy)) {
+        if (imgs.length > 1) {
+          msGo(state.msIndex + (dx < 0 ? 1 : -1));
+        }
+        msSuppressClick = true;
+        setTimeout(() => { msSuppressClick = false; }, 400);
+      }
+      msTouchX = null;
+      msTouchY = null;
+    };
+
+    els.msTrack.addEventListener('touchstart', onMsStart, { passive: true });
+    els.msTrack.addEventListener('touchend', onMsEnd, { passive: true });
+    els.msTrack.addEventListener('pointerdown', onMsStart);
+    els.msTrack.addEventListener('pointerup', onMsEnd);
 
     const openDesignLightbox = () => {
       const d2 = designById(state.currentDesign);
@@ -606,6 +658,7 @@
 
     els.msTrack.querySelectorAll('.ms-slide').forEach((sl, idx) => {
       sl.onclick = (e) => {
+        if (msSuppressClick) return;
         if (e.target.closest('.slider-arrow') || e.target.closest('.dot')) return;
         state.msIndex = idx;
         openDesignLightbox();
@@ -1000,6 +1053,30 @@
         applyI18n();
       });
     });
+
+    // Mobil dil açılır menüsü toggle ve dışarı tıklayınca kapatma
+    const langMobileBtn = $('#langMobileBtn');
+    const langDropdown = $('#langDropdown');
+    if (langMobileBtn && langDropdown) {
+      langMobileBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = !langDropdown.hidden;
+        langDropdown.hidden = isOpen;
+        langMobileBtn.setAttribute('aria-expanded', String(!isOpen));
+      });
+      document.addEventListener('click', (e) => {
+        if (!langDropdown.hidden && !e.target.closest('.lang-mobile-wrap')) {
+          langDropdown.hidden = true;
+          langMobileBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !langDropdown.hidden) {
+          langDropdown.hidden = true;
+          langMobileBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
 
     if (els.resetBtn) els.resetBtn.addEventListener('click', () => {
       state.activeCat = null;

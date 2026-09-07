@@ -32,9 +32,35 @@
 
       <div class="header-actions">
         <div class="lang-switch" role="group" aria-label="Dil seçimi" data-i18n-aria="ui.lang">
-          <button class="lang-btn" data-lang="fr" aria-pressed="false">FR</button>
-          <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
-          <button class="lang-btn" data-lang="tr" aria-pressed="true">TR</button>
+          <div class="lang-desktop">
+            <button class="lang-btn" data-lang="fr" aria-pressed="false">FR</button>
+            <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+            <button class="lang-btn" data-lang="tr" aria-pressed="true">TR</button>
+          </div>
+          <div class="lang-mobile-wrap">
+            <button type="button" class="lang-mobile-btn" id="langMobileBtn" aria-expanded="false" aria-label="Dil seçimi" data-i18n-aria="ui.lang">
+              <svg class="lang-globe-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+              <span class="lang-current" id="langCurrent">TR</span>
+              <svg class="lang-caret-icon" width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true">
+                <path d="M6 9l6 6 6-6"/>
+              </svg>
+            </button>
+            <div class="lang-dropdown" id="langDropdown" hidden>
+              <button class="lang-btn lang-opt" data-lang="fr" aria-pressed="false">
+                <span>Français</span> <span class="lang-code">FR</span>
+              </button>
+              <button class="lang-btn lang-opt" data-lang="en" aria-pressed="false">
+                <span>English</span> <span class="lang-code">EN</span>
+              </button>
+              <button class="lang-btn lang-opt" data-lang="tr" aria-pressed="true">
+                <span>Türkçe</span> <span class="lang-code">TR</span>
+              </button>
+            </div>
+          </div>
         </div>
         <a class="header-cta" href="index.html#contact" data-i18n="nav.quote" id="quoteLink">Teklif Al</a>
         <button class="nav-toggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Menüyü aç" data-i18n-aria="ui.menu">

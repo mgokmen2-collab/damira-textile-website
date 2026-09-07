@@ -224,9 +224,9 @@
           </figure>
         </div>`;
     }).join('');
-    els.gmDots.innerHTML = models.map((m, i) =>
-      `<button class="dot" data-gdot="${i}" aria-label="${t('ui.variant')} ${i + 1}"></button>`
-    ).join('');
+    els.gmDots.innerHTML = (models.length > 1 && models.length <= 10)
+      ? models.map((m, i) => `<button class="dot" data-gdot="${i}" aria-label="${t('ui.variant')} ${i + 1}"></button>`).join('')
+      : '';
 
     // Ok butonları
     els.gmNext.onclick = (e) => { e.stopPropagation(); gmGo(state.gIndex + 1); gmAuto(true); };
@@ -527,6 +527,7 @@
 
     // Varyant slider'ı
     const imgs = designGallery(d);
+    state.msIndex = 0;
     els.msTrack.innerHTML = imgs.map((src) =>
       `<div class="ms-slide" title="${t('ui.zoom')}"><img src="${src}" alt="${esc(d[state.lang].n)} — COQ D’OR" loading="lazy"></div>`
     ).join('');
@@ -540,16 +541,41 @@
       state.msIndex = ((idx % n) + n) % n;
       els.msTrack.style.transform = `translateX(-${state.msIndex * 100}%)`;
       els.msDots.querySelectorAll('[data-msdot]').forEach((dd, i) => dd.classList.toggle('active', i === state.msIndex));
+      if (els.modalCount) {
+        els.modalCount.textContent = n > 1 ? `${state.msIndex + 1} / ${n}` : '';
+        els.modalCount.style.display = n > 1 ? 'inline-block' : 'none';
+      }
     };
     window._msGo = msGo;
 
     const msNext = els.modal.querySelector('.ms-next');
     const msPrev = els.modal.querySelector('.ms-prev');
-    if (msNext) msNext.onclick = (e) => { e.stopPropagation(); msGo(state.msIndex + 1); };
-    if (msPrev) msPrev.onclick = (e) => { e.stopPropagation(); msGo(state.msIndex - 1); };
+    if (msNext) {
+      msNext.style.display = imgs.length > 1 ? 'flex' : 'none';
+      msNext.onclick = (e) => { e.stopPropagation(); msGo(state.msIndex + 1); };
+    }
+    if (msPrev) {
+      msPrev.style.display = imgs.length > 1 ? 'flex' : 'none';
+      msPrev.onclick = (e) => { e.stopPropagation(); msGo(state.msIndex - 1); };
+    }
     els.msDots.querySelectorAll('[data-msdot]').forEach((dd) => {
       dd.onclick = (e) => { e.stopPropagation(); msGo(+dd.dataset.msdot); };
     });
+
+    if (els.modalCount) {
+      els.modalCount.textContent = imgs.length > 1 ? `1 / ${imgs.length}` : '';
+      els.modalCount.style.display = imgs.length > 1 ? 'inline-block' : 'none';
+    }
+
+    // Mobil dokunmatik kaydırma (swipe)
+    let msTouchX = null;
+    els.msTrack.ontouchstart = (e) => { msTouchX = e.touches[0].clientX; };
+    els.msTrack.ontouchend = (e) => {
+      if (msTouchX === null) return;
+      const dx = e.changedTouches[0].clientX - msTouchX;
+      if (Math.abs(dx) > 40 && imgs.length > 1) { msGo(state.msIndex + (dx < 0 ? 1 : -1)); }
+      msTouchX = null;
+    };
 
     const openDesignLightbox = () => {
       const d2 = designById(state.currentDesign);
@@ -898,6 +924,7 @@
       msDots: $('#msDots'),
       modalCollection: $('#modalCollection'),
       modalTitle: $('#modalTitle'),
+      modalCount: $('#modalCount'),
       modalDesc: $('#modalDesc'),
       modalSpecs: $('#modalSpecs'),
       modalPdfLink: $('#modalPdfLink'),

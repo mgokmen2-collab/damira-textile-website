@@ -822,8 +822,6 @@ button { font: inherit; cursor: pointer; background: none; border: none; color: 
 .modal-figure .ms-track { display: flex; height: 100%; transition: transform var(--dur-med) var(--ease); }
 .modal-figure .ms-slide { flex: 0 0 100%; min-width: 0; display: flex; align-items: center; justify-content: center; }
 .modal-figure .ms-slide img { width: 100%; height: 100%; object-fit: contain; display: block; }
-.modal-figure .slider-arrow { top: 44%; }
-.modal-figure .ms-dots { position: absolute; bottom: 10px; left: 0; right: 0; z-index: 2; }
 .modal-body { padding: clamp(24px, 3vw, 36px); }
 .modal-title { font-family: var(--font-serif); font-weight: 500; font-size: 2rem; line-height: 1.15; margin-bottom: 8px; text-wrap: balance; }
 .modal-desc { color: var(--ink-soft); line-height: 1.65; margin-bottom: var(--space-4); }
@@ -1015,26 +1013,45 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
   max-width: 100%; max-height: 100%;
   object-fit: contain; display: block;
 }
-.gm-figure .slider-arrow {
+/* Evrensel Slider Ok Butonları (Hem Desen Hem Model Modalı) */
+.slider-arrow {
   position: absolute; top: 50%; transform: translateY(-50%);
   width: 44px; height: 44px; border-radius: 50%;
   background: color-mix(in oklch, var(--bg) 88%, transparent);
-  backdrop-filter: blur(6px); border: 1px solid var(--line-strong);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  border: 1px solid var(--line-strong);
   color: var(--ink); font-size: 1.5rem; line-height: 1;
   display: flex; align-items: center; justify-content: center;
-  z-index: 2; transition: background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+  z-index: 4; cursor: pointer;
+  box-shadow: 0 2px 8px rgba(26, 25, 24, 0.12);
+  transition: background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), transform 0.15s;
 }
-.gm-figure .slider-arrow:hover { background: var(--bg); border-color: var(--gold-deep); }
-.gm-figure .slider-arrow.prev { left: 10px; }
-.gm-figure .slider-arrow.next { right: 10px; }
-.gm-figure .slider-dots {
+.slider-arrow:hover { background: var(--bg); border-color: var(--gold-deep); transform: translateY(-50%) scale(1.06); }
+.slider-arrow.prev { left: 12px; }
+.slider-arrow.next { right: 12px; }
+
+/* Evrensel Slider Varyant Noktaları */
+.slider-dots {
   position: absolute; bottom: 12px; left: 0; right: 0;
-  display: flex; justify-content: center; gap: 6px; z-index: 2;
+  display: flex; justify-content: center; gap: 6px; z-index: 4;
+}
+.dot {
+  width: 24px; height: 5px; border-radius: 3px; border: none; padding: 0;
+  background: color-mix(in oklch, var(--ink) 25%, transparent);
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease), transform var(--dur-instant) var(--ease), width var(--dur-fast) var(--ease);
+}
+.dot.active {
+  background: var(--gold-deep);
+  width: 32px;
+}
+.dot:hover {
+  background: var(--gold-deep);
 }
 
 /* Tam Ekran Zoom Butonları (Hem Desen Hem Model Modalı) */
 .modal-zoom-btn {
-  position: absolute; top: 12px; left: 12px; z-index: 2;
+  position: absolute; top: 12px; left: 12px; z-index: 4;
   display: inline-flex; align-items: center; gap: 6px;
   padding: 6px 12px; border-radius: 20px;
   background: color-mix(in oklch, var(--bg) 90%, transparent);
@@ -1055,14 +1072,18 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
   display: flex; flex-direction: column; justify-content: center;
   gap: 12px; overflow-y: auto;
 }
+.modal-head-meta,
 .gm-head-meta {
   display: flex; align-items: baseline; justify-content: space-between;
   gap: var(--space-4); margin-bottom: 2px;
+  padding-right: 48px; /* Sağ üst kapatma çarpısının altına girmesini engeller */
 }
+.modal-head-meta .eyebrow,
 .gm-head-meta .eyebrow { margin: 0; }
-.gm-panel .slider-count {
-  font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+.slider-count {
+  font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
   color: var(--gold-deep); font-variant-numeric: tabular-nums; font-weight: 600;
+  white-space: nowrap;
 }
 .gm-panel .modal-title {
   font-family: var(--font-serif); font-weight: 500;

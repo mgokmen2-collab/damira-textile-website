@@ -29,6 +29,79 @@
   };
   const catLabel = (code) => (code && CAT_LABELS[code] ? t(CAT_LABELS[code]) : '');
 
+  const QUOTE_KEY = 'damira-quote';
+
+  /* ---------- Toast Bildirim ---------- */
+  function toast(msg) {
+    const el = $('#toast');
+    if (!el) return;
+    el.textContent = msg;
+    el.classList.add('show');
+    clearTimeout(el._toastT);
+    el._toastT = setTimeout(() => el.classList.remove('show'), 4400);
+  }
+
+  /* ---------- Teklif Listesi (localStorage: damira-quote) ---------- */
+  function getQuote() {
+    try {
+      const raw = JSON.parse(localStorage.getItem(QUOTE_KEY) || '[]');
+      return Array.isArray(raw) ? raw : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function persistQuote(list) {
+    try {
+      localStorage.setItem(QUOTE_KEY, JSON.stringify(list));
+    } catch (e) {}
+  }
+
+  function quoteTitle(modelName) {
+    const plainLabel = t('quote.plain') || (state.lang === 'tr' ? 'Sade' : state.lang === 'fr' ? 'Uni' : 'Plain');
+    return `${modelName} (${plainLabel})`;
+  }
+
+  function isModelInQuote(cid, mid) {
+    const list = getQuote();
+    return list.some((q) => q.key === `plain:${cid}:${mid}`);
+  }
+
+  function addModelToQuote(c, m) {
+    const list = getQuote();
+    const key = `plain:${c.id}:${m.id}`;
+    const title = quoteTitle(m.n[state.lang]);
+    if (!list.some((q) => q.key === key)) {
+      list.push({ key, title });
+      persistQuote(list);
+      renderQuoteBadges();
+      return true;
+    }
+    return false;
+  }
+
+  function removeModelFromQuote(c, m) {
+    let list = getQuote();
+    const key = `plain:${c.id}:${m.id}`;
+    list = list.filter((q) => q.key !== key);
+    persistQuote(list);
+    renderQuoteBadges();
+  }
+
+  function renderQuoteBadges() {
+    const n = getQuote().length;
+    $$('#quoteLink, #mobileQuoteLink').forEach((a) => {
+      const label = t('nav.quote');
+      a.textContent = '';
+      a.appendChild(document.createTextNode(label + ' '));
+      const badge = document.createElement('span');
+      badge.className = 'quote-n';
+      badge.textContent = n;
+      badge.hidden = n === 0;
+      a.appendChild(badge);
+    });
+  }
+
   const els = {};
 
   /* ---------- Dokunmatik Swipe Yöneticisi ---------- */
@@ -206,13 +279,65 @@
       els.gmDots.querySelectorAll('[data-gdot]').forEach((d, i) => d.classList.toggle('active', i === state.gIndex));
     }
 
-    if (els.gmSummary) els.gmSummary.textContent = t('panel.noDesign');
+    const inQuote = isModelInQuote(c.id, m.id);
+
+    if (els.gmSummary) {
+      const plainLabel = t('quote.plain') || (state.lang === 'tr' ? 'Sade' : state.lang === 'fr' ? 'Uni' : 'Plain');
+      const inQuoteText = t('modal.inQuote') || (state.lang === 'tr' ? 'Teklife Eklendi' : state.lang === 'fr' ? 'Ajouté au Devis' : 'Added to Quote');
+      els.gmSummary.innerHTML = inQuote
+        ? `<strong style="color:var(--gold-deep)">✓ ${esc(inQuoteText)}</strong> — ${esc(m.n[state.lang])} (${esc(plainLabel)})`
+        : `<strong>${esc(m.n[state.lang])}</strong> · ${esc(plainLabel)} · ${esc(c[state.lang])}`;
+    }
 
     if (els.gmActions) {
       els.gmActions.innerHTML = `
-        <a class="btn btn-primary" href="index.html#contact">${t('ecat.quoteModel')}</a>
-        <button type="button" class="btn btn-outline" data-gm-close-btn>${t('ui.closeMenu') || 'Kapat'}</button>
+        <button type="button" class="btn btn-primary" data-gm-quote-direct>
+          ${t('ecat.quoteModel')}
+        </button>
+        <button type="button" class="btn ${inQuote ? 'btn-gold-line active' : 'btn-gold-line'}" data-gm-add-quote>
+          ${inQuote ? '✓ ' + (t('modal.inQuote') || 'Teklifte Var') : '+ ' + (t('modal.addQuote') || 'Teklife Ekle')}
+        </button>
+        <button type="button" class="btn btn-outline" data-gm-close-btn>
+          ${t('ui.closeMenu') || 'Kapat'}
+        </button>
       `;
+
+      // 1. Fiyat Teklifi İste: Modele teklife ekler VE doğrudan index.html#contact sayfasına yönlendirir
+      const directBtn = els.gmActions.querySelector('[data-gm-quote-direct]');
+      if (directBtn) {
+        directBtn.onclick = () => {
+          addModelToQuote(c, m);
+          window.location.href = 'index.html#contact';
+        };
+      }
+
+      // 2. Teklife Ekle / Çıkar: Sayfada kalarak teklif sepetine ekler
+      const addBtn = els.gmActions.querySelector('[data-gm-add-quote]');
+      if (addBtn) {
+        addBtn.onclick = () => {
+          if (isModelInQuote(c.id, m.id)) {
+            removeModelFromQuote(c, m);
+            addBtn.classList.remove('active');
+            addBtn.textContent = '+ ' + (t('modal.addQuote') || 'Teklife Ekle');
+            toast((t('modal.remove') || 'Kaldırıldı') + ': ' + m.n[state.lang]);
+          } else {
+            addModelToQuote(c, m);
+            addBtn.classList.add('active');
+            addBtn.textContent = '✓ ' + (t('modal.inQuote') || 'Teklifte Var');
+            toast((t('quote.added') || 'Teklife eklendi:') + ' ' + m.n[state.lang]);
+          }
+          if (els.gmSummary) {
+            const nowIn = isModelInQuote(c.id, m.id);
+            const plainLabel = t('quote.plain') || (state.lang === 'tr' ? 'Sade' : state.lang === 'fr' ? 'Uni' : 'Plain');
+            const inQuoteText = t('modal.inQuote') || 'Teklife Eklendi';
+            els.gmSummary.innerHTML = nowIn
+              ? `<strong style="color:var(--gold-deep)">✓ ${esc(inQuoteText)}</strong> — ${esc(m.n[state.lang])} (${esc(plainLabel)})`
+              : `<strong>${esc(m.n[state.lang])}</strong> · ${esc(plainLabel)} · ${esc(c[state.lang])}`;
+          }
+        };
+      }
+
+      // 3. Kapat butonu
       const closeBtn = els.gmActions.querySelector('[data-gm-close-btn]');
       if (closeBtn) closeBtn.onclick = closeGroupModal;
     }
@@ -358,6 +483,7 @@
 
     renderCategories();
     renderDesigns();
+    renderQuoteBadges();
 
     if (state.group) {
       const c = catById(state.group);

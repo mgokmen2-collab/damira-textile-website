@@ -1253,6 +1253,7 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
 }
 .btn-gold-line { border: 1px solid var(--gold-deep); color: var(--gold-deep); }
 .btn-gold-line:hover { background: var(--gold-deep); color: var(--bg); }
+.btn-gold-line.active { background: var(--gold-deep); color: var(--bg); font-weight: 600; }
 .sel-designs { display: inline-flex; flex-wrap: wrap; gap: 6px; align-items: center; }
 .sel-designs .chip { padding: 4px 10px; min-height: 0; font-size: 0.72rem; }
 .clear-attached { font-size: 0.78rem; font-weight: 600; color: var(--gold-deep); padding: 4px 6px; min-height: 0; border-bottom: 1px solid transparent; }
@@ -1478,7 +1479,8 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
 .quote-sticky a.go-form:hover { color: var(--gold-deep); }
 
 /* Header rozet: metin + sayaç */
-.header-cta .quote-n {
+.header-cta .quote-n,
+.mobile-cta .quote-n {
   display: inline-flex; align-items: center; justify-content: center;
   min-width: 20px; height: 20px; padding: 0 6px; margin-left: 6px;
   border-radius: 10px; background: var(--gold-deep); color: var(--bg);

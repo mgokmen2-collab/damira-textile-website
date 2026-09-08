@@ -772,6 +772,12 @@
     const hash = window.location.hash.replace('#', '').trim().toLowerCase();
     if (!hash) return;
 
+    if (hash === 'contact') {
+      const c = $('#contact');
+      if (c) setTimeout(() => c.scrollIntoView({ behavior: 'smooth', block: 'start' }), 120);
+      return;
+    }
+
     const isCat = CATEGORIES.some((c) => c.id.toLowerCase() === hash);
     if (isCat) {
       openGroupPanel(hash, null);

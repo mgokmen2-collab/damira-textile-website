@@ -1114,8 +1114,21 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
   display: flex; align-items: center; justify-content: center;
   box-shadow: 0 2px 8px rgba(26, 25, 24, 0.18);
   transition: transform var(--dur-short) var(--ease);
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 .gm-close:hover { transform: rotate(90deg); }
+.modal-close, .gm-close, .lb-close {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.modal-close:focus, .gm-close:focus, .lb-close:focus {
+  outline: none !important;
+}
+.modal-close:focus-visible, .gm-close:focus-visible, .lb-close:focus-visible {
+  outline: 2px solid var(--gold-deep) !important;
+  outline-offset: 2px;
+}
 
 /* Sol Sütun: Slider & Görsel Alanı */
 .gm-figure {

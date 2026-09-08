@@ -110,8 +110,15 @@
     let startX = 0;
     let startY = 0;
     let startTime = 0;
+    let isControlTarget = false;
 
     el.addEventListener('touchstart', (e) => {
+      // Butonlara (oklar, kapatma, zoom, noktalar) dokunulduğunda swipe veya tap tetikleme
+      if (e.target.closest('button, a, .slider-arrow, .slider-dots, .figure-bar, [data-gm-close], [data-lb-close]')) {
+        isControlTarget = true;
+        return;
+      }
+      isControlTarget = false;
       const touch = e.changedTouches[0];
       startX = touch.clientX;
       startY = touch.clientY;
@@ -119,16 +126,26 @@
     }, { passive: true });
 
     el.addEventListener('touchend', (e) => {
+      if (isControlTarget || e.target.closest('button, a, .slider-arrow, .slider-dots, .figure-bar, [data-gm-close], [data-lb-close]')) {
+        isControlTarget = false;
+        return;
+      }
+      if (!startTime) return;
       const touch = e.changedTouches[0];
       const dx = touch.clientX - startX;
       const dy = touch.clientY - startY;
       const dt = Date.now() - startTime;
+      startTime = 0;
 
-      if (dt < 400 && Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.4) {
+      // Yatay kaydırma (swipe)
+      if (dt < 400 && Math.abs(dx) > 30 && Math.abs(dx) > Math.abs(dy) * 1.2) {
         if (dx < 0 && handlers.onNext) handlers.onNext();
         else if (dx > 0 && handlers.onPrev) handlers.onPrev();
       } else if (dt < 250 && Math.abs(dx) < 12 && Math.abs(dy) < 12 && handlers.onTap) {
-        handlers.onTap();
+        // Yalnızca doğrudan görsel alanına dokunulduğunda tam ekran aç
+        if (e.target.closest('.gm-slide, #gmTrack, .lb-viewport, img')) {
+          handlers.onTap();
+        }
       }
     }, { passive: true });
   }
@@ -203,7 +220,13 @@
     });
 
     gmGo(state.gIndex);
-    if (els.gmClose) els.gmClose.focus();
+    if (els.gmClose) {
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        els.gmClose.focus({ preventScroll: true });
+      } else {
+        els.gmClose.blur();
+      }
+    }
   }
 
   function closeGroupModal() {
@@ -256,6 +279,12 @@
     }
 
     els.gmTrack.tabIndex = 0;
+    els.gmTrack.style.cursor = 'zoom-in';
+    els.gmTrack.onclick = (e) => {
+      if (e.target.tagName === 'IMG' || e.target.classList.contains('gm-slide')) {
+        openGroupLightbox();
+      }
+    };
     els.gmTrack.onkeydown = (e) => {
       if (e.key === 'ArrowRight') { e.preventDefault(); gmGo(state.gIndex + 1); }
       if (e.key === 'ArrowLeft') { e.preventDefault(); gmGo(state.gIndex - 1); }

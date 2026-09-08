@@ -200,7 +200,11 @@
     setOverlay(true);
     gmGo(0);
     gmAuto(true);
-    els.gmClose.focus();
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      els.gmClose.focus({ preventScroll: true });
+    } else {
+      els.gmClose.blur();
+    }
   }
 
   function closeGroupPanel() {

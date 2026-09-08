@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=3.7">
+  <link rel="stylesheet" href="css/styles.css?v=3.8">
 </head>
 <body>
   <a class="skip-link" href="#catalogMain" data-i18n="skip">İçeriğe atla</a>
@@ -126,8 +126,63 @@
     </div>
   </footer>
 
-  <script src="js/data.js?v=3.7"></script>
-  <script src="js/catalog.js?v=3.7"></script>
-  <script src="js/app.js?v=3.7"></script>
+  <!-- ===== ÜRÜN GRUBU İNCELEME PANELİ (2 Sütunlu Editoryal Mizanpaj) ===== -->
+  <div class="group-modal" id="groupModal" role="dialog" aria-modal="true" aria-labelledby="gmTitle">
+    <div class="gm-backdrop" data-gm-close></div>
+    <div class="gm-panel">
+      <button class="gm-close" data-gm-close aria-label="Kapat" data-i18n-aria="ui.close">×</button>
+      <figure class="gm-figure" id="gmFigure">
+        <div class="figure-bar">
+          <button type="button" class="modal-zoom-btn" id="gmZoomBtn" aria-label="Tam ekran incele">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+            <span data-i18n="ui.zoom">Tam Ekran</span>
+          </button>
+          <span class="slider-count" id="gmCount"></span>
+        </div>
+        <div class="slider" id="gmSlider">
+          <button class="slider-arrow prev" id="gmPrev" aria-label="Önceki model" data-i18n-aria="ui.prevModel">‹</button>
+          <div class="slider-track" id="gmTrack"></div>
+          <button class="slider-arrow next" id="gmNext" aria-label="Sonraki model" data-i18n-aria="ui.nextModel">›</button>
+        </div>
+        <div class="slider-dots" id="gmDots"></div>
+      </figure>
+      <div class="gm-body">
+        <div class="gm-head-meta">
+          <p class="eyebrow" id="gmGroup"></p>
+        </div>
+        <h3 class="modal-title" id="gmTitle"></h3>
+        <p class="modal-desc" id="gmDesc"></p>
+        <div class="sel-summary" id="gmSummary"></div>
+        <div class="gm-actions" id="gmActions"></div>
+        <p class="visually-hidden" id="gmStatus" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== EVRENSEL LIGHTBOX (Tam Ekran Görsel İnceleme) ===== -->
+  <div class="lightbox" id="siteLightbox" role="dialog" aria-modal="true" aria-label="Tam Ekran Görsel" hidden>
+    <div class="lb-backdrop" data-lb-close></div>
+    <div class="lb-content">
+      <button class="lb-close" data-lb-close aria-label="Kapat">×</button>
+      <div class="lb-viewport" id="lbViewport">
+        <img class="lb-img" id="lbImg" src="" alt="">
+      </div>
+      <button class="slider-arrow prev lb-prev" id="lbPrev" aria-label="Önceki görsel">‹</button>
+      <button class="slider-arrow next lb-next" id="lbNext" aria-label="Sonraki görsel">›</button>
+      <div class="lb-bar">
+        <div class="lb-meta">
+          <p class="lb-eyebrow" id="lbEyebrow"></p>
+          <h4 class="lb-name" id="lbName"></h4>
+        </div>
+        <span class="lb-count" id="lbCount"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TOAST ===== -->
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="js/data.js?v=3.8"></script>
+  <script src="js/catalog.js?v=3.8"></script>
 </body>
 </html>

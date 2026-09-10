@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=3.9">
+  <link rel="stylesheet" href="css/styles.css?v=4.0">
 </head>
 <body>
   <a class="skip-link" href="#catalogMain" data-i18n="skip">İçeriğe atla</a>
@@ -159,6 +159,39 @@
     </div>
   </div>
 
+  <!-- ===== DESEN ÜRÜNLERİ İNCELEME PANELİ (Group Modal ile Birebir Aynı Tasarım ve Altyapı) ===== -->
+  <div class="group-modal" id="designModal" role="dialog" aria-modal="true" aria-labelledby="dmTitle">
+    <div class="gm-backdrop" data-dm-close></div>
+    <div class="gm-panel">
+      <button class="gm-close" data-dm-close aria-label="Kapat" data-i18n-aria="ui.close">×</button>
+      <figure class="gm-figure" id="dmFigure">
+        <div class="figure-bar">
+          <button type="button" class="modal-zoom-btn" id="dmZoomBtn" aria-label="Tam ekran incele">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+            <span data-i18n="ui.zoom">Tam Ekran</span>
+          </button>
+          <span class="slider-count" id="dmCount"></span>
+        </div>
+        <div class="slider" id="dmSlider">
+          <button class="slider-arrow prev" id="dmPrev" aria-label="Önceki ürün">‹</button>
+          <div class="slider-track" id="dmTrack"></div>
+          <button class="slider-arrow next" id="dmNext" aria-label="Sonraki ürün">›</button>
+        </div>
+        <div class="slider-dots" id="dmDots"></div>
+      </figure>
+      <div class="gm-body">
+        <div class="gm-head-meta">
+          <p class="eyebrow" id="dmDesignName"></p>
+        </div>
+        <h3 class="modal-title" id="dmTitle"></h3>
+        <p class="modal-desc" id="dmDesc"></p>
+        <div class="sel-summary" id="dmSummary"></div>
+        <div class="gm-actions" id="dmActions"></div>
+        <p class="visually-hidden" id="dmStatus" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+
   <!-- ===== EVRENSEL LIGHTBOX (Tam Ekran Görsel İnceleme) ===== -->
   <div class="lightbox" id="siteLightbox" role="dialog" aria-modal="true" aria-label="Tam Ekran Görsel" hidden>
     <div class="lb-backdrop" data-lb-close></div>
@@ -182,7 +215,7 @@
   <!-- ===== TOAST ===== -->
   <div class="toast" id="toast" role="status"></div>
 
-  <script src="js/data.js?v=3.9"></script>
-  <script src="js/catalog.js?v=3.9"></script>
+  <script src="js/data.js?v=4.0"></script>
+  <script src="js/catalog.js?v=4.0"></script>
 </body>
 </html>

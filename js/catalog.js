@@ -13,6 +13,8 @@
     lang: localStorage.getItem('damira-lang') || 'fr',
     group: null,       // Açık olan kategori id'si
     gIndex: 0,         // Modal slider aktif indeks
+    designGroup: null, // Açık olan desen id'si
+    dIndex: 0,         // Desen modal slider aktif indeks
     lb: null           // Lightbox durumu: { open, list, index }
   };
 
@@ -245,12 +247,10 @@
   function buildGmTrack(c, models) {
     if (!els.gmTrack) return;
     els.gmTrack.innerHTML = models.map((m) => {
-      const srcs = [m.img, m.gallery && m.gallery[1], m.img2].filter(Boolean);
       return `
         <div class="slide" title="${t('ui.zoom')}">
           <figure class="slide-fig">
-            <img src="${srcs[0]}" alt="${esc(m.n[state.lang])}" loading="lazy" data-role="main">
-            ${srcs.length > 1 ? `<img src="${srcs[1]}" alt="" aria-hidden="true" loading="lazy" class="slide-alt">` : ''}
+            <img src="${m.img}" alt="${esc(m.n[state.lang])}" loading="lazy" data-role="main">
           </figure>
         </div>`;
     }).join('');
@@ -429,6 +429,236 @@
     if (els.lbCount) els.lbCount.textContent = `${state.lb.index + 1} / ${state.lb.list.length}`;
   }
 
+  /* ---------- Desene Bağlı Ürünleri Listeleme ---------- */
+  function getProductsByDesign(designId) {
+    const products = [];
+    CATEGORIES.forEach((cat) => {
+      (cat.models || []).forEach((model) => {
+        if (model.designId === designId) {
+          products.push({
+            id: model.id,
+            designId: model.designId,
+            n: model.n,
+            img: model.img,
+            gallery: model.gallery,
+            categoryId: cat.id,
+            categoryName: cat[state.lang] || cat.tr,
+            categoryDesc: cat.d ? (cat.d[state.lang] || cat.d.tr) : ''
+          });
+        }
+      });
+    });
+
+    // Desene ait henüz somut model eklenmemişse nakış arşiv görselini sun
+    if (!products.length) {
+      const d = DESIGNS.find((item) => item.id === designId);
+      if (d) {
+        const customTitle = {
+          tr: `${d.tr.n} Özel Nakışlı Üretim Talebi`,
+          en: `${d.en.n} Custom Embroidered Order`,
+          fr: `Commande Broderie Sur-Mesure ${d.fr.n}`
+        };
+        const allImgs = [d.img].concat(d.gallery || []).filter(Boolean);
+        allImgs.forEach((imgSrc, vIdx) => {
+          products.push({
+            id: `${d.id}-custom-${vIdx}`,
+            designId: d.id,
+            isCustomDesign: true,
+            n: customTitle,
+            img: imgSrc,
+            categoryId: 'custom',
+            categoryName: state.lang === 'tr' ? 'Özel Nakış & Üretim' : state.lang === 'fr' ? 'Broderie Sur-Mesure' : 'Bespoke Embroidery',
+            categoryDesc: d[state.lang] ? d[state.lang].d : ''
+          });
+        });
+      }
+    }
+    return products;
+  }
+
+  /* ---------- Desen Ürünleri İnceleme Paneli (Design Modal) ---------- */
+  function openDesignModal(designId, targetIdx) {
+    const d = DESIGNS.find((item) => item.id === designId);
+    if (!d || !els.designModal) return;
+    const products = getProductsByDesign(designId);
+    if (!products.length) return;
+
+    state.designGroup = designId;
+    const validIdx = (typeof targetIdx === 'number' && targetIdx >= 0 && targetIdx < products.length) ? targetIdx : 0;
+    state.dIndex = validIdx;
+
+    els.dmDesignName.textContent = `${d[state.lang].n} · ${products.length} ${t('modal.unit') || 'Ürün'}`;
+    buildDmTrack(products);
+    els.designModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+
+    // Arka planı inert yap
+    const bgEls = ['#catalogMain', '#siteHeader', '.site-footer', '#mobileNav'];
+    bgEls.forEach((sel) => {
+      $$(sel).forEach((el) => el.setAttribute('inert', ''));
+    });
+
+    dmGo(state.dIndex);
+    if (els.dmClose) {
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        els.dmClose.focus({ preventScroll: true });
+      } else {
+        els.dmClose.blur();
+      }
+    }
+  }
+
+  function closeDesignModal() {
+    if (!els.designModal) return;
+    els.designModal.classList.remove('open');
+    document.body.style.overflow = '';
+
+    const bgEls = ['#catalogMain', '#siteHeader', '.site-footer', '#mobileNav'];
+    bgEls.forEach((sel) => {
+      $$(sel).forEach((el) => el.removeAttribute('inert'));
+    });
+
+    state.designGroup = null;
+  }
+
+  function buildDmTrack(products) {
+    if (!els.dmTrack) return;
+    els.dmTrack.innerHTML = products.map((m) => {
+      return `
+        <div class="slide" title="${t('ui.zoom')}">
+          <figure class="slide-fig">
+            <img src="${m.img}" alt="${esc(m.n[state.lang])}" loading="lazy" data-role="main">
+          </figure>
+        </div>`;
+    }).join('');
+
+    if (els.dmDots) {
+      els.dmDots.innerHTML = (products.length > 1 && products.length <= 10)
+        ? products.map((m, i) => `<button class="dot" data-dmdot="${i}" aria-label="${t('ui.variant')} ${i + 1}"></button>`).join('')
+        : '';
+
+      els.dmDots.querySelectorAll('[data-dmdot]').forEach((dot) => {
+        dot.onclick = (e) => {
+          e.stopPropagation();
+          dmGo(+dot.dataset.dmdot);
+        };
+      });
+    }
+
+    if (els.dmNext) els.dmNext.onclick = (e) => { e.stopPropagation(); dmGo(state.dIndex + 1); };
+    if (els.dmPrev) els.dmPrev.onclick = (e) => { e.stopPropagation(); dmGo(state.dIndex - 1); };
+
+    if (els.dmZoomBtn) {
+      els.dmZoomBtn.onclick = (e) => {
+        e.stopPropagation();
+        openDesignGroupLightbox();
+      };
+    }
+
+    els.dmTrack.tabIndex = 0;
+    els.dmTrack.style.cursor = 'zoom-in';
+    els.dmTrack.onclick = (e) => {
+      if (e.target.tagName === 'IMG' || e.target.classList.contains('slide')) {
+        openDesignGroupLightbox();
+      }
+    };
+    els.dmTrack.onkeydown = (e) => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); dmGo(state.dIndex + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); dmGo(state.dIndex - 1); }
+    };
+  }
+
+  function dmGo(idx) {
+    const products = getProductsByDesign(state.designGroup);
+    if (!products || !products.length) return;
+    const n = products.length;
+    state.dIndex = ((idx % n) + n) % n;
+    const m = products[state.dIndex];
+    const d = DESIGNS.find((item) => item.id === state.designGroup);
+
+    if (els.dmTrack) els.dmTrack.style.transform = `translateX(-${state.dIndex * 100}%)`;
+    if (els.dmCount) els.dmCount.textContent = `${state.dIndex + 1} / ${n}`;
+    if (els.dmTitle) els.dmTitle.textContent = m.n[state.lang];
+    if (els.dmDesc) els.dmDesc.textContent = m.categoryDesc || (d ? d[state.lang].d : '');
+    if (els.dmStatus) els.dmStatus.textContent = `${t('ui.sliderStatus')} ${m.n[state.lang]}`;
+
+    if (els.dmDots) {
+      els.dmDots.querySelectorAll('[data-dmdot]').forEach((dot, i) => dot.classList.toggle('active', i === state.dIndex));
+    }
+
+    const inQuote = isModelInQuote(m.categoryId, m.id);
+
+    if (els.dmSummary) {
+      const inQuoteText = t('modal.inQuote') || (state.lang === 'tr' ? 'Teklife Eklendi' : state.lang === 'fr' ? 'Ajouté au Devis' : 'Added to Quote');
+      els.dmSummary.innerHTML = inQuote
+        ? `<strong style="color:var(--gold-deep)">✓ ${esc(inQuoteText)}</strong> — ${esc(m.n[state.lang])} · ${esc(m.categoryName)}`
+        : `<strong>${esc(m.n[state.lang])}</strong> · ${esc(m.categoryName)}`;
+    }
+
+    if (els.dmActions) {
+      els.dmActions.innerHTML = `
+        <button type="button" class="btn btn-primary" data-dm-quote-direct>
+          ${t('ecat.quoteModel')}
+        </button>
+        <button type="button" class="btn ${inQuote ? 'btn-gold-line active' : 'btn-gold-line'}" data-dm-add-quote>
+          ${inQuote ? '✓ ' + (t('modal.inQuote') || 'Teklifte Var') : '+ ' + (t('modal.addQuote') || 'Teklife Ekle')}
+        </button>
+        <button type="button" class="btn btn-outline" data-dm-close-btn>
+          ${t('ui.closeMenu') || 'Kapat'}
+        </button>
+      `;
+
+      const directBtn = els.dmActions.querySelector('[data-dm-quote-direct]');
+      if (directBtn) {
+        directBtn.onclick = () => {
+          const fakeCat = { id: m.categoryId, tr: m.categoryName };
+          addModelToQuote(fakeCat, m);
+          window.location.href = 'index.html#contact';
+        };
+      }
+
+      const addBtn = els.dmActions.querySelector('[data-dm-add-quote]');
+      if (addBtn) {
+        addBtn.onclick = () => {
+          const fakeCat = { id: m.categoryId, tr: m.categoryName };
+          if (isModelInQuote(m.categoryId, m.id)) {
+            removeModelFromQuote(fakeCat, m);
+            addBtn.classList.remove('active');
+            addBtn.textContent = '+ ' + (t('modal.addQuote') || 'Teklife Ekle');
+            toast((t('modal.remove') || 'Kaldırıldı') + ': ' + m.n[state.lang]);
+          } else {
+            addModelToQuote(fakeCat, m);
+            addBtn.classList.add('active');
+            addBtn.textContent = '✓ ' + (t('modal.inQuote') || 'Teklifte Var');
+            toast((t('quote.added') || 'Teklife eklendi:') + ' ' + m.n[state.lang]);
+          }
+          if (els.dmSummary) {
+            const nowIn = isModelInQuote(m.categoryId, m.id);
+            const inQuoteText = t('modal.inQuote') || 'Teklife Eklendi';
+            els.dmSummary.innerHTML = nowIn
+              ? `<strong style="color:var(--gold-deep)">✓ ${esc(inQuoteText)}</strong> — ${esc(m.n[state.lang])} · ${esc(m.categoryName)}`
+              : `<strong>${esc(m.n[state.lang])}</strong> · ${esc(m.categoryName)}`;
+          }
+        };
+      }
+
+      const closeBtn = els.dmActions.querySelector('[data-dm-close-btn]');
+      if (closeBtn) closeBtn.onclick = closeDesignModal;
+    }
+  }
+
+  function openDesignGroupLightbox() {
+    const products = getProductsByDesign(state.designGroup);
+    if (!products || !products.length) return;
+    const d = DESIGNS.find((item) => item.id === state.designGroup);
+    const items = products.map((mod) => ({
+      src: mod.img,
+      title: mod.n[state.lang],
+      eyebrow: d ? `${d[state.lang].n} · ${mod.categoryName}` : mod.categoryName
+    }));
+    openLightbox(items, state.dIndex);
+  }
+
   /* ---------- 25 şehir deseni (bölgesel gruplu) ---------- */
   const CAT_ORDER = ['riviera', 'provence', 'atlantik', 'kuzey', 'adalar', 'guney'];
 
@@ -449,6 +679,14 @@
         </div>
       </div>
     `).join('');
+
+    // Desen kartlarına veya incele butonlarına tıklandığında Design Modal açılır
+    list.querySelectorAll('[data-open-design]').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openDesignModal(btn.dataset.openDesign);
+      });
+    });
   }
 
   function designCard(d) {
@@ -457,14 +695,20 @@
     const thumbs = gal.length
       ? `<div class="ecat-design-thumbs">${gal.map((src) => `<img src="${src}" alt="" loading="lazy">`).join('')}</div>`
       : '';
+    const prods = getProductsByDesign(d.id);
+    const badgeText = prods.length ? `${prods.length} ${t('modal.unit') || 'Ürün'}` : '';
     return `
-      <article class="ecat-design" id="${d.id}">
-        <figure class="ecat-design-fig">
+      <article class="ecat-design" id="${d.id}" data-design-card="${d.id}">
+        <figure class="ecat-design-fig" data-open-design="${d.id}" style="cursor:pointer">
           <img src="${d.img}" alt="${esc(label)}" loading="lazy">
           <figcaption>
             <span>${esc(d[state.lang].t)}</span>
             <p>${esc(d[state.lang].n)}</p>
           </figcaption>
+          ${badgeText ? `<span class="ecat-card-badge" aria-hidden="true" style="display:inline-flex;gap:4px">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            <span>${badgeText}</span>
+          </span>` : ''}
         </figure>
         ${thumbs}
         <div class="ecat-design-body">
@@ -474,7 +718,9 @@
             <dt>${t('modal.specs')}</dt><dd>${t('modal.specsV')}</dd>
             <dt>${t('ecat.coll')}</dt><dd>${esc(d[state.lang].t)}</dd>
           </dl>
-          <a class="btn btn-outline btn-sm btn-block" href="index.html#${d.id}" data-i18n="designs.detail">İncele</a>
+          <button type="button" class="btn btn-outline btn-sm btn-block" data-open-design="${d.id}">
+            ${t('designs.detail') || 'İncele'} ${prods.length ? `(${prods.length} ${t('modal.unit') || 'Ürün'})` : ''} →
+          </button>
         </div>
       </article>`;
   }
@@ -598,6 +844,21 @@
       gmActions: $('#gmActions'),
       gmDesc: $('#gmDesc'),
       gmZoomBtn: $('#gmZoomBtn'),
+      designModal: $('#designModal'),
+      dmClose: $('#designModal [data-dm-close]'),
+      dmDesignName: $('#dmDesignName'),
+      dmTitle: $('#dmTitle'),
+      dmCount: $('#dmCount'),
+      dmSlider: $('#dmSlider'),
+      dmTrack: $('#dmTrack'),
+      dmDots: $('#dmDots'),
+      dmStatus: $('#dmStatus'),
+      dmPrev: $('#dmPrev'),
+      dmNext: $('#dmNext'),
+      dmSummary: $('#dmSummary'),
+      dmActions: $('#dmActions'),
+      dmDesc: $('#dmDesc'),
+      dmZoomBtn: $('#dmZoomBtn'),
       siteLightbox: $('#siteLightbox'),
       lbClose: $('#siteLightbox .lb-close'),
       lbPrev: $('#lbPrev'),
@@ -616,6 +877,11 @@
       el.addEventListener('click', closeGroupModal);
     });
 
+    // Design modal backdrop veya close tıklandığında kapat
+    $$('[data-dm-close]').forEach((el) => {
+      el.addEventListener('click', closeDesignModal);
+    });
+
     // Lightbox backdrop veya close tıklandığında kapat
     $$('[data-lb-close]').forEach((el) => {
       el.addEventListener('click', closeLightbox);
@@ -629,6 +895,15 @@
         onNext: () => gmGo(state.gIndex + 1),
         onPrev: () => gmGo(state.gIndex - 1),
         onTap: () => openGroupLightbox()
+      });
+    }
+
+    // Design modal dokunmatik swipe
+    if (els.dmSlider) {
+      attachSwipe(els.dmSlider, {
+        onNext: () => dmGo(state.dIndex + 1),
+        onPrev: () => dmGo(state.dIndex - 1),
+        onTap: () => openDesignGroupLightbox()
       });
     }
 
@@ -651,6 +926,11 @@
         if (e.key === 'Escape') { closeGroupModal(); return; }
         if (e.key === 'ArrowLeft') { gmGo(state.gIndex - 1); return; }
         if (e.key === 'ArrowRight') { gmGo(state.gIndex + 1); return; }
+      }
+      if (state.designGroup && els.designModal && els.designModal.classList.contains('open')) {
+        if (e.key === 'Escape') { closeDesignModal(); return; }
+        if (e.key === 'ArrowLeft') { dmGo(state.dIndex - 1); return; }
+        if (e.key === 'ArrowRight') { dmGo(state.dIndex + 1); return; }
       }
       if (els.navToggle && els.navToggle.getAttribute('aria-expanded') === 'true') {
         if (e.key === 'Escape') { setNav(false); return; }

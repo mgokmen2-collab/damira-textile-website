@@ -80,7 +80,8 @@
         { id: 'ps1', n: { tr: 'Geleneksel Elmas Jakar Peştemal', en: 'Traditional Diamond Jacquard Fouta', fr: 'Fouta Jacquard Losange Traditionnelle' }, img: 'koleksiyonlar/pestemal/ca04c60c-7400-46bb-9fad-15a089f6f37f.JPG_202609041340.jpeg' },
         { id: 'ps2', n: { tr: 'Riviera Çizgili Klasik Peştemal', en: 'Riviera Striped Classic Fouta', fr: 'Fouta Rayée Classique Riviera' }, img: 'koleksiyonlar/pestemal/6b0fdef9-8fc4-4d0c-85d6-a0377c1ecca6.JPG_202609041340.jpeg' },
         { id: 'ps3', n: { tr: 'Okyanus Mavisi Jakarlı Peştemal', en: 'Ocean Blue Jacquard Fouta', fr: 'Fouta Jacquard Bleu Océan' }, img: 'koleksiyonlar/pestemal/1e7ec679-44b3-4c7c-9bc7-71bac847b151.JPG_202609041340.jpeg' },
-        { id: 'ps4', n: { tr: 'Güneş Sarısı Nakış Numune Peştemal', en: 'Sunshine Yellow Fouta Sample', fr: 'Fouta Jaune Soleil Spéciale Broderie' }, img: 'koleksiyonlar/pestemal/5e9943c8-1c4b-4a8d-bf99-1539df57dee6.JPG_202609041340.jpeg' }
+        { id: 'ps4', n: { tr: 'Güneş Sarısı Nakış Numune Peştemal', en: 'Sunshine Yellow Fouta Sample', fr: 'Fouta Jaune Soleil Spéciale Broderie' }, img: 'koleksiyonlar/pestemal/5e9943c8-1c4b-4a8d-bf99-1539df57dee6.JPG_202609041340.jpeg' },
+        { id: 'ps5', n: { tr: 'Adaçayı Yeşili Jakarlı Riviera Peştemal', en: 'Sage Green Jacquard Riviera Fouta', fr: 'Fouta Jacquard Riviera Vert Sauge' }, img: 'koleksiyonlar/pestemal/pestemal-riviera-aqua-jakar.jpg' }
       ]
     },
     {
@@ -96,47 +97,41 @@
         fr: 'Sacs cabas de plage et de ville en 100% toile de coton écru et étuis à bouteille. Impression écologique de motifs côtiers français et blasons maritimes.'
       },
       models: [
-        { id: 'c1', n: { tr: 'Kulplu Kanvas Şarap Çantası (Marseille)', en: 'Canvas Wine Tote Bag (Marseille)', fr: 'Sac Porte-Bouteille en Toile (Marseille)' }, img: 'koleksiyonlar/canta/Canvas_wine_bag_mockup_202609031318.jpeg' },
-        { id: 'c2', n: { tr: 'Büzgülü Kanvas Şişe Kılıfı (Monaco)', en: 'Drawstring Canvas Bottle Sleeve (Monaco)', fr: 'Étui Bouteille à Cordon (Monaco)' }, img: 'koleksiyonlar/canta/Wine_bag_with_botanical_print_202609031318_new.jpeg' },
-        { id: 'c3', n: { tr: 'Bretagne Kanvas Çanta (Lifestyle Sokak Çekimi)', en: 'Bretagne Canvas Tote (Lifestyle Street)', fr: 'Cabas Bretagne en Toile (Ambiance Rue)' }, img: 'koleksiyonlar/canta/canta-bretagne-lifestyle.jpg' },
-        { id: 'c4', n: { tr: 'Bretagne Kanvas Çanta (Çiçekli Bisiklet Stüdyo)', en: 'Bretagne Canvas Tote (Floral Bike Studio)', fr: 'Cabas Bretagne en Toile (Vélo Fleuri Studio)' }, img: 'koleksiyonlar/canta/canta-bretagne-studio.jpg' },
-        { id: 'c5', n: { tr: 'Bretagne Kanvas Çanta (Mermer Masa Flatlay)', en: 'Bretagne Canvas Tote (Marble Flatlay)', fr: 'Cabas Bretagne en Toile (Flatlay Marbre)' }, img: 'koleksiyonlar/canta/canta-bretagne-flatlay.jpg' },
-        { id: 'c6', n: { tr: 'Monaco Kanvas Çanta (Lifestyle Akdeniz Sokak)', en: 'Monaco Canvas Tote (Lifestyle Street)', fr: 'Cabas Monaco en Toile (Ambiance Riviera)' }, img: 'koleksiyonlar/canta/canta-monaco-lifestyle.jpg' },
-        { id: 'c7', n: { tr: 'Monaco Kanvas Çanta (Monte-Carlo Casino Stüdyo)', en: 'Monaco Canvas Tote (Monte-Carlo Studio)', fr: 'Cabas Monaco en Toile (Casino Monte-Carlo Studio)' }, img: 'koleksiyonlar/canta/canta-monaco-studio.jpg' },
-        { id: 'c8', n: { tr: 'Monaco Kanvas Çanta (Mermer Masa Flatlay)', en: 'Monaco Canvas Tote (Marble Flatlay)', fr: 'Cabas Monaco en Toile (Flatlay Marbre)' }, img: 'koleksiyonlar/canta/canta-monaco-flatlay.jpg' },
-        { id: 'c9', n: { tr: 'Nice Kanvas Çanta (Lifestyle Eski Şehir)', en: 'Nice Canvas Tote (Lifestyle Old Town)', fr: 'Cabas Nice en Toile (Vieux Nice Lifestyle)' }, img: 'koleksiyonlar/canta/canta-nice-lifestyle-1.jpg' },
-        { id: 'c10', n: { tr: 'Nice Kanvas Çanta (Lifestyle Sahil Kasabası)', en: 'Nice Canvas Tote (Lifestyle Seaside)', fr: 'Cabas Nice en Toile (Ambiance Bord de Mer)' }, img: 'koleksiyonlar/canta/canta-nice-lifestyle-2.jpg' },
-        { id: 'c11', n: { tr: 'Nice Kanvas Çanta (Negresco Kubbesi Stüdyo)', en: 'Nice Canvas Tote (Negresco Dome Studio)', fr: 'Cabas Nice en Toile (Dôme Negresco Studio)' }, img: 'koleksiyonlar/canta/canta-nice-studio.jpg' },
-        { id: 'c12', n: { tr: 'Nice Kanvas Çanta (Ahşap Masa Stüdyo)', en: 'Nice Canvas Tote (Wooden Table Studio)', fr: 'Cabas Nice en Toile (Table Bois Studio)' }, img: 'koleksiyonlar/canta/canta-nice-table.jpg' },
-        { id: 'c13', n: { tr: 'Nice Kanvas Çanta (Rustik Ahşap Flatlay)', en: 'Nice Canvas Tote (Rustic Wood Flatlay)', fr: 'Cabas Nice en Toile (Flatlay Bois Rustique)' }, img: 'koleksiyonlar/canta/canta-nice-flatlay-1.jpg' },
-        { id: 'c14', n: { tr: 'Nice Kanvas Çanta (Lavantalı Flatlay)', en: 'Nice Canvas Tote (Lavender Flatlay)', fr: 'Cabas Nice en Toile (Flatlay Lavande)' }, img: 'koleksiyonlar/canta/canta-nice-flatlay-2.jpg' },
-        { id: 'c15', n: { tr: 'Provence Kanvas Çanta (Lifestyle Çiçekli Sokak)', en: 'Provence Canvas Tote (Lifestyle Street)', fr: 'Cabas Provence en Toile (Ambiance Ruelle Fleurie)' }, img: 'koleksiyonlar/canta/canta-provence-lifestyle-1.jpg' },
-        { id: 'c16', n: { tr: 'Provence Kanvas Çanta (Lifestyle Taş Ev & Lavanta)', en: 'Provence Canvas Tote (Lifestyle Lavender)', fr: 'Cabas Provence en Toile (Maison en Pierre & Lavande)' }, img: 'koleksiyonlar/canta/canta-provence-lifestyle-2.jpg' },
-        { id: 'c17', n: { tr: 'Provence Kanvas Çanta (Antik Sütun Stüdyo)', en: 'Provence Canvas Tote (Antique Column Studio)', fr: 'Cabas Provence en Toile (Colonnes Antiques Studio)' }, img: 'koleksiyonlar/canta/canta-provence-studio.jpg' },
-        { id: 'c18', n: { tr: 'Provence Kanvas Çanta (Doğal Keten Flatlay)', en: 'Provence Canvas Tote (Natural Linen Flatlay)', fr: 'Cabas Provence en Toile (Flatlay Lin Naturel)' }, img: 'koleksiyonlar/canta/canta-provence-flatlay-1.jpg' },
-        { id: 'c19', n: { tr: 'Provence Kanvas Çanta (Rustik Ahşap & Lavanta Flatlay)', en: 'Provence Canvas Tote (Rustic Lavender Flatlay)', fr: 'Cabas Provence en Toile (Flatlay Bois & Lavande)' }, img: 'koleksiyonlar/canta/canta-provence-flatlay-2.jpg' },
-        { id: 'c20', n: { tr: 'Saint-Tropez Kanvas Çanta (Lifestyle Sahil Kordonu)', en: 'Saint-Tropez Canvas Tote (Lifestyle Promenade)', fr: 'Cabas Saint-Tropez en Toile (Bord de Mer)' }, img: 'koleksiyonlar/canta/canta-saint-tropez-lifestyle.jpg' },
-        { id: 'c21', n: { tr: 'Saint-Tropez Kanvas Çanta (Liman & Yelkenli Stüdyo)', en: 'Saint-Tropez Canvas Tote (Port & Sailboat Studio)', fr: 'Cabas Saint-Tropez en Toile (Port & Voilier Studio)' }, img: 'koleksiyonlar/canta/canta-saint-tropez-studio.jpg' },
-        { id: 'c22', n: { tr: 'Saint-Tropez Kanvas Çanta (Ahşap & Deri Defter Flatlay)', en: 'Saint-Tropez Canvas Tote (Leather & Wood Flatlay)', fr: 'Cabas Saint-Tropez en Toile (Flatlay Carnet & Bois)' }, img: 'koleksiyonlar/canta/canta-saint-tropez-flatlay.jpg' },
-        { id: 'c23', n: { tr: 'Baie de Somme Kanvas Çanta (Lifestyle Keten Gömlek)', en: 'Baie de Somme Canvas Tote (Lifestyle Linen)', fr: 'Cabas Baie de Somme en Toile (Ambiance Lin Écru)' }, img: 'koleksiyonlar/canta/canta-baie-de-somme-lifestyle.jpg' },
-        { id: 'c24', n: { tr: 'Baie de Somme Kanvas Çanta (Fok & Can Simidi Stüdyo)', en: 'Baie de Somme Canvas Tote (Seal & Lifebuoy Studio)', fr: 'Cabas Baie de Somme en Toile (Phoque & Bouée Studio)' }, img: 'koleksiyonlar/canta/canta-baie-de-somme-studio.jpg' },
-        { id: 'c25', n: { tr: 'Baie de Somme Kanvas Çanta (Deniz Kabuklu Flatlay)', en: 'Baie de Somme Canvas Tote (Seashells Flatlay)', fr: 'Cabas Baie de Somme en Toile (Flatlay Coquillages)' }, img: 'koleksiyonlar/canta/canta-baie-de-somme-flatlay.jpg' }
+        { id: 'c1', designId: 'marseille', n: { tr: 'Kulplu Kanvas Şarap Çantası (Marseille)', en: 'Canvas Wine Tote Bag (Marseille)', fr: 'Sac Porte-Bouteille en Toile (Marseille)' }, img: 'koleksiyonlar/canta/Canvas_wine_bag_mockup_202609031318.jpeg' },
+        { id: 'c2', designId: 'monaco', n: { tr: 'Büzgülü Kanvas Şişe Kılıfı (Monaco)', en: 'Drawstring Canvas Bottle Sleeve (Monaco)', fr: 'Étui Bouteille à Cordon (Monaco)' }, img: 'koleksiyonlar/canta/Wine_bag_with_botanical_print_202609031318_new.jpeg', gallery: ['koleksiyonlar/canta/Wine_bag_with_botanical_print_202609031318.jpeg', 'koleksiyonlar/canta/Wine_bag_with_botanical_print_202609031318_2.jpeg'] },
+        { id: 'c3', designId: 'bretagne', n: { tr: 'Bretagne Kanvas Çanta', en: 'Bretagne Canvas Tote Bag', fr: 'Cabas Bretagne en Toile' }, img: 'koleksiyonlar/canta/canta-bretagne-lifestyle.jpg', gallery: ['koleksiyonlar/canta/canta-bretagne-studio.jpg', 'koleksiyonlar/canta/canta-bretagne-flatlay.jpg'] },
+        { id: 'c4', designId: 'monaco', n: { tr: 'Monaco Kanvas Çanta', en: 'Monaco Canvas Tote Bag', fr: 'Cabas Monaco en Toile' }, img: 'koleksiyonlar/canta/canta-monaco-lifestyle.jpg', gallery: ['koleksiyonlar/canta/canta-monaco-studio.jpg', 'koleksiyonlar/canta/canta-monaco-flatlay.jpg'] },
+        { id: 'c5', designId: 'nice', n: { tr: 'Nice Kanvas Çanta', en: 'Nice Canvas Tote Bag', fr: 'Cabas Nice en Toile' }, img: 'koleksiyonlar/canta/canta-nice-lifestyle-1.jpg', gallery: ['koleksiyonlar/canta/canta-nice-lifestyle-2.jpg', 'koleksiyonlar/canta/canta-nice-studio.jpg', 'koleksiyonlar/canta/canta-nice-table.jpg', 'koleksiyonlar/canta/canta-nice-flatlay-1.jpg', 'koleksiyonlar/canta/canta-nice-flatlay-2.jpg'] },
+        { id: 'c6', designId: 'provence', n: { tr: 'Provence Kanvas Çanta', en: 'Provence Canvas Tote Bag', fr: 'Cabas Provence en Toile' }, img: 'koleksiyonlar/canta/canta-provence-lifestyle-1.jpg', gallery: ['koleksiyonlar/canta/canta-provence-lifestyle-2.jpg', 'koleksiyonlar/canta/canta-provence-studio.jpg', 'koleksiyonlar/canta/canta-provence-flatlay-1.jpg', 'koleksiyonlar/canta/canta-provence-flatlay-2.jpg'] },
+        { id: 'c7', designId: 'saint-tropez', n: { tr: 'Saint-Tropez Kanvas Çanta', en: 'Saint-Tropez Canvas Tote Bag', fr: 'Cabas Saint-Tropez en Toile' }, img: 'koleksiyonlar/canta/canta-saint-tropez-lifestyle.jpg', gallery: ['koleksiyonlar/canta/canta-saint-tropez-studio.jpg', 'koleksiyonlar/canta/canta-saint-tropez-flatlay.jpg'] },
+        { id: 'c8', designId: 'baie-de-somme', n: { tr: 'Baie de Somme Kanvas Çanta', en: 'Baie de Somme Canvas Tote Bag', fr: 'Cabas Baie de Somme en Toile' }, img: 'koleksiyonlar/canta/canta-baie-de-somme-lifestyle.jpg', gallery: ['koleksiyonlar/canta/canta-baie-de-somme-studio.jpg', 'koleksiyonlar/canta/canta-baie-de-somme-flatlay.jpg'] }
       ]
     },
     {
       id: 'hediyelik',
-      img: 'items/designs/chats_new.jpg',
+      img: 'koleksiyonlar/hediyelik/waffle-oleron-leylak-hediye.jpg',
       ratio: 3/4,
       tr: 'Hediyelik & Özel Nakış Koleksiyonu',
       en: 'Gift & Insignia Collection',
       fr: 'Collection Cadeaux & Broderies Fines',
       d: {
-        tr: 'Lüks butik oteller ve konsept mağazalar için özel kedi ve köpek ırkı nakışlı misafir havluları, seyahat keseleri ve kişiselleştirilmiş armalar.',
-        en: 'Embroidered guest towels, travel pouches and custom emblems featuring fine animal breeds for luxury concept stores and boutique hotels.',
-        fr: 'Serviettes d’invités et trousses brodées de races canines et félines de prestige pour boutiques de luxe et hôtels de charme.'
+        tr: 'Butik oteller, gurme mutfaklar ve hediyelik mağazaları için Fransız sahil nakışlı waffle & bukle misafir havluları, seyahat keseleri ve armalar.',
+        en: 'French regional embroidered waffle & terry guest/kitchen towels, travel pouches and bespoke insignias for boutique hotels and luxury gift stores.',
+        fr: 'Torillons d’office et serviettes d’invités brodés en nid d’abeille & éponge aux couleurs régionales françaises, trousses de voyage et armoiries.'
       },
       models: [
-        { id: 'g1', n: { tr: 'Safkan Kedi Nakışlı Misafir Havlusu (4 Irk)', en: 'Pedigree Cat Embroidered Guest Towel', fr: 'Serviette d’Invité Chats de Race (4 Motifs)' }, img: 'items/designs/chats_new.jpg', gallery: ['items/designs/kedi-irk/3-irk-set.jpg'] },
+        { id: 'g4', designId: 'ile-d-oleron', n: { tr: 'Île d’Oléron Leylak Waffle Hediye Havlusu', en: 'Île d’Oléron Lilac Waffle Gift Towel', fr: 'Serviette Cadeau Lilas Waffle Île d’Oléron' }, img: 'koleksiyonlar/hediyelik/waffle-oleron-leylak-hediye.jpg', gallery: ['koleksiyonlar/hediyelik/waffle-oleron-leylak-flat.jpg', 'koleksiyonlar/hediyelik/waffle-oleron-leylak-dikey.jpg'] },
+        { id: 'g5', designId: 'ile-d-oleron', n: { tr: 'Île d’Oléron Mavi Waffle Mutfak Havlusu', en: 'Île d’Oléron Blue Waffle Kitchen Towel', fr: 'Torchon Waffle Bleu Île d’Oléron' }, img: 'koleksiyonlar/hediyelik/waffle-oleron-mavi-asili.jpg', gallery: ['koleksiyonlar/hediyelik/waffle-oleron-mavi-rulo.jpg', 'koleksiyonlar/hediyelik/waffle-oleron-mavi-flat.jpg'] },
+        { id: 'g6', designId: 'ile-d-oleron', n: { tr: 'Île d’Oléron Adaçayı Yeşili Waffle Havlu', en: 'Île d’Oléron Sage Green Waffle Towel', fr: 'Torchon Waffle Vert Sauge Île d’Oléron' }, img: 'koleksiyonlar/hediyelik/waffle-oleron-yesil-asili.jpg', gallery: ['koleksiyonlar/hediyelik/waffle-oleron-yesil-flat.jpg'] },
+        { id: 'g7', designId: 'ile-d-oleron', n: { tr: 'Île d’Oléron Beyaz Waffle Mutfak Havlusu', en: 'Île d’Oléron White Waffle Kitchen Towel', fr: 'Torchon Waffle Blanc Île d’Oléron' }, img: 'koleksiyonlar/hediyelik/waffle-oleron-beyaz-asili.jpg' },
+        { id: 'g8', designId: 'pays-basque', n: { tr: 'Pays Basque Leylak Waffle El Havlusu', en: 'Pays Basque Lilac Waffle Hand Towel', fr: 'Serviette Waffle Lilas Pays Basque' }, img: 'koleksiyonlar/hediyelik/waffle-basque-leylak-asili.jpg', gallery: ['koleksiyonlar/hediyelik/waffle-basque-leylak-flat.jpg', 'koleksiyonlar/hediyelik/waffle-basque-leylak-rulo.jpg', 'koleksiyonlar/hediyelik/waffle-basque-leylak-katli.jpg'] },
+        { id: 'g9', designId: 'pays-basque', n: { tr: 'Pays Basque Mavi Waffle Mutfak Havlusu', en: 'Pays Basque Blue Waffle Kitchen Towel', fr: 'Torchon Waffle Bleu Pays Basque' }, img: 'koleksiyonlar/hediyelik/waffle-basque-mavi-rulo.jpg', gallery: ['koleksiyonlar/hediyelik/waffle-basque-mavi-flat.jpg'] },
+        { id: 'g10', designId: 'pays-basque', n: { tr: 'Pays Basque Pudra Pembe Waffle Havlu', en: 'Pays Basque Dusty Rose Waffle Towel', fr: 'Serviette Waffle Rose Poudré Pays Basque' }, img: 'koleksiyonlar/hediyelik/waffle-basque-pembe-katli.jpg', gallery: ['koleksiyonlar/hediyelik/waffle-basque-pembe-flat.jpg'] },
+        { id: 'g11', designId: 'pays-basque', n: { tr: 'Pays Basque Sarı Waffle Mutfak Havlusu', en: 'Pays Basque Yellow Waffle Kitchen Towel', fr: 'Torchon Waffle Jaune Pays Basque' }, img: 'koleksiyonlar/hediyelik/waffle-basque-sari-asili.jpg', gallery: ['koleksiyonlar/hediyelik/waffle-basque-sari-rulo.jpg'] },
+        { id: 'g12', designId: 'pays-basque', n: { tr: 'Pays Basque Beyaz Bukle Misafir Havlusu', en: 'Pays Basque White Terry Guest Towel', fr: 'Serviette d’Invité Éponge Pays Basque' }, img: 'koleksiyonlar/hediyelik/bukle-basque-beyaz-katli.jpg', gallery: ['koleksiyonlar/hediyelik/bukle-basque-beyaz-rulo.jpg'] },
+        { id: 'g13', designId: 'cassis', n: { tr: 'Cassis Liman Nakışlı Bukle Misafir Havlusu', en: 'Cassis Port Embroidered Terry Guest Towel', fr: 'Serviette d’Invité Éponge Port de Cassis' }, img: 'koleksiyonlar/hediyelik/bukle-cassis-ekru-flat.jpg' },
+        { id: 'g1', n: { tr: 'Safkan Kedi Nakışlı Misafir Havlusu (4 Irk)', en: 'Pedigree Cat Embroidered Guest Towel', fr: 'Serviette d’Invité Chats de Race (4 Motifs)' }, img: 'items/designs/chats_new.jpg', gallery: ['koleksiyonlar/hediyelik/kedi-nakis-4-irk-tasarim.jpg', 'items/designs/kedi-irk/3-irk-set.jpg'] },
+        { id: 'g14', n: { tr: 'Özel Kedi Nakış Serisi Tasarım Kartı (4 Irk)', en: 'Bespoke Cat Embroidery Design Sheet (4 Breeds)', fr: 'Planche de Broderie Féline Sur-Mesure (4 Races)' }, img: 'koleksiyonlar/hediyelik/kedi-nakis-4-irk-tasarim.jpg' },
         { id: 'g2', n: { tr: 'Safkan Köpek Nakışlı Misafir Havlusu (5 Irk)', en: 'Pedigree Dog Embroidered Guest Towel', fr: 'Serviette d’Invité Chiens de Race (5 Motifs)' }, img: 'items/designs/chiens.jpg' },
         { id: 'g3', n: { tr: 'COQ D’OR Fermuarlı Kanvas Seyahat Kesesi', en: 'COQ D’OR Canvas Zipper Travel Pouch', fr: 'Trousse de Voyage Zippée COQ D’OR' }, img: 'items/giris-foto-new-2k.jpeg' }
       ]

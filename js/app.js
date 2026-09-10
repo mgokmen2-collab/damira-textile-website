@@ -229,12 +229,10 @@
 
   function buildGmTrack(c, models) {
     els.gmTrack.innerHTML = models.map((m) => {
-      const srcs = [m.img, m.gallery && m.gallery[1], m.img2].filter(Boolean);
       return `
         <div class="slide" title="${t('ui.zoom')}">
           <figure class="slide-fig">
-            <img src="${srcs[0]}" alt="${esc(m.n[state.lang])}" loading="lazy" data-role="main">
-            ${srcs.length > 1 ? `<img src="${srcs[1]}" alt="" aria-hidden="true" loading="lazy" class="slide-alt">` : ''}
+            <img src="${m.img}" alt="${esc(m.n[state.lang])}" loading="lazy" data-role="main">
           </figure>
         </div>`;
     }).join('');

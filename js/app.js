@@ -220,7 +220,7 @@
     const c = catById(state.group);
     if (!c || !c.models || !c.models.length) return;
     const items = c.models.map((mod) => ({
-      src: mod.img,
+      src: mod.fullImg || mod.img,
       title: mod.n[state.lang],
       eyebrow: c[state.lang]
     }));

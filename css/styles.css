@@ -1375,12 +1375,12 @@ html.js .reveal.revealed { opacity: 1; transform: none; }
 .lb-viewport {
   flex: 1; width: 100%;
   display: flex; align-items: center; justify-content: center;
-  overflow: hidden; padding: 10px 0;
+  overflow: hidden; padding: 6px 0;
   min-height: 0; touch-action: pan-y;
   position: relative; z-index: 1;
 }
 .lb-img {
-  max-width: 95vw; max-height: 80vh;
+  max-width: 96vw; max-height: calc(100vh - 110px);
   object-fit: contain; display: block;
   user-select: none; -webkit-user-select: none;
   filter: drop-shadow(0 16px 40px rgba(0,0,0,0.6));

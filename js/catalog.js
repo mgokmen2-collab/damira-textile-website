@@ -385,7 +385,7 @@
     const c = catById(state.group);
     if (!c || !c.models || !c.models.length) return;
     const items = c.models.map((mod) => ({
-      src: mod.img,
+      src: mod.fullImg || mod.img,
       title: mod.n[state.lang],
       eyebrow: c[state.lang]
     }));
@@ -440,6 +440,7 @@
             designId: model.designId,
             n: model.n,
             img: model.img,
+            fullImg: model.fullImg,
             gallery: model.gallery,
             categoryId: cat.id,
             categoryName: cat[state.lang] || cat.tr,
@@ -652,7 +653,7 @@
     if (!products || !products.length) return;
     const d = DESIGNS.find((item) => item.id === state.designGroup);
     const items = products.map((mod) => ({
-      src: mod.img,
+      src: mod.fullImg || mod.img,
       title: mod.n[state.lang],
       eyebrow: d ? `${d[state.lang].n} · ${mod.categoryName}` : mod.categoryName
     }));
